@@ -3,6 +3,22 @@
   "WorkspaceRootPath": "C:\\JavaScript\\chat-website\\chat-website\\backend\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{38671D0B-A7B3-47EC-93C0-7551DA9BA69F}|backend\\backend.csproj|c:\\javascript\\chat-website\\chat-website\\backend\\backend\\models\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{38671D0B-A7B3-47EC-93C0-7551DA9BA69F}|backend\\backend.csproj|solutionrelative:backend\\models\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{38671D0B-A7B3-47EC-93C0-7551DA9BA69F}|backend\\backend.csproj|c:\\javascript\\chat-website\\chat-website\\backend\\backend\\models\\message.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{38671D0B-A7B3-47EC-93C0-7551DA9BA69F}|backend\\backend.csproj|solutionrelative:backend\\models\\message.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{38671D0B-A7B3-47EC-93C0-7551DA9BA69F}|backend\\backend.csproj|c:\\javascript\\chat-website\\chat-website\\backend\\backend\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{38671D0B-A7B3-47EC-93C0-7551DA9BA69F}|backend\\backend.csproj|solutionrelative:backend\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{38671D0B-A7B3-47EC-93C0-7551DA9BA69F}|backend\\backend.csproj|c:\\javascript\\chat-website\\chat-website\\backend\\backend\\.env||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{38671D0B-A7B3-47EC-93C0-7551DA9BA69F}|backend\\backend.csproj|solutionrelative:backend\\.env||{8B382828-6202-11D1-8870-0000F87579D2}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{38671D0B-A7B3-47EC-93C0-7551DA9BA69F}|backend\\backend.csproj|c:\\javascript\\chat-website\\chat-website\\backend\\backend\\controllers\\userscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{38671D0B-A7B3-47EC-93C0-7551DA9BA69F}|backend\\backend.csproj|solutionrelative:backend\\controllers\\userscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
@@ -14,8 +30,34 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 3,
+          "SelectedChildIndex": 0,
           "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "User.cs",
+              "DocumentMoniker": "C:\\JavaScript\\chat-website\\chat-website\\backend\\backend\\Models\\User.cs",
+              "RelativeDocumentMoniker": "backend\\Models\\User.cs",
+              "ToolTip": "C:\\JavaScript\\chat-website\\chat-website\\backend\\backend\\Models\\User.cs",
+              "RelativeToolTip": "backend\\Models\\User.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABIAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-23T22:26:30.851Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\JavaScript\\chat-website\\chat-website\\backend\\backend\\Program.cs",
+              "RelativeDocumentMoniker": "backend\\Program.cs",
+              "ToolTip": "C:\\JavaScript\\chat-website\\chat-website\\backend\\backend\\Program.cs",
+              "RelativeToolTip": "backend\\Program.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAACYAAAAKAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-23T22:16:34.483Z",
+              "EditorCaption": ""
+            },
             {
               "$type": "Bookmark",
               "Name": "ST:0:0:{3ae79031-e1bc-11d0-8f78-00a0c9110057}"
@@ -30,20 +72,46 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "UsersController.cs",
-              "DocumentMoniker": "C:\\JavaScript\\chat-website\\chat-website\\backend\\backend\\Controllers\\UsersController.cs",
-              "RelativeDocumentMoniker": "backend\\Controllers\\UsersController.cs",
-              "ToolTip": "C:\\JavaScript\\chat-website\\chat-website\\backend\\backend\\Controllers\\UsersController.cs",
-              "RelativeToolTip": "backend\\Controllers\\UsersController.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABMAAAAhAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-22T00:16:37.217Z",
+              "DocumentIndex": 3,
+              "Title": ".env",
+              "DocumentMoniker": "C:\\JavaScript\\chat-website\\chat-website\\backend\\backend\\.env",
+              "RelativeDocumentMoniker": "backend\\.env",
+              "ToolTip": "C:\\JavaScript\\chat-website\\chat-website\\backend\\backend\\.env",
+              "RelativeToolTip": "backend\\.env",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAMAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2025-03-23T22:16:58.062Z",
               "EditorCaption": ""
             },
             {
               "$type": "Bookmark",
               "Name": "ST:0:0:{cce594b6-0c39-4442-ba28-10c64ac7e89f}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Message.cs",
+              "DocumentMoniker": "C:\\JavaScript\\chat-website\\chat-website\\backend\\backend\\Models\\Message.cs",
+              "RelativeDocumentMoniker": "backend\\Models\\Message.cs",
+              "ToolTip": "C:\\JavaScript\\chat-website\\chat-website\\backend\\backend\\Models\\Message.cs",
+              "RelativeToolTip": "backend\\Models\\Message.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-22T21:43:17.456Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "UsersController.cs",
+              "DocumentMoniker": "C:\\JavaScript\\chat-website\\chat-website\\backend\\backend\\Controllers\\UsersController.cs",
+              "RelativeDocumentMoniker": "backend\\Controllers\\UsersController.cs",
+              "ToolTip": "C:\\JavaScript\\chat-website\\chat-website\\backend\\backend\\Controllers\\UsersController.cs",
+              "RelativeToolTip": "backend\\Controllers\\UsersController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAlAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-22T00:16:37.217Z",
+              "EditorCaption": ""
             }
           ]
         }
