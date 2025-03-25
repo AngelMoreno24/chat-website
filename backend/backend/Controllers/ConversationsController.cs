@@ -8,28 +8,28 @@ namespace backend.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class UsersController : ControllerBase
+    public class ConversationsController : ControllerBase
     {
         private readonly Client _supabase;
 
-        public UsersController(Client supabase)
+        public ConversationsController(Client supabase)
         {
             _supabase = supabase;
         }
 
-        // Register a new user
+        // Create a new conversation (DM or Group)
         [HttpPost]
-        public async Task<IActionResult> RegisterUser([FromBody] User user)
+        public async Task<IActionResult> CreateConversation([FromBody] Conversation conversation)
         {
-            var response = await _supabase.From<User>().Insert(user);
+            var response = await _supabase.From<Conversation>().Insert(conversation);
             return Ok(response);
         }
 
-        // Get all users
+        // Get all conversations
         [HttpGet]
-        public async Task<IActionResult> GetUsers()
+        public async Task<IActionResult> GetConversations()
         {
-            var response = await _supabase.From<User>().Get();
+            var response = await _supabase.From<Conversation>().Get();
             return Ok(response.Models);
         }
     }

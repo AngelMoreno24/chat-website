@@ -10,10 +10,10 @@ namespace backend.Models
         public Guid Id { get; set; } = Guid.NewGuid();
 
         [Column("name")]
-        public string Name { get; set; }  // Group chat name (null for DMs)
+        public string Name { get; set; }
 
         [Column("is_group")]
-        public bool IsGroup { get; set; }  // True = Group chat, False = DM
+        public bool IsGroup { get; set; }
 
         [Column("created_at")]
         public DateTime CreatedAt { get; set; } = DateTime.UtcNow;

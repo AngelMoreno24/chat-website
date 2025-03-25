@@ -7,19 +7,19 @@ namespace backend.Models
     {
 
         [PrimaryKey("id", false)]
-        public long Id { get; set; }
+        public Guid Id { get; set; } = Guid.NewGuid();  // Unique ID
 
-        [Column("conversationId")]
-        public long Username { get; set; }
+        [Column("conversation_id")]
+        public Guid ConversationId { get; set; }  // Links to Conversation
 
-        [PrimaryKey("senderId", false)]
-        public long SenderId { get; set; }
+        [Column("sender_id")]
+        public Guid SenderId { get; set; }  // Links to User
 
-        [PrimaryKey("content", false)]
-        public long Content { get; set; }
+        [Column("content")]
+        public string Content { get; set; }  // Message text
 
         [Column("created_at")]
-        public DateTime CreatedAt { get; set; }
+        public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
     }
 
 }

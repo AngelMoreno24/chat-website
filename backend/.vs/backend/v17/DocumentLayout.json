@@ -3,28 +3,36 @@
   "WorkspaceRootPath": "C:\\JavaScript\\chat-website\\chat-website\\backend\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{38671D0B-A7B3-47EC-93C0-7551DA9BA69F}|backend\\backend.csproj|c:\\javascript\\chat-website\\chat-website\\backend\\backend\\models\\conversation.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{38671D0B-A7B3-47EC-93C0-7551DA9BA69F}|backend\\backend.csproj|solutionrelative:backend\\models\\conversation.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{38671D0B-A7B3-47EC-93C0-7551DA9BA69F}|backend\\backend.csproj|c:\\javascript\\chat-website\\chat-website\\backend\\backend\\.env||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{38671D0B-A7B3-47EC-93C0-7551DA9BA69F}|backend\\backend.csproj|solutionrelative:backend\\.env||{8B382828-6202-11D1-8870-0000F87579D2}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{38671D0B-A7B3-47EC-93C0-7551DA9BA69F}|backend\\backend.csproj|c:\\javascript\\chat-website\\chat-website\\backend\\backend\\models\\message.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{38671D0B-A7B3-47EC-93C0-7551DA9BA69F}|backend\\backend.csproj|solutionrelative:backend\\models\\message.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{38671D0B-A7B3-47EC-93C0-7551DA9BA69F}|backend\\backend.csproj|c:\\javascript\\chat-website\\chat-website\\backend\\backend\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{38671D0B-A7B3-47EC-93C0-7551DA9BA69F}|backend\\backend.csproj|solutionrelative:backend\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{38671D0B-A7B3-47EC-93C0-7551DA9BA69F}|backend\\backend.csproj|c:\\javascript\\chat-website\\chat-website\\backend\\backend\\models\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{38671D0B-A7B3-47EC-93C0-7551DA9BA69F}|backend\\backend.csproj|solutionrelative:backend\\models\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{38671D0B-A7B3-47EC-93C0-7551DA9BA69F}|backend\\backend.csproj|c:\\javascript\\chat-website\\chat-website\\backend\\backend\\.env||{8B382828-6202-11D1-8870-0000F87579D2}",
-      "RelativeMoniker": "D:0:0:{38671D0B-A7B3-47EC-93C0-7551DA9BA69F}|backend\\backend.csproj|solutionrelative:backend\\.env||{8B382828-6202-11D1-8870-0000F87579D2}"
+      "AbsoluteMoniker": "D:0:0:{38671D0B-A7B3-47EC-93C0-7551DA9BA69F}|backend\\backend.csproj|c:\\javascript\\chat-website\\chat-website\\backend\\backend\\models\\message.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{38671D0B-A7B3-47EC-93C0-7551DA9BA69F}|backend\\backend.csproj|solutionrelative:backend\\models\\message.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{38671D0B-A7B3-47EC-93C0-7551DA9BA69F}|backend\\backend.csproj|c:\\javascript\\chat-website\\chat-website\\backend\\backend\\models\\conversation.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{38671D0B-A7B3-47EC-93C0-7551DA9BA69F}|backend\\backend.csproj|solutionrelative:backend\\models\\conversation.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{38671D0B-A7B3-47EC-93C0-7551DA9BA69F}|backend\\backend.csproj|c:\\javascript\\chat-website\\chat-website\\backend\\backend\\controllers\\messagescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{38671D0B-A7B3-47EC-93C0-7551DA9BA69F}|backend\\backend.csproj|solutionrelative:backend\\controllers\\messagescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{38671D0B-A7B3-47EC-93C0-7551DA9BA69F}|backend\\backend.csproj|c:\\javascript\\chat-website\\chat-website\\backend\\backend\\controllers\\userscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{38671D0B-A7B3-47EC-93C0-7551DA9BA69F}|backend\\backend.csproj|solutionrelative:backend\\controllers\\userscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{38671D0B-A7B3-47EC-93C0-7551DA9BA69F}|backend\\backend.csproj|c:\\javascript\\chat-website\\chat-website\\backend\\backend\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{38671D0B-A7B3-47EC-93C0-7551DA9BA69F}|backend\\backend.csproj|solutionrelative:backend\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{38671D0B-A7B3-47EC-93C0-7551DA9BA69F}|backend\\backend.csproj|c:\\javascript\\chat-website\\chat-website\\backend\\backend\\controllers\\conversationscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{38671D0B-A7B3-47EC-93C0-7551DA9BA69F}|backend\\backend.csproj|solutionrelative:backend\\controllers\\conversationscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -34,7 +42,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 3,
+          "SelectedChildIndex": 9,
           "Children": [
             {
               "$type": "Bookmark",
@@ -49,21 +57,47 @@
               "Name": "ST:0:0:{b1e99781-ab81-11d0-b683-00aa00a3ee26}"
             },
             {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{cce594b6-0c39-4442-ba28-10c64ac7e89f}"
+            },
+            {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 5,
+              "Title": "MessagesController.cs",
+              "DocumentMoniker": "C:\\JavaScript\\chat-website\\chat-website\\backend\\backend\\Controllers\\MessagesController.cs",
+              "RelativeDocumentMoniker": "backend\\Controllers\\MessagesController.cs",
+              "ToolTip": "C:\\JavaScript\\chat-website\\chat-website\\backend\\backend\\Controllers\\MessagesController.cs",
+              "RelativeToolTip": "backend\\Controllers\\MessagesController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAACEAAAAXAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-25T07:28:05.354Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "ConversationsController.cs",
+              "DocumentMoniker": "C:\\JavaScript\\chat-website\\chat-website\\backend\\backend\\Controllers\\ConversationsController.cs",
+              "RelativeDocumentMoniker": "backend\\Controllers\\ConversationsController.cs",
+              "ToolTip": "C:\\JavaScript\\chat-website\\chat-website\\backend\\backend\\Controllers\\ConversationsController.cs",
+              "RelativeToolTip": "backend\\Controllers\\ConversationsController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAMAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-25T07:27:23.244Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
               "Title": "Conversation.cs",
               "DocumentMoniker": "C:\\JavaScript\\chat-website\\chat-website\\backend\\backend\\Models\\Conversation.cs",
               "RelativeDocumentMoniker": "backend\\Models\\Conversation.cs",
               "ToolTip": "C:\\JavaScript\\chat-website\\chat-website\\backend\\backend\\Models\\Conversation.cs",
               "RelativeToolTip": "backend\\Models\\Conversation.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAoAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-03-24T21:11:52.524Z",
               "EditorCaption": ""
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{cce594b6-0c39-4442-ba28-10c64ac7e89f}"
             },
             {
               "$type": "Document",
@@ -73,60 +107,62 @@
               "RelativeDocumentMoniker": "backend\\Models\\User.cs",
               "ToolTip": "C:\\JavaScript\\chat-website\\chat-website\\backend\\backend\\Models\\User.cs",
               "RelativeToolTip": "backend\\Models\\User.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAcAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-03-23T22:26:30.851Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 1,
               "Title": "Program.cs",
               "DocumentMoniker": "C:\\JavaScript\\chat-website\\chat-website\\backend\\backend\\Program.cs",
               "RelativeDocumentMoniker": "backend\\Program.cs",
               "ToolTip": "C:\\JavaScript\\chat-website\\chat-website\\backend\\backend\\Program.cs",
               "RelativeToolTip": "backend\\Program.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAACYAAAAKAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAC0AAAAKAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-23T22:16:34.483Z"
+              "WhenOpened": "2025-03-23T22:16:34.483Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 0,
               "Title": ".env",
               "DocumentMoniker": "C:\\JavaScript\\chat-website\\chat-website\\backend\\backend\\.env",
               "RelativeDocumentMoniker": "backend\\.env",
               "ToolTip": "C:\\JavaScript\\chat-website\\chat-website\\backend\\backend\\.env",
               "RelativeToolTip": "backend\\.env",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAMAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAIAAAAMAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
               "WhenOpened": "2025-03-23T22:16:58.062Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 3,
               "Title": "Message.cs",
               "DocumentMoniker": "C:\\JavaScript\\chat-website\\chat-website\\backend\\backend\\Models\\Message.cs",
               "RelativeDocumentMoniker": "backend\\Models\\Message.cs",
               "ToolTip": "C:\\JavaScript\\chat-website\\chat-website\\backend\\backend\\Models\\Message.cs",
               "RelativeToolTip": "backend\\Models\\Message.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAnAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABUAAABCAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-03-22T21:43:17.456Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 6,
               "Title": "UsersController.cs",
               "DocumentMoniker": "C:\\JavaScript\\chat-website\\chat-website\\backend\\backend\\Controllers\\UsersController.cs",
               "RelativeDocumentMoniker": "backend\\Controllers\\UsersController.cs",
               "ToolTip": "C:\\JavaScript\\chat-website\\chat-website\\backend\\backend\\Controllers\\UsersController.cs",
               "RelativeToolTip": "backend\\Controllers\\UsersController.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAlAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABAAAAAhAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-22T00:16:37.217Z"
+              "WhenOpened": "2025-03-22T00:16:37.217Z",
+              "EditorCaption": ""
             }
           ]
         }
