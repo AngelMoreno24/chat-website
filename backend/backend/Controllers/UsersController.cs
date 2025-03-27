@@ -1,6 +1,9 @@
-﻿using backend.Models;
-using Microsoft.AspNetCore.Mvc;
-using Supabase;
+﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using backend.Data;
+using backend.Models;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -10,27 +13,40 @@ namespace backend.Controllers
     [ApiController]
     public class UsersController : ControllerBase
     {
-        private readonly Client _supabase;
+        private readonly ApplicationDbContext _context;
 
-        public UsersController(Client supabase)
+        public UsersController(ApplicationDbContext context)
         {
-            _supabase = supabase;
-        }
-
-        // Register a new user
-        [HttpPost]
-        public async Task<IActionResult> RegisterUser([FromBody] User user)
-        {
-            var response = await _supabase.From<User>().Insert(user);
-            return Ok(response);
+            _context = context;
         }
 
         // Get all users
         [HttpGet]
-        public async Task<IActionResult> GetUsers()
+        public async Task<ActionResult<IEnumerable<User>>> GetUsers()
         {
-            var response = await _supabase.From<User>().Get();
-            return Ok(response.Models);
+            return await _context.Users.ToListAsync();
+        }
+
+        // Get user by ID
+        [HttpGet("{id}")]
+        public async Task<ActionResult<User>> GetUser(long id)
+        {
+            var user = await _context.Users.FindAsync(id);
+
+            if (user == null)
+                return NotFound();
+
+            return user;
+        }
+
+        // Create user
+        [HttpPost]
+        public async Task<ActionResult<User>> CreateUser(User user)
+        {
+            _context.Users.Add(user);
+            await _context.SaveChangesAsync();
+
+            return CreatedAtAction(nameof(GetUser), new { id = user.id }, user);
         }
     }
 }

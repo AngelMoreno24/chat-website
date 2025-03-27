@@ -1,21 +1,26 @@
-﻿using Postgrest.Models;
-using Postgrest.Attributes;
+﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace backend.Models
 {
-    public class User:BaseModel
+    public class User
     {
 
-        [PrimaryKey("id", false)]
-        public Guid Id { get; set; } = Guid.NewGuid();
+        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public long id { get; set; }
 
-        [Column("username")]
-        public string Username { get; set; }
+        [Required]
+        [MaxLength(50)]
+        public string username { get; set; }
 
-        [Column("email")]
-        public string Email { get; set; }
+        [Required]
+        [MaxLength(100)]
+        public string email { get; set; }
 
-        [Column("created_at")]
-        public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
+        [Required]
+        public string password_hash { get; set; }
+
+        public DateTime created_at { get; set; } = DateTime.UtcNow;
     }
 }

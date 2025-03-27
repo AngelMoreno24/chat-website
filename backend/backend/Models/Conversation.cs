@@ -1,21 +1,26 @@
-﻿using Postgrest.Attributes;
-using Postgrest.Models;
+﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace backend.Models
 {
-    public class Conversation : BaseModel
+    public class Conversation
     {
 
-        [PrimaryKey("id", false)]
-        public Guid Id { get; set; } = Guid.NewGuid();
+        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public long id { get; set; }
 
-        [Column("name")]
-        public string Name { get; set; }
+        [Required]
+        [MaxLength(50)]
+        public string name { get; set; }
 
-        [Column("is_group")]
-        public bool IsGroup { get; set; }
+        [Required]
+        [MaxLength(100)]
+        public string is_group { get; set; }
 
-        [Column("created_at")]
-        public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
+        [Required]
+        public string password_hash { get; set; }
+
+        public DateTime created_at { get; set; } = DateTime.UtcNow;
     }
 }
