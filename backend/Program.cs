@@ -1,9 +1,26 @@
+using backend.Data;
+using DotNetEnv;
+using Microsoft.EntityFrameworkCore;
+
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
+// Load .env file
+Env.Load();
 
+// Get connection string from environment variables
+var connectionString = Environment.GetEnvironmentVariable("AZURE_SQL_CONNECTION");
+
+if (string.IsNullOrEmpty(connectionString))
+{
+    throw new Exception("Database connection string is missing.");
+}
+
+// Register ApplicationDbContext with SQL Server
+builder.Services.AddDbContext<ApplicationDbContext>(options =>
+    options.UseSqlServer(connectionString));
+
+// Add services to the container.
 builder.Services.AddControllers();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
@@ -17,9 +34,6 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
-
 app.UseAuthorization();
-
 app.MapControllers();
-
 app.Run();
