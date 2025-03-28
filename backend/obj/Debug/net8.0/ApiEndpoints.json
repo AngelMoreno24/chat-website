@@ -1,6 +1,99 @@
 [
   {
-    "ContainingType": "YourNamespace.Controllers.ConversationsController",
+    "ContainingType": "backend.Controllers.ConversationMembersController",
+    "Method": "GetConversationMembers",
+    "RelativePath": "api/ConversationMembers",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[backend.Models.ConversationMember, backend, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "backend.Controllers.ConversationMembersController",
+    "Method": "AddUserToConversation",
+    "RelativePath": "api/ConversationMembers",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "conversationMember",
+        "Type": "backend.Models.ConversationMember",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "backend.Models.ConversationMember",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "backend.Controllers.ConversationMembersController",
+    "Method": "RemoveUserFromConversation",
+    "RelativePath": "api/ConversationMembers/{conversation_id}/{user_id}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "conversation_id",
+        "Type": "System.Int64",
+        "IsRequired": true
+      },
+      {
+        "Name": "user_id",
+        "Type": "System.Int64",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "backend.Controllers.ConversationMembersController",
+    "Method": "GetMembersByConversation",
+    "RelativePath": "api/ConversationMembers/conversation/{conversation_id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "conversation_id",
+        "Type": "System.Int64",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[backend.Models.ConversationMember, backend, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "backend.Controllers.ConversationsController",
     "Method": "GetConversations",
     "RelativePath": "api/Conversations",
     "HttpMethod": "GET",
@@ -20,7 +113,7 @@
     ]
   },
   {
-    "ContainingType": "YourNamespace.Controllers.ConversationsController",
+    "ContainingType": "backend.Controllers.ConversationsController",
     "Method": "CreateConversation",
     "RelativePath": "api/Conversations",
     "HttpMethod": "POST",
@@ -46,7 +139,7 @@
     ]
   },
   {
-    "ContainingType": "YourNamespace.Controllers.ConversationsController",
+    "ContainingType": "backend.Controllers.ConversationsController",
     "Method": "GetConversation",
     "RelativePath": "api/Conversations/{id}",
     "HttpMethod": "GET",

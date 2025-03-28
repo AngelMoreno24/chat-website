@@ -5,7 +5,7 @@ using backend.Models;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace YourNamespace.Controllers
+namespace backend.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]

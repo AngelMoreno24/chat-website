@@ -3,18 +3,24 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace backend.Models
 {
+    [Table("Conversations")]
     public class Conversation
     {
-
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public long Id { get; set; }
+        [Column("id")]
+        public long id { get; set; }
 
-        [MaxLength(100)]
-        public string? Name { get; set; } // Nullable for private chats
+        [Column("name")]
+        public string? name { get; set; }
 
-        public bool IsGroup { get; set; } = false; // Default to false
+        [Column("is_group")]
+        public bool is_group { get; set; } = false;
 
-        public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
+        [Column("created_at")]
+        public DateTime created_at { get; set; } = DateTime.UtcNow;
+
+        // Navigation property
+        public ICollection<ConversationMember> members { get; set; } = new List<ConversationMember>();
     }
 }
