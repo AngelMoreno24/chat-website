@@ -9,10 +9,18 @@ namespace backend.Data
         {
         }
 
-        public DbSet<User> Users { get; set; }  // Replace with actual models
-        public DbSet<Conversation> Conversations { get; set; } // Add Conversations table
 
+
+
+        //adds table models
+        public DbSet<User> Users { get; set; } 
+        public DbSet<Conversation> Conversations { get; set; } 
         public DbSet<ConversationMember> ConversationMembers { get; set; }
+        public DbSet<Message> Messages { get; set; }
+
+
+
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);

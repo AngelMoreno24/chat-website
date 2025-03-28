@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using backend.Models;
 
 namespace backend.Models
 {
@@ -22,5 +23,7 @@ namespace backend.Models
 
         // Navigation property
         public ICollection<ConversationMember> members { get; set; } = new List<ConversationMember>();
+        public ICollection<Message> messages { get; set; } = new List<Message>();
+
     }
 }
