@@ -18,17 +18,17 @@ namespace backend.Data
         public DbSet<ConversationMember> ConversationMembers { get; set; }
         public DbSet<Message> Messages { get; set; }
 
-
-
+        public DbSet<MessageStatus> MessageStatuses { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
 
-            // Enforce snake_case column names
             modelBuilder.Entity<User>().ToTable("Users");
             modelBuilder.Entity<Conversation>().ToTable("Conversations");
             modelBuilder.Entity<ConversationMember>().ToTable("ConversationMembers");
+            modelBuilder.Entity<Message>().ToTable("Messages");
+            modelBuilder.Entity<MessageStatus>().ToTable("MessageStatus");
 
             // Define unique constraint for ConversationMembers
             modelBuilder.Entity<ConversationMember>()
@@ -36,20 +36,35 @@ namespace backend.Data
                 .IsUnique()
                 .HasDatabaseName("UQ_Conversation_User");
 
-            // Define foreign key relationships
-            modelBuilder.Entity<ConversationMember>()
-                .HasOne(cm => cm.conversation)
-                .WithMany(c => c.members)
-                .HasForeignKey(cm => cm.conversation_id)
+            // Define Message foreign key relationships
+            modelBuilder.Entity<Message>()
+                .HasOne(m => m.conversation)
+                .WithMany(c => c.messages)
+                .HasForeignKey(m => m.conversation_id)
                 .OnDelete(DeleteBehavior.Cascade)
-                .HasConstraintName("FK_ConversationMembers_Conversations");
+                .HasConstraintName("FK_Messages_Conversations");
 
-            modelBuilder.Entity<ConversationMember>()
-                .HasOne(cm => cm.user)
-                .WithMany(u => u.conversations)
-                .HasForeignKey(cm => cm.user_id)
+            modelBuilder.Entity<Message>()
+                .HasOne(m => m.sender)
+                .WithMany(u => u.messages)
+                .HasForeignKey(m => m.sender_id)
+                .OnDelete(DeleteBehavior.SetNull)
+                .HasConstraintName("FK_Messages_Users");
+
+            // Define MessageStatus foreign key relationships
+            modelBuilder.Entity<MessageStatus>()
+                .HasOne(ms => ms.message)
+                .WithMany(m => m.message_statuses)
+                .HasForeignKey(ms => ms.message_id)
                 .OnDelete(DeleteBehavior.Cascade)
-                .HasConstraintName("FK_ConversationMembers_Users");
+                .HasConstraintName("FK_MessageStatus_Messages");
+
+            modelBuilder.Entity<MessageStatus>()
+                .HasOne(ms => ms.user)
+                .WithMany(u => u.message_statuses)
+                .HasForeignKey(ms => ms.user_id)
+                .OnDelete(DeleteBehavior.Cascade)
+                .HasConstraintName("FK_MessageStatus_Users");
         }
     }
 }

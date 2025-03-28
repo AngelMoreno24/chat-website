@@ -34,5 +34,7 @@ namespace backend.Models
 
         public ICollection<Message> messages { get; set; } = new List<Message>();
 
+        public ICollection<MessageStatus> message_statuses { get; set; } = new List<MessageStatus>();
+
     }
 }

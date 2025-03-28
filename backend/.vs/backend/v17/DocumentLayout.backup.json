@@ -3,8 +3,32 @@
   "WorkspaceRootPath": "C:\\JavaScript\\chat-website\\chat-website\\backend\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{DFB9262D-9650-4810-8E79-4EFD3CB5E67A}|backend.csproj|c:\\javascript\\chat-website\\chat-website\\backend\\data\\applicationdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{DFB9262D-9650-4810-8E79-4EFD3CB5E67A}|backend.csproj|solutionrelative:data\\applicationdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{DFB9262D-9650-4810-8E79-4EFD3CB5E67A}|backend.csproj|c:\\javascript\\chat-website\\chat-website\\backend\\controllers\\userscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{DFB9262D-9650-4810-8E79-4EFD3CB5E67A}|backend.csproj|solutionrelative:controllers\\userscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{DFB9262D-9650-4810-8E79-4EFD3CB5E67A}|backend.csproj|c:\\javascript\\chat-website\\chat-website\\backend\\controllers\\messagestatuscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{DFB9262D-9650-4810-8E79-4EFD3CB5E67A}|backend.csproj|solutionrelative:controllers\\messagestatuscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{DFB9262D-9650-4810-8E79-4EFD3CB5E67A}|backend.csproj|c:\\javascript\\chat-website\\chat-website\\backend\\models\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{DFB9262D-9650-4810-8E79-4EFD3CB5E67A}|backend.csproj|solutionrelative:models\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{DFB9262D-9650-4810-8E79-4EFD3CB5E67A}|backend.csproj|c:\\javascript\\chat-website\\chat-website\\backend\\models\\messages.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{DFB9262D-9650-4810-8E79-4EFD3CB5E67A}|backend.csproj|solutionrelative:models\\messages.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{DFB9262D-9650-4810-8E79-4EFD3CB5E67A}|backend.csproj|c:\\javascript\\chat-website\\chat-website\\backend\\controllers\\messagescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{DFB9262D-9650-4810-8E79-4EFD3CB5E67A}|backend.csproj|solutionrelative:controllers\\messagescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{DFB9262D-9650-4810-8E79-4EFD3CB5E67A}|backend.csproj|c:\\javascript\\chat-website\\chat-website\\backend\\models\\messagestatus.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{DFB9262D-9650-4810-8E79-4EFD3CB5E67A}|backend.csproj|solutionrelative:models\\messagestatus.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{DFB9262D-9650-4810-8E79-4EFD3CB5E67A}|backend.csproj|c:\\javascript\\chat-website\\chat-website\\backend\\models\\conversation.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -13,22 +37,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{DFB9262D-9650-4810-8E79-4EFD3CB5E67A}|backend.csproj|c:\\javascript\\chat-website\\chat-website\\backend\\controllers\\conversationscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{DFB9262D-9650-4810-8E79-4EFD3CB5E67A}|backend.csproj|solutionrelative:controllers\\conversationscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{DFB9262D-9650-4810-8E79-4EFD3CB5E67A}|backend.csproj|c:\\javascript\\chat-website\\chat-website\\backend\\models\\messages.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{DFB9262D-9650-4810-8E79-4EFD3CB5E67A}|backend.csproj|solutionrelative:models\\messages.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{DFB9262D-9650-4810-8E79-4EFD3CB5E67A}|backend.csproj|c:\\javascript\\chat-website\\chat-website\\backend\\data\\applicationdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{DFB9262D-9650-4810-8E79-4EFD3CB5E67A}|backend.csproj|solutionrelative:data\\applicationdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{DFB9262D-9650-4810-8E79-4EFD3CB5E67A}|backend.csproj|c:\\javascript\\chat-website\\chat-website\\backend\\controllers\\messagescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{DFB9262D-9650-4810-8E79-4EFD3CB5E67A}|backend.csproj|solutionrelative:controllers\\messagescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{DFB9262D-9650-4810-8E79-4EFD3CB5E67A}|backend.csproj|c:\\javascript\\chat-website\\chat-website\\backend\\controllers\\userscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{DFB9262D-9650-4810-8E79-4EFD3CB5E67A}|backend.csproj|solutionrelative:controllers\\userscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{DFB9262D-9650-4810-8E79-4EFD3CB5E67A}|backend.csproj|c:\\javascript\\chat-website\\chat-website\\backend\\controllers\\conversationmembercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -58,7 +66,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 11,
+          "SelectedChildIndex": 14,
           "Children": [
             {
               "$type": "Bookmark",
@@ -73,6 +81,32 @@
               "Name": "ST:0:0:{b1e99781-ab81-11d0-b683-00aa00a3ee26}"
             },
             {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "MessageStatusController.cs",
+              "DocumentMoniker": "C:\\JavaScript\\chat-website\\chat-website\\backend\\Controllers\\MessageStatusController.cs",
+              "RelativeDocumentMoniker": "Controllers\\MessageStatusController.cs",
+              "ToolTip": "C:\\JavaScript\\chat-website\\chat-website\\backend\\Controllers\\MessageStatusController.cs",
+              "RelativeToolTip": "Controllers\\MessageStatusController.cs",
+              "ViewState": "AgIAAAYAAAAAAAAAAAAAAAgAAAARAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-28T09:35:18.993Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "MessageStatus.cs",
+              "DocumentMoniker": "C:\\JavaScript\\chat-website\\chat-website\\backend\\Models\\MessageStatus.cs",
+              "RelativeDocumentMoniker": "Models\\MessageStatus.cs",
+              "ToolTip": "C:\\JavaScript\\chat-website\\chat-website\\backend\\Models\\MessageStatus.cs",
+              "RelativeToolTip": "Models\\MessageStatus.cs",
+              "ViewState": "AgIAAAgAAAAAAAAAAAAxwBsAAAAxAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-28T09:32:26.904Z",
+              "EditorCaption": ""
+            },
+            {
               "$type": "Bookmark",
               "Name": "ST:0:0:{cce594b6-0c39-4442-ba28-10c64ac7e89f}"
             },
@@ -84,27 +118,27 @@
               "RelativeDocumentMoniker": "Controllers\\MessagesController.cs",
               "ToolTip": "C:\\JavaScript\\chat-website\\chat-website\\backend\\Controllers\\MessagesController.cs",
               "RelativeToolTip": "Controllers\\MessagesController.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABUAAAAzAAAAAAAAAA==",
+              "ViewState": "AgIAABYAAAAAAAAAAAAQwBUAAAAzAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-03-28T09:22:54.472Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 4,
               "Title": "Messages.cs",
               "DocumentMoniker": "C:\\JavaScript\\chat-website\\chat-website\\backend\\Models\\Messages.cs",
               "RelativeDocumentMoniker": "Models\\Messages.cs",
               "ToolTip": "C:\\JavaScript\\chat-website\\chat-website\\backend\\Models\\Messages.cs",
               "RelativeToolTip": "Models\\Messages.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAANAAAAAAAAAA==",
+              "ViewState": "AgIAAA0AAAAAAAAAAAAzwCQAAAAzAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-03-28T09:20:21.732Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 9,
               "Title": "ConversationMemberController.cs",
               "DocumentMoniker": "C:\\JavaScript\\chat-website\\chat-website\\backend\\Controllers\\ConversationMemberController.cs",
               "RelativeDocumentMoniker": "Controllers\\ConversationMemberController.cs",
@@ -112,12 +146,11 @@
               "RelativeToolTip": "Controllers\\ConversationMemberController.cs",
               "ViewState": "AgIAAB4AAAAAAAAAAAAYwCAAAAAJAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-28T00:36:06.58Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-03-28T00:36:06.58Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 10,
               "Title": "ConversationMember.cs",
               "DocumentMoniker": "C:\\JavaScript\\chat-website\\chat-website\\backend\\Models\\ConversationMember.cs",
               "RelativeDocumentMoniker": "Models\\ConversationMember.cs",
@@ -125,12 +158,11 @@
               "RelativeToolTip": "Models\\ConversationMember.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAAjAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-28T00:35:19.978Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-03-28T00:35:19.978Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 8,
               "Title": "ConversationsController.cs",
               "DocumentMoniker": "C:\\JavaScript\\chat-website\\chat-website\\backend\\Controllers\\ConversationsController.cs",
               "RelativeDocumentMoniker": "Controllers\\ConversationsController.cs",
@@ -138,12 +170,11 @@
               "RelativeToolTip": "Controllers\\ConversationsController.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAAGAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-28T00:16:39.292Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-03-28T00:16:39.292Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 1,
               "Title": "UsersController.cs",
               "DocumentMoniker": "C:\\JavaScript\\chat-website\\chat-website\\backend\\Controllers\\UsersController.cs",
               "RelativeDocumentMoniker": "Controllers\\UsersController.cs",
@@ -156,7 +187,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 7,
               "Title": "Conversation.cs",
               "DocumentMoniker": "C:\\JavaScript\\chat-website\\chat-website\\backend\\Models\\Conversation.cs",
               "RelativeDocumentMoniker": "Models\\Conversation.cs",
@@ -164,38 +195,37 @@
               "RelativeToolTip": "Models\\Conversation.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAIAAAANAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-27T23:25:11.514Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-03-27T23:25:11.514Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 3,
               "Title": "User.cs",
               "DocumentMoniker": "C:\\JavaScript\\chat-website\\chat-website\\backend\\Models\\User.cs",
               "RelativeDocumentMoniker": "Models\\User.cs",
               "ToolTip": "C:\\JavaScript\\chat-website\\chat-website\\backend\\Models\\User.cs",
               "RelativeToolTip": "Models\\User.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAIAAAANAAAAAAAAAA==",
+              "ViewState": "AgIAABIAAAAAAAAAAAAYwCQAAAAzAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-03-27T23:24:41.712Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 0,
               "Title": "ApplicationDbContext.cs",
               "DocumentMoniker": "C:\\JavaScript\\chat-website\\chat-website\\backend\\Data\\ApplicationDbContext.cs",
               "RelativeDocumentMoniker": "Data\\ApplicationDbContext.cs",
               "ToolTip": "C:\\JavaScript\\chat-website\\chat-website\\backend\\Data\\ApplicationDbContext.cs",
               "RelativeToolTip": "Data\\ApplicationDbContext.cs",
-              "ViewState": "AgIAAAUAAAAAAAAAAAAxwAwAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAB0AAAAAAAAAAAAgwD8AAAAqAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-03-27T23:23:29.016Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 9,
+              "DocumentIndex": 11,
               "Title": "Program.cs",
               "DocumentMoniker": "C:\\JavaScript\\chat-website\\chat-website\\backend\\Program.cs",
               "RelativeDocumentMoniker": "Program.cs",
@@ -207,7 +237,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 10,
+              "DocumentIndex": 12,
               "Title": ".env",
               "DocumentMoniker": "C:\\JavaScript\\chat-website\\chat-website\\backend\\.env",
               "RelativeDocumentMoniker": ".env",
@@ -219,7 +249,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 11,
+              "DocumentIndex": 13,
               "Title": ".gitignore",
               "DocumentMoniker": "C:\\JavaScript\\chat-website\\chat-website\\backend\\.gitignore",
               "RelativeDocumentMoniker": ".gitignore",

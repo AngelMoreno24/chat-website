@@ -33,5 +33,8 @@ namespace backend.Models
 
         [ForeignKey("sender_id")]
         public User sender { get; set; }
+
+        public ICollection<MessageStatus> message_statuses { get; set; } = new List<MessageStatus>();
+
     }
 }
