@@ -8,19 +8,13 @@ namespace backend.Models
 
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public long id { get; set; }
+        public long Id { get; set; }
 
-        [Required]
-        [MaxLength(50)]
-        public string name { get; set; }
-
-        [Required]
         [MaxLength(100)]
-        public string is_group { get; set; }
+        public string? Name { get; set; } // Nullable for private chats
 
-        [Required]
-        public string password_hash { get; set; }
+        public bool IsGroup { get; set; } = false; // Default to false
 
-        public DateTime created_at { get; set; } = DateTime.UtcNow;
+        public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
     }
 }

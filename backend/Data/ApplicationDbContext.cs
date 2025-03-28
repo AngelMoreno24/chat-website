@@ -10,6 +10,7 @@ namespace backend.Data
         }
 
         public DbSet<User> Users { get; set; }  // Replace with actual models
+        public DbSet<Conversation> Conversations { get; set; } // Add Conversations table
 
     }
 }
