@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using backend.Data;
 
@@ -11,9 +12,11 @@ using backend.Data;
 namespace backend.Migrations
 {
     [DbContext(typeof(BackendContext))]
-    partial class BackendContextModelSnapshot : ModelSnapshot
+    [Migration("20250330062935_add Conversation and Message")]
+    partial class addConversationandMessage
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -240,21 +243,6 @@ namespace backend.Migrations
                     b.ToTable("Conversations");
                 });
 
-            modelBuilder.Entity("backend.Models.ConversationUser", b =>
-                {
-                    b.Property<int>("ConversationId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("UserId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.HasKey("ConversationId", "UserId");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("ConversationUsers");
-                });
-
             modelBuilder.Entity("backend.Models.Message", b =>
                 {
                     b.Property<int>("Id")
@@ -335,25 +323,6 @@ namespace backend.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("backend.Models.ConversationUser", b =>
-                {
-                    b.HasOne("backend.Models.Conversation", "Conversation")
-                        .WithMany("ConversationUsers")
-                        .HasForeignKey("ConversationId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", "User")
-                        .WithMany()
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Conversation");
-
-                    b.Navigation("User");
-                });
-
             modelBuilder.Entity("backend.Models.Message", b =>
                 {
                     b.HasOne("backend.Models.Conversation", "Conversation")
@@ -367,8 +336,6 @@ namespace backend.Migrations
 
             modelBuilder.Entity("backend.Models.Conversation", b =>
                 {
-                    b.Navigation("ConversationUsers");
-
                     b.Navigation("Messages");
                 });
 #pragma warning restore 612, 618

@@ -74,9 +74,51 @@
     "ReturnTypes": []
   },
   {
+    "ContainingType": "backend.Controllers.ConversationController",
+    "Method": "GetConversation",
+    "RelativePath": "api/Conversation/{id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "backend.Controllers.ConversationController",
+    "Method": "CreateConversation",
+    "RelativePath": "api/Conversation/create",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "backend.Models.ConversationRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "backend.Controllers.UserController",
     "Method": "Get",
     "RelativePath": "api/User",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "backend.Controllers.UserController",
+    "Method": "GetUserProfile",
+    "RelativePath": "api/User/profile",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
