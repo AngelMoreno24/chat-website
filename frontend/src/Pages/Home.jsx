@@ -7,12 +7,19 @@ const Home = () => {
 
   useEffect(() => {
     const isLoggedIn = localStorage.getItem('isLoggedIn');
-    if (!isLoggedIn) {
+    if (isLoggedIn) {
       navigate('/login'); // Redirect to login if not authenticated
     }
   }, [navigate]);
+  
+  return (
+    <div>
+      <h2>Home Page - Welcome!</h2>
 
-  return <h2>Home Page - Welcome!</h2>;
+
+      <textarea name="" id=""></textarea>
+    </div>
+);
 };
 
 export default Home;

@@ -4,6 +4,8 @@ import Layout from "./Components/Layout"
 import Home from "./Pages/Home"
 import NoPage from './Pages/NoPage';
 import Login from './Pages/Login';
+import ChatWindow from './Pages/ChatWindow';
+
 
 
 const App = () => {
@@ -20,6 +22,7 @@ const App = () => {
         <Route element={<Layout />}>
           <Route path="/home" element={<Home />} />
           <Route path="*" element={<NoPage />} />
+          <Route path="/chat/:chatId" element={<ChatWindow />} />
         </Route>
       </Routes>
     </BrowserRouter>
