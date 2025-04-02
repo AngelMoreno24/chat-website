@@ -1,220 +1,334 @@
 /* Reset defaults */
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-  }
-  
-  body {
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-    background-color: #f8f9fa;
-    color: #333;
-    min-height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-  
-  /* Layout container */
-  .layout {
-    display: flex;
-    width: 90vw;
-    max-width: 1200px;
-    height: 90vh;
-    background: #fff;
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
-    border-radius: 10px;
-    overflow: hidden;
-    position: relative;
-  }
-  
-  /* Sidebar Toggle Button */
-  .layout__toggle-btn {
-    position: absolute;
-    top: 15px;
-    left: 15px;
-    background: #343a40;
-    color: white;
-    border: none;
-    padding: 10px 15px;
-    cursor: pointer;
-    font-size: 1.2rem;
-    border-radius: 5px;
-    transition: left 0.3s ease, background 0.3s ease;
-    z-index: 200; /* Ensures it stays above other elements */
-  }
-  
-  .layout__toggle-btn:hover {
-    background: #495057;
-  }
-  
-  /* Move button when sidebar is open */
-  .layout__sidebar--left.open ~ .layout__toggle-btn {
-    left: 265px; /* Push it outside the sidebar */
-  }
-  
-  /* Sidebar container */
-  .layout__sidebar {
-    width: 250px;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding-top: 3rem;
-    transition: transform 0.3s ease;
-  }
-  
-  /* Left Sidebar (Hidden by default) */
-  .layout__sidebar--left {
-    position: absolute;
-    left: -250px;
-    top: 0;
-    background-color: #343a40;
-    color: white;
-    padding: 1rem;
-  }
-  
-  .layout__sidebar--left.open {
-    transform: translateX(250px);
-  }
-  
-  /* Sidebar title */
-  .layout__sidebar-title {
-    color: white;
-    text-align: center;
-    margin-bottom: 1rem;
-  }
-  
-  /* Sidebar Links */
-  .layout__nav-list {
-    list-style: none;
-    padding: 0;
-    width: 100%;
-  }
-  
-  .layout__nav-item {
-    width: 100%;
-    text-align: center;
-    margin-bottom: 0.5rem;
-  }
-  
-  .layout__nav-link {
-    display: block;
-    width: 100%;
-    padding: 1rem;
-    color: #fff;
-    text-decoration: none;
-    background: none;
-    border: none;
-    cursor: pointer;
-    transition: background 0.3s ease;
-  }
-  
-  .layout__nav-link:hover {
-    background: rgba(255, 255, 255, 0.2);
-  }
-  
-  /* Logout Button */
-  .layout__logout-btn {
-    background: #d9534f;
-    color: white;
-    border: none;
-    padding: 10px 15px;
-    width: 100%;
-    cursor: pointer;
-    font-size: 1rem;
-    border-radius: 5px;
-    transition: background 0.3s ease;
-  }
-  
-  .layout__logout-btn:hover {
-    background: #c9302c;
-  }
-  
-  /* Right Sidebar (Always visible) */
-  .layout__sidebar--right {
-    background-color: #f1f1f1;
-    padding: 1rem;
-    border-left: 1px solid #ddd;
-    text-align: center;
-    width: 250px;
-  }
-  
-  /* Chat Content */
-  .layout__content {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    width: calc(100% - 250px); /* Adjust for right sidebar */
-    padding: 2rem;
-    transition: margin-left 0.3s ease;
-  }
-  
-  /* Adjust content when left sidebar is open */
-  .layout__sidebar--left.open + .layout__content {
-    margin-left: 250px;
-  }
-  
-  /* Centered chat window */
-  .layout__main {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-  }
-  
-  /* Chat Messages Area */
-  .chat-messages {
-    width: 100%;
-    max-width: 600px;
-    height: 400px;
-    background: #fff;
-    border: 1px solid #ddd;
-    padding: 1rem;
-    overflow-y: auto;
-    border-radius: 10px;
-  }
-  
-  /* Message Input */
-  .chat-input {
-    display: flex;
-    width: 100%;
-    max-width: 600px;
-    margin-top: 1rem;
-  }
-  
-  .chat-input input {
-    flex: 1;
-    padding: 10px;
-    border: 1px solid #ddd;
-    border-radius: 5px 0 0 5px;
-    font-size: 1rem;
-  }
-  
-  .chat-input button {
-    padding: 10px;
-    border: none;
-    background: #007bff;
-    color: white;
-    cursor: pointer;
-    font-size: 1rem;
-    border-radius: 0 5px 5px 0;
-    transition: background 0.3s ease;
-  }
-  
-  .chat-input button:hover {
-    background: #0056b3;
-  }
-  
-  /* Footer */
-  .layout__footer {
-    background-color: #e9ecef;
-    text-align: center;
-    padding: 1rem;
-    font-size: 0.9rem;
-    width: 100%;
-    border-top: 1px solid #ddd;
-  }
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  background-color: #121212;
+  color: #e0e0e0;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Layout container */
+.layout {
+  display: flex;
+  width: 90vw;
+  max-width: 1200px;
+  height: 90vh;
+  background: #1e1e1e;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+  border-radius: 10px;
+  overflow: hidden;
+  position: relative;
+}
+
+/* Sidebar Toggle Button */
+.layout__toggle-btn {
+  position: absolute;
+  top: 15px;
+  left: 15px;
+  background: #333;
+  color: #e0e0e0;
+  border: none;
+  padding: 10px 15px;
+  cursor: pointer;
+  font-size: 1.2rem;
+  border-radius: 5px;
+  transition: left 0.3s ease, background 0.3s ease;
+  z-index: 200;
+}
+
+.layout__toggle-btn:hover {
+  background: #444;
+}
+
+/* Move button when sidebar is open */
+.layout__sidebar--left.open ~ .layout__toggle-btn {
+  left: 265px;
+}
+
+/* Sidebar container */
+.layout__sidebar {
+  width: 250px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 3rem;
+  transition: transform 0.3s ease;
+}
+
+/* Left Sidebar */
+.layout__sidebar--left {
+  position: absolute;
+  left: -250px;
+  top: 0;
+  background-color: #212121;
+  color: white;
+  padding: 1rem;
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.3);
+}
+
+.layout__sidebar--left.open {
+  transform: translateX(250px);
+}
+
+/* Sidebar title */
+.layout__sidebar-title {
+  color: white;
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+/* Sidebar Links */
+.layout__nav-list {
+  list-style: none;
+  padding: 0;
+  width: 100%;
+}
+
+.layout__nav-item {
+  width: 100%;
+  text-align: center;
+  margin-bottom: 0.5rem;
+}
+
+.layout__nav-link {
+  display: block;
+  width: 100%;
+  padding: 1rem;
+  color: #e0e0e0;
+  text-decoration: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.layout__nav-link:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+/* Logout Button */
+.layout__logout-btn {
+  background: #d9534f;
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  width: 100%;
+  cursor: pointer;
+  font-size: 1rem;
+  border-radius: 5px;
+  transition: background 0.3s ease;
+}
+
+.layout__logout-btn:hover {
+  background: #c9302c;
+}
+
+/* Right Sidebar */
+.layout__sidebar--right {
+  background-color: #292929;
+  padding: 1rem;
+  border-left: 1px solid #444;
+  text-align: center;
+  width: 250px;
+  color: #e0e0e0;
+}
+
+/* Chat Content */
+.layout__content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: calc(100% - 250px);
+  padding: 2rem;
+  transition: margin-left 0.3s ease;
+}
+
+/* Adjust content when left sidebar is open */
+.layout__sidebar--left.open + .layout__content {
+  margin-left: 250px;
+}
+
+/* Centered chat window */
+.layout__main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+/* Chat Messages Area */
+.chat-messages {
+  width: 100%;
+  max-width: 600px;
+  height: 400px;
+  background: #1e1e1e;
+  border: 1px solid #444;
+  padding: 1rem;
+  overflow-y: auto;
+  border-radius: 10px;
+}
+
+/* Message Input */
+.chat-input {
+  display: flex;
+  width: 100%;
+  max-width: 600px;
+  margin-top: 1rem;
+}
+
+.chat-input input {
+  flex: 1;
+  padding: 10px;
+  border: 1px solid #444;
+  border-radius: 5px 0 0 5px;
+  font-size: 1rem;
+  background: #292929;
+  color: #e0e0e0;
+}
+
+.chat-input button {
+  padding: 10px;
+  border: none;
+  background: #007bff;
+  color: white;
+  cursor: pointer;
+  font-size: 1rem;
+  border-radius: 0 5px 5px 0;
+  transition: background 0.3s ease;
+}
+
+.chat-input button:hover {
+  background: #0056b3;
+}
+
+/* Footer */
+.layout__footer {
+  background-color: #1e1e1e;
+  text-align: center;
+  padding: 1rem;
+  font-size: 0.9rem;
+  width: 100%;
+  border-top: 1px solid #444;
+  color: #bbb;
+}
+
+
+
+
+
+
+/* Find Friends Button */
+.layout__friend-btn {
+  background: #007bff;
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  cursor: pointer;
+  font-size: 1rem;
+  border-radius: 5px;
+  transition: background 0.3s ease;
+  width: 100%;
+  margin-top: 1rem;
+}
+
+.layout__friend-btn:hover {
+  background: #0056b3;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+/* Popup Styling */
+.popup {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 300;
+}
+
+.popup__content {
+  background: #292929;
+  padding: 20px;
+  border-radius: 10px;
+  text-align: center;
+  color: white;
+  width: 300px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+/* Friend Search Input */
+.popup__input {
+  width: 100%;
+  padding: 10px;
+  margin: 10px 0;
+  border: 1px solid #444;
+  background: #1e1e1e;
+  color: white;
+  border-radius: 5px;
+}
+
+/* Send Friend Request Button */
+.popup__send-btn {
+  background: #28a745;
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  cursor: pointer;
+  font-size: 1rem;
+  border-radius: 5px;
+  width: 100%;
+  transition: background 0.3s ease;
+}
+
+.popup__send-btn:hover {
+  background: #218838;
+}
+
+.popup__send-btn:disabled {
+  background: #555;
+  cursor: not-allowed;
+}
+
+/* Close Button */
+.popup__close-btn {
+  background: #d9534f;
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  cursor: pointer;
+  font-size: 1rem;
+  border-radius: 5px;
+  margin-top: 10px;
+  transition: background 0.3s ease;
+  width: 100%;
+}
+
+.popup__close-btn:hover {
+  background: #c9302c;
+}

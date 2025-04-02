@@ -4,9 +4,12 @@ import './CssComponent/Layout.css';
 
 const Layout = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const [isPopupOpen, setIsPopupOpen] = useState(false);
+  const [friendName, setFriendName] = useState('');
+  const [requestSent, setRequestSent] = useState(false);
   const navigate = useNavigate();
 
-  // Dummy conversation data (replace with actual data from backend)
+  // Dummy conversation data (replace with actual backend data)
   const conversations = [
     { id: 1, name: "Alice" },
     { id: 2, name: "Bob" },
@@ -16,6 +19,16 @@ const Layout = () => {
   const handleLogout = () => {
     localStorage.removeItem('isLoggedIn');
     navigate('/login');
+  };
+
+  const sendFriendRequest = () => {
+    if (friendName.trim() === '') return;
+    setRequestSent(true);
+    setTimeout(() => {
+      setRequestSent(false);
+      setFriendName('');
+      alert(`Friend request sent to ${friendName}!`);
+    }, 1500);
   };
 
   return (
@@ -35,7 +48,7 @@ const Layout = () => {
         <button onClick={handleLogout} className="layout__logout-btn">Logout</button>
       </nav>
 
-      {/* Toggle Button for Sidebar (Now outside the sidebar) */}
+      {/* Toggle Button for Sidebar */}
       <button className={`layout__toggle-btn ${isOpen ? 'open' : ''}`} onClick={() => setIsOpen(!isOpen)}>
         ☰ Chats
       </button>
@@ -51,7 +64,34 @@ const Layout = () => {
       <aside className="layout__sidebar layout__sidebar--right">
         <h3>Online Users</h3>
         <p>Coming soon...</p>
+        <button className="layout__friend-btn" onClick={() => setIsPopupOpen(true)}>
+          Find Friends
+        </button>
       </aside>
+
+      {/* Friend Search Popup */}
+      {isPopupOpen && (
+        <div className="popup">
+          <div className="popup__content">
+            <h3>Find Friends</h3>
+            <input
+              type="text"
+              placeholder="Search by name..."
+              className="popup__input"
+              value={friendName}
+              onChange={(e) => setFriendName(e.target.value)}
+            />
+            <button
+              className="popup__send-btn"
+              onClick={sendFriendRequest}
+              disabled={friendName.trim() === '' || requestSent}
+            >
+              {requestSent ? "Request Sent!" : "Send Friend Request"}
+            </button>
+            <button className="popup__close-btn" onClick={() => setIsPopupOpen(false)}>Close</button>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
