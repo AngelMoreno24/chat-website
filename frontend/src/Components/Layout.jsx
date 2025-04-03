@@ -5,30 +5,50 @@ import './CssComponent/Layout.css';
 const Layout = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isPopupOpen, setIsPopupOpen] = useState(false);
-  const [friendName, setFriendName] = useState('');
-  const [requestSent, setRequestSent] = useState(false);
-  const navigate = useNavigate();
+  const [newChatName, setNewChatName] = useState('');
+  const [manageChatId, setManageChatId] = useState(null);
+  const [conversations, setConversations] = useState([
+    { id: 1, name: "Alice", members: ["Alice"] },
+    { id: 2, name: "Bob", members: ["Bob"] },
+    { id: 3, name: "Group Chat 1", members: ["Alice", "Bob"] }
+  ]);
 
-  // Dummy conversation data (replace with actual backend data)
-  const conversations = [
-    { id: 1, name: "Alice" },
-    { id: 2, name: "Bob" },
-    { id: 3, name: "Group Chat 1" }
-  ];
+  const [users] = useState(["Alice", "Bob", "Charlie", "David", "Emma"]); // Dummy users
+
+  const navigate = useNavigate();
 
   const handleLogout = () => {
     localStorage.removeItem('isLoggedIn');
     navigate('/login');
   };
 
-  const sendFriendRequest = () => {
-    if (friendName.trim() === '') return;
-    setRequestSent(true);
-    setTimeout(() => {
-      setRequestSent(false);
-      setFriendName('');
-      alert(`Friend request sent to ${friendName}!`);
-    }, 1500);
+  const createNewChat = () => {
+    if (newChatName.trim() === '') return;
+    const newChat = { id: conversations.length + 1, name: newChatName, members: [] };
+    setConversations([...conversations, newChat]);
+    setNewChatName('');
+    setIsPopupOpen(false);
+  };
+
+  const openManageChat = (chatId) => {
+    setManageChatId(chatId);
+  };
+
+  const closeManageChat = () => {
+    setManageChatId(null);
+  };
+
+  const toggleMember = (chatId, user) => {
+    setConversations(conversations.map(chat => {
+      if (chat.id === chatId) {
+        const isMember = chat.members.includes(user);
+        return {
+          ...chat,
+          members: isMember ? chat.members.filter(m => m !== user) : [...chat.members, user]
+        };
+      }
+      return chat;
+    }));
   };
 
   return (
@@ -36,12 +56,18 @@ const Layout = () => {
       {/* Left Sidebar (Chat Navigation) */}
       <nav className={`layout__sidebar layout__sidebar--left ${isOpen ? 'open' : ''}`}>
         <h3 className="layout__sidebar-title">Chats</h3>
+        <button className="layout__new-chat-btn" onClick={() => setIsPopupOpen(true)}>
+          + New Chat
+        </button>
         <ul className="layout__nav-list">
           {conversations.map(chat => (
             <li key={chat.id} className="layout__nav-item">
-              <Link to={`/chat/${chat.id}`} className="layout__nav-link" onClick={() => setIsOpen(false)}>
-                {chat.name}
-              </Link>
+              <div className="layout__chat-item">
+                <Link to={`/chat/${chat.id}`} className="layout__nav-link" onClick={() => setIsOpen(false)}>
+                  {chat.name}
+                </Link>
+                <button className="layout__manage-btn" onClick={() => openManageChat(chat.id)}>⚙️</button>
+              </div>
             </li>
           ))}
         </ul>
@@ -64,31 +90,47 @@ const Layout = () => {
       <aside className="layout__sidebar layout__sidebar--right">
         <h3>Online Users</h3>
         <p>Coming soon...</p>
-        <button className="layout__friend-btn" onClick={() => setIsPopupOpen(true)}>
-          Find Friends
-        </button>
       </aside>
 
-      {/* Friend Search Popup */}
+      {/* Create New Chat Popup */}
       {isPopupOpen && (
         <div className="popup">
           <div className="popup__content">
-            <h3>Find Friends</h3>
+            <h3>Create New Chat</h3>
             <input
               type="text"
-              placeholder="Search by name..."
+              placeholder="Enter chat name..."
               className="popup__input"
-              value={friendName}
-              onChange={(e) => setFriendName(e.target.value)}
+              value={newChatName}
+              onChange={(e) => setNewChatName(e.target.value)}
             />
-            <button
-              className="popup__send-btn"
-              onClick={sendFriendRequest}
-              disabled={friendName.trim() === '' || requestSent}
-            >
-              {requestSent ? "Request Sent!" : "Send Friend Request"}
+            <button className="popup__send-btn" onClick={createNewChat} disabled={newChatName.trim() === ''}>
+              Create Chat
             </button>
             <button className="popup__close-btn" onClick={() => setIsPopupOpen(false)}>Close</button>
+          </div>
+        </div>
+      )}
+
+      {/* Manage Chat Members Popup */}
+      {manageChatId !== null && (
+        <div className="popup">
+          <div className="popup__content">
+            <h3>Manage Chat Members</h3>
+            <ul className="popup__user-list">
+              {users.map(user => (
+                <li key={user} className="popup__user-item">
+                  <span>{user}</span>
+                  <button
+                    className={`popup__toggle-btn ${conversations.find(chat => chat.id === manageChatId)?.members.includes(user) ? 'remove' : 'add'}`}
+                    onClick={() => toggleMember(manageChatId, user)}
+                  >
+                    {conversations.find(chat => chat.id === manageChatId)?.members.includes(user) ? 'Remove' : 'Add'}
+                  </button>
+                </li>
+              ))}
+            </ul>
+            <button className="popup__close-btn" onClick={closeManageChat}>Close</button>
           </div>
         </div>
       )}
