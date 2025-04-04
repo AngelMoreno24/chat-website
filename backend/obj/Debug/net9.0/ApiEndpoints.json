@@ -33,6 +33,22 @@
   },
   {
     "ContainingType": "backend.Controllers.AccountController",
+    "Method": "DeleteUser",
+    "RelativePath": "api/Account/delete-user/{id}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "backend.Controllers.AccountController",
     "Method": "Login",
     "RelativePath": "api/Account/login",
     "HttpMethod": "POST",
@@ -59,6 +75,22 @@
         "Name": "model",
         "Type": "backend.Models.Register",
         "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "backend.Controllers.AccountController",
+    "Method": "SearchUsers",
+    "RelativePath": "api/Account/search",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "query",
+        "Type": "System.String",
+        "IsRequired": false
       }
     ],
     "ReturnTypes": []

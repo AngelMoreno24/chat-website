@@ -1,6 +1,7 @@
 // Login.js
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
 const Login = () => {
   const [email, setEmail] = useState('');
@@ -14,38 +15,17 @@ const Login = () => {
       navigate('/'); // Redirect to home
     }
   }, [navigate]);
-
-  const handleLogin = (e) => {
-    e.preventDefault();
-    // Simulate authentication (replace with real authentication logic)
-    if (email === 'user@example.com' && password === 'password') {
-      localStorage.setItem('isLoggedIn', 'true');
-      navigate('/'); // Redirect to home after login
-    } else {
-      alert('Invalid credentials');
-    }   
-
-    const BaseUrl = process.env.REACT_APP_API_BASE_URL
-
-    const response = axios({
-        method: 'post',
-        url: `${BaseUrl}/api/Account/login`,
-        data: {
-          firstName: email,
-          lastName: password
-        }
-      });
-
-
-  };
+ 
 
   const login = (event) => {
     event.preventDefault(); // Prevents the default form submission behavior
 
-    console.log("logging in " + email + "password= " + password);
-    console.log("logging in " + email + "password= " + password);
+    console.log("logging in " + email + " password= " + password);
+    console.log("logging in " + email + " password= " + password);
 
-    axios.post(`${BaseUrl}/api/Account/login`,   
+    const Url = process.env.REACT_APP_BASE_URL
+
+    axios.post(`${Url}/api/Account/login`,   
       {
       email: email,
       password: password
@@ -58,6 +38,7 @@ const Login = () => {
     
     })
     .catch(error => console.log(error));
+
     
   }
 
