@@ -23,9 +23,9 @@ const Login = () => {
     console.log("logging in " + email + " password= " + password);
     console.log("logging in " + email + " password= " + password);
 
-    const Url = process.env.REACT_APP_BASE_URL
+    //const Url = process.env.REACT_APP_BASE_URL
 
-    axios.post(`${Url}/api/Account/login`,   
+    axios.post(`https://localhost:7145/api/Account/login`,   
       {
       email: email,
       password: password
@@ -34,7 +34,7 @@ const Login = () => {
     .then(data => {
       localStorage.setItem('token', data.data.accessToken);
       console.log(data.data) 
-      navigate('home/'); 
+      navigate('../home/'); 
     
     })
     .catch(error => console.log(error));
