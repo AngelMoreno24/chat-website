@@ -580,3 +580,31 @@ body {
 .popup__toggle-btn.remove:hover {
   background: #c9302c;
 }
+
+.layout__user-list {
+  list-style: none;
+  padding: 0;
+}
+
+.layout__user-item {
+  display: flex;
+  justify-content: space-between;
+  margin: 5px 0;
+}
+
+.layout__friend-btn {
+  padding: 4px 8px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.layout__friend-btn.add {
+  background-color: #4CAF50;
+  color: white;
+}
+
+.layout__friend-btn.remove {
+  background-color: #f44336;
+  color: white;
+}
