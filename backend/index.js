@@ -1,16 +1,19 @@
 import express from 'express';
 import cors from 'cors';    
 import dotenv from 'dotenv';
+import authRoutes from './routes/authRoutes.js';
 
 const app = express();
 
 
 // Enable Cors
-const cors = require('cors');
 app.use(cors());
 
 // Middleware
 app.use(express.json()); // parse JSON request bodies
+
+
+app.use("/auth", authRoutes);
 
 // Routes
 app.get('/', (req, res) => {
