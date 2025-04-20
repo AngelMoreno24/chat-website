@@ -1,27 +1,14 @@
 import sql from 'mssql';
 import dotenv from 'dotenv';
+
 dotenv.config();
 
-const config = {
-  user: process.env.AZURE_SQL_USER,
-  password: process.env.AZURE_SQL_PASSWORD,
-  server: process.env.AZURE_SQL_SERVER,
-  database: process.env.AZURE_SQL_DATABASE,
-  options: {
-    encrypt: true, // For Azure
-    trustServerCertificate: false,
-  },
-  pool: {
-    max: 10,
-    min: 0,
-    idleTimeoutMillis: 30000,
-  },
-};
+const connectionString = process.env.AZURE_SQL_CONNECTION_STRING;
 
-const poolPromise = new sql.ConnectionPool(config)
+const poolPromise = new sql.ConnectionPool(connectionString)
   .connect()
   .then(pool => {
-    console.log('✅ Connected to Azure SQL');
+    console.log('✅ Connected to Azure SQL via connection string');
     return pool;
   })
   .catch(err => {
