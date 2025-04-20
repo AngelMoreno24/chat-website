@@ -41,3 +41,27 @@ export const addFriend = async (req, res) => {
     }
 
 }
+
+export const getRequests = async (req, res) => {
+
+    
+    const id = req.user.id;
+    
+    
+    try {
+        const pool = await poolPromise;
+
+        const result = await pool
+            .request()
+            .input('UserId', sql.Int, id)
+            .query(`
+                SELECT * FROM Friendships WHERE FriendId = @UserId AND Status = 'pending'
+            `);
+
+
+            return res.status(200).json({ requests: result.recordset });
+    } catch (err) {
+        console.error('Get requests error:', err);
+        return res.status(500).json({ message: 'Server error' });
+    }
+}
