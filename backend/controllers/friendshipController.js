@@ -77,7 +77,7 @@ export const acceptRequest = async (req, res) => {
 
     const { userId } = req.body;
 
-    if(!id){
+    if(!userId){
         return res(400).json({ message: 'missing request id!' });  
     }
 
@@ -91,11 +91,13 @@ export const acceptRequest = async (req, res) => {
             .input('UserId', sql.Int, userId)
             .input('FriendId', sql.Int, friendId)
             .query(`
-                SELECT * FROM Friendships 
-                WHERE (FriendId = @UserId) AND Status = 'pending'
+                UPDATE Friendships
+                SET Status = 'accepted'
+                WHERE UserId = @UserId AND FriendId = @FriendId AND Status = 'pending'
             `);
 
-        return res.status(200).json({ requests: result.recordset });
+
+        return res.status(200).json({ userId, message: 'Friend request accepted successfully' });
 
     } catch (err) {
         console.error('Get requests error:', err);

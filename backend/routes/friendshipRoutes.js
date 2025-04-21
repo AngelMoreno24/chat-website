@@ -6,6 +6,6 @@ const router = express.Router();
 
 router.post('/addFriend', addFriend); 
 router.get('/getRequests', getRequests); 
-router.post('/acceptRequest', acceptRequest); 
+router.patch('/acceptRequest', acceptRequest); 
 
 export default router;
