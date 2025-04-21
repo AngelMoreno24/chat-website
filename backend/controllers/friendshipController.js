@@ -52,6 +52,7 @@ export const getRequests = async (req, res) => {
     
     const id = req.user.id;
     
+    console.log("getRequests route hit");
     
     try {
         const pool = await poolPromise;
@@ -104,3 +105,32 @@ export const acceptRequest = async (req, res) => {
         return res.status(500).json({ message: 'Server error' });
     }
 }
+
+export const getFriends = async (req, res) => {
+    const id = req.user.id;
+
+    try {
+        const pool = await poolPromise;
+
+        const result = await pool
+            .request()
+            .input('UserId', sql.Int, id)
+            .query(`
+                SELECT 
+                    u.Id AS FriendId,
+                    u.Username
+                FROM Friendships f
+                JOIN Users u ON 
+                    (u.Id = f.FriendId AND f.UserId = @UserId)
+                    OR (u.Id = f.UserId AND f.FriendId = @UserId)
+                WHERE 
+                    (f.UserId = @UserId OR f.FriendId = @UserId)
+                    AND f.Status = 'accepted'
+            `);
+
+        return res.status(200).json({ friends: result.recordset });
+    } catch (err) {
+        console.error('Get friends error:', err);
+        return res.status(500).json({ message: 'Server error' });
+    }
+};
