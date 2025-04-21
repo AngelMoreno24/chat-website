@@ -65,3 +65,35 @@ export const getRequests = async (req, res) => {
         return res.status(500).json({ message: 'Server error' });
     }
 }
+
+
+
+export const acceptRequest = async (req, res) => {
+
+    const { userId } = req.body;
+
+    if(!id){
+        return res(400).json({ message: 'missing request id!' });  
+    }
+
+    const friendId = req.user.id;
+    
+    try {
+        const pool = await poolPromise;
+
+        const result = await pool
+            .request()
+            .input('UserId', sql.Int, userId)
+            .input('FriendId', sql.Int, friendId)
+            .query(`
+                SELECT * FROM Friendships 
+                WHERE (FriendId = @UserId) AND Status = 'pending'
+            `);
+
+        return res.status(200).json({ requests: result.recordset });
+
+    } catch (err) {
+        console.error('Get requests error:', err);
+        return res.status(500).json({ message: 'Server error' });
+    }
+}
