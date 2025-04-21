@@ -4,17 +4,18 @@ export const addFriend = async (req, res) => {
 
     const { friendCode  } = req.body;
 
+    const userId = req.user.id;
+
     if(!friendCode){
         return res(400).json({ message: 'missing friend code!' });  
     }
     
     try{
 
-        pool = await poolPromise;
+        const pool = await poolPromise;
         const response = await pool
             .request()
-            .input('UserId', sql.NVarChar, UserId )
-            .input('FriendId', sql.NVarChar, FriendId)
+            .input('FriendCode', sql.NVarChar, friendCode)
             .query(`
                 Select Id FROM Users Where FriendCode = @FriendCode
             `);
@@ -22,18 +23,22 @@ export const addFriend = async (req, res) => {
 
         const friendId = response.recordset[0].Id;
 
-        const id = req.user.id;
+
+        if(!friendId){
+            return res.status(400).json({ message: 'Friend not found!' });  
+        }
+        
 
         await pool
             .request()
-            .input('UserId', sql.NVarChar, UserId )
-            .input('FriendId', sql.NVarChar, friendId)
+            .input('UserId', sql.Int, userId )
+            .input('FriendId', sql.Int, friendId)
             .query(`
                 INSERT INTO Friendships (UserId, FriendId)
                 VALUES (@UserId, @FriendId)
             `);
 
-        return res.status(200).json({ message: 'Friend added successfully' });
+        return res.status(200).json({ message: 'Friend request sent successfully' });
     }catch(err){
 
         console.error('add member error:', err);
