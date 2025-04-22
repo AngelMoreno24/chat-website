@@ -5,21 +5,33 @@ import axios from 'axios';
 const FriendRequestsModal = ({ onClose }) => {
 
   const [requests, setRequests] = useState([]); // State to hold friend requests
-
+  const [token, setToken] = useState(''); // State to hold the token
 
 
   useEffect(() => {
     
-    // Fetch friend requests when the modal opens
-    fetchFriendRequests();
+    const storedToken = localStorage.getItem('token');
+    if (storedToken) {
+      setToken(storedToken);
+    } else {
+      console.warn('Token not found in localStorage');
+    }
+    
   }, []);
 
 
-  const fetchFriendRequests = () => {
 
-    const token = localStorage.getItem('token');
+  // Fetch friends only after token is set
+  useEffect(() => {
+    if (token) {
+      fetchFriendRequests(token);
+    }
+  }, [token]);
+
+  const fetchFriendRequests = (token) => {
+ 
     
-    axios.get(`http://localhost:7145/friendship/getRequests`, {}, {
+    axios.get(`http://localhost:7145/friendship/getRequests`, {
       headers: {
         'Authorization': `Bearer ${token}`,
         'Content-Type': 'application/json'
@@ -28,7 +40,6 @@ const FriendRequestsModal = ({ onClose }) => {
     .then(response => {
       console.log('Friend request sent:', response.data);
       setRequests(response.data.requests || []); // Assuming the response contains an array of requests
-      setLoading(true);
     })
     .catch(err => {
       console.error(err);
@@ -44,7 +55,7 @@ const FriendRequestsModal = ({ onClose }) => {
 
         {requests.length > 0 ? (
           requests.map((request, index) => (
-            <li key={index}>{request.name || request}</li>
+            <li key={index}>{request.SenderUsername || request}</li>
           ))
         ) : (
           <p>No friends found.</p>
