@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import FriendRequestsModal from '../Components/FriendRequestModal.jsx';
 import AddFriendModal from '../Components/AddFriendModal.jsx';
+import './CssPages/Home.css'; // Import the CSS file
 
 const Home = () => {
   const [friends, setFriends] = useState([]);
@@ -12,11 +13,7 @@ const Home = () => {
 
   useEffect(() => {
     const isLoggedIn = localStorage.getItem('isLoggedIn');
-    if (!isLoggedIn) {
-      //window.location.href = '/login';
-    } else {
-      getFriends();
-    }
+    if (isLoggedIn) getFriends();
   }, []);
 
   const getFriends = () => {
@@ -24,7 +21,6 @@ const Home = () => {
     setError(null);
 
     const token = localStorage.getItem('token');
-
     axios.post(`https://localhost:7145/friendship/getFriends`, {}, {
       headers: {
         'Authorization': `Bearer ${token}`,
@@ -32,8 +28,7 @@ const Home = () => {
       }
     })
     .then(response => {
-      const data = response.data;
-      setFriends(data.friends || []);
+      setFriends(response.data.friends || []);
       setLoading(false);
     })
     .catch(err => {
@@ -44,21 +39,17 @@ const Home = () => {
   };
 
   return (
-    <div style={{ padding: '20px' }}>
+    <div className="home-container">
       <h1>Friends Dashboard</h1>
 
-      <div style={{ marginBottom: '15px' }}>
-        <button onClick={() => setShowRequestsModal(true)} style={{ marginRight: '10px' }}>
-          👥 Friend Requests
-        </button>
-        <button onClick={() => setShowAddFriendModal(true)}>
-          ➕ Add Friends
-        </button>
+      <div className="button-group">
+        <button onClick={() => setShowRequestsModal(true)}>👥 Friend Requests</button>
+        <button onClick={() => setShowAddFriendModal(true)}>➕ Add Friends</button>
       </div>
 
       <h2>Friends List</h2>
       {loading && <p>Loading friends...</p>}
-      {error && <p style={{ color: 'red' }}>{error}</p>}
+      {error && <p className="error">{error}</p>}
 
       <ol>
         {friends.length > 0 ? (
@@ -72,28 +63,6 @@ const Home = () => {
 
       {showRequestsModal && <FriendRequestsModal onClose={() => setShowRequestsModal(false)} />}
       {showAddFriendModal && <AddFriendModal onClose={() => setShowAddFriendModal(false)} />}
-
-      <style>{`
-        .modal {
-          position: fixed;
-          top: 0; left: 0;
-          width: 100%; height: 100%;
-          background: rgba(0, 0, 0, 0.4);
-          display: flex;
-          justify-content: center;
-          align-items: center;
-          z-index: 1000;
-        }
-
-        .modal-content {
-          background: white;
-          padding: 20px;
-          border-radius: 8px;
-          max-width: 400px;
-          width: 90%;
-          box-shadow: 0 2px 10px rgba(0,0,0,0.2);
-        }
-      `}</style>
     </div>
   );
 };
