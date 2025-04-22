@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import FriendRequestsModal from '../Components/FriendRequestModal.jsx';
+import AddFriendModal from '../Components/AddFriendModal.jsx';
 
 const Home = () => {
   const [friends, setFriends] = useState([]);
@@ -68,30 +70,9 @@ const Home = () => {
         )}
       </ol>
 
-      {/* Friend Requests Modal */}
-      {showRequestsModal && (
-        <div className="modal">
-          <div className="modal-content">
-            <h3>Friend Requests</h3>
-            <p>Show incoming friend requests here...</p>
-            <button onClick={() => setShowRequestsModal(false)}>Close</button>
-          </div>
-        </div>
-      )}
+      {showRequestsModal && <FriendRequestsModal onClose={() => setShowRequestsModal(false)} />}
+      {showAddFriendModal && <AddFriendModal onClose={() => setShowAddFriendModal(false)} />}
 
-      {/* Add Friend Modal */}
-      {showAddFriendModal && (
-        <div className="modal">
-          <div className="modal-content">
-            <h3>Add Friend</h3>
-            <p>Search and add users here...</p>
-            <input></input>
-            <button onClick={() => setShowAddFriendModal(false)}>Close</button>
-          </div>
-        </div>
-      )}
-
-      {/* Modal styling */}
       <style>{`
         .modal {
           position: fixed;
@@ -111,14 +92,6 @@ const Home = () => {
           max-width: 400px;
           width: 90%;
           box-shadow: 0 2px 10px rgba(0,0,0,0.2);
-        }
-
-        .modal-content h3 {
-          margin-top: 0;
-        }
-
-        .modal-content button {
-          margin-top: 10px;
         }
       `}</style>
     </div>
