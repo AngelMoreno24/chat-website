@@ -18,7 +18,7 @@ const AddFriendModal = ({ onClose }) => {
     const token = localStorage.getItem('token');
 
 
-    axios.post(`https://localhost:7145/friendship/addFriend`, 
+    axios.post(`http://localhost:7145/friendship/addFriend`, 
       {
         friendCode: friendCode
       }, {

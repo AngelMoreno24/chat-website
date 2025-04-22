@@ -19,7 +19,7 @@ const FriendRequestsModal = ({ onClose }) => {
 
     const token = localStorage.getItem('token');
     
-    axios.get(`https://localhost:7145/friendship/getRequests`, {}, {
+    axios.get(`http://localhost:7145/friendship/getRequests`, {}, {
       headers: {
         'Authorization': `Bearer ${token}`,
         'Content-Type': 'application/json'

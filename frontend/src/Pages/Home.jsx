@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import FriendRequestsModal from '../Components/FriendRequestModal.jsx';
 import AddFriendModal from '../Components/AddFriendModal.jsx';
-import './CssPages/Home.css'; // Import the CSS file
+import './CssPages/Home.css';
 
 const Home = () => {
   const [friends, setFriends] = useState([]);
@@ -10,32 +10,47 @@ const Home = () => {
   const [error, setError] = useState(null);
   const [showRequestsModal, setShowRequestsModal] = useState(false);
   const [showAddFriendModal, setShowAddFriendModal] = useState(false);
+  const [token, setToken] = useState('');
 
+  // Load token on mount
   useEffect(() => {
-    const isLoggedIn = localStorage.getItem('isLoggedIn');
-    if (isLoggedIn) getFriends();
+    const storedToken = localStorage.getItem('token');
+    if (storedToken) {
+      setToken(storedToken);
+    } else {
+      console.warn('Token not found in localStorage');
+    }
   }, []);
 
-  const getFriends = () => {
+  // Fetch friends only after token is set
+  useEffect(() => {
+    if (token) {
+      console.log('Token found:', token); // Debug log
+      getFriends(token);
+    }
+  }, [token]);
+
+  const getFriends = (token) => {
     setLoading(true);
     setError(null);
 
-    const token = localStorage.getItem('token');
-    axios.post(`https://localhost:7145/friendship/getFriends`, {}, {
+
+    axios.get('http://localhost:7145/friendship/getFriends', {
       headers: {
         'Authorization': `Bearer ${token}`,
         'Content-Type': 'application/json'
       }
     })
-    .then(response => {
-      setFriends(response.data.friends || []);
-      setLoading(false);
-    })
-    .catch(err => {
-      console.error(err);
-      setError('Failed to load friends.');
-      setLoading(false);
-    });
+      .then(response => {
+        setFriends(response.data.friends || []);
+
+        setLoading(false);
+      })
+      .catch(err => {
+        console.error('Failed to fetch friends:', err);
+        setError('Failed to load friends.');
+        setLoading(false);
+      });
   };
 
   return (
@@ -51,18 +66,22 @@ const Home = () => {
       {loading && <p>Loading friends...</p>}
       {error && <p className="error">{error}</p>}
 
-      <ol>
+      <ul>
         {friends.length > 0 ? (
           friends.map((friend, index) => (
-            <li key={index}>{friend.name || friend}</li>
+            <li key={index}>{friend.Username}</li>
           ))
         ) : (
           !loading && <p>No friends found.</p>
         )}
-      </ol>
+      </ul>
 
-      {showRequestsModal && <FriendRequestsModal onClose={() => setShowRequestsModal(false)} />}
-      {showAddFriendModal && <AddFriendModal onClose={() => setShowAddFriendModal(false)} />}
+      {showRequestsModal && (
+        <FriendRequestsModal onClose={() => setShowRequestsModal(false)} />
+      )}
+      {showAddFriendModal && (
+        <AddFriendModal onClose={() => setShowAddFriendModal(false)} />
+      )}
     </div>
   );
 };

@@ -8,40 +8,34 @@ const Login = () => {
   const [password, setPassword] = useState('');
   const navigate = useNavigate();
 
-  // Redirect to home if already logged in
   useEffect(() => {
-    const isLoggedIn = localStorage.getItem('isLoggedIn');
-    if (isLoggedIn) {
-      navigate('/'); // Redirect to home
+    const token = localStorage.getItem('token');
+    if (token) {
+      navigate('/home'); // Redirect if already logged in
     }
   }, [navigate]);
- 
 
   const login = (event) => {
-    event.preventDefault(); // Prevents the default form submission behavior
+    event.preventDefault();
 
-    console.log("logging in " + email + " password= " + password);
-    console.log("logging in " + email + " password= " + password);
-
-    //const Url = process.env.REACT_APP_BASE_URL
-
-    axios.post(`https://localhost:7145/auth/login`,   
-      {
+    axios.post('http://localhost:7145/auth/login', {
       email: email,
       password: password
-      }
-    )
-    .then(data => {
-      localStorage.setItem('token', data.data.accessToken);
-      console.log(data.data) 
-      navigate('../home/'); 
-    
     })
-    .catch(error => console.log(error));
+    .then(data => {
+      localStorage.setItem('token', data.data.token);
+      localStorage.setItem('isLoggedIn', 'true');
 
-    
-  }
-
+      // Tiny delay to allow token to be saved before navigation
+      setTimeout(() => {
+        navigate('/home', { state: { justLoggedIn: true } });
+      }, 50);
+    })
+    .catch(error => {
+      console.error('Login error:', error);
+      alert('Login failed. Please check your credentials.');
+    });
+  };
 
   return (
     <div style={styles.container}>
@@ -74,10 +68,24 @@ const Login = () => {
 };
 
 const styles = {
-  container: { maxWidth: '300px', margin: '50px auto', padding: '20px', border: '1px solid #ccc', borderRadius: '8px', textAlign: 'center' },
+  container: {
+    maxWidth: '300px',
+    margin: '50px auto',
+    padding: '20px',
+    border: '1px solid #ccc',
+    borderRadius: '8px',
+    textAlign: 'center'
+  },
   form: { display: 'flex', flexDirection: 'column' },
   inputGroup: { marginBottom: '10px' },
-  button: { padding: '10px', background: 'blue', color: 'white', border: 'none', borderRadius: '4px', cursor: 'pointer' },
+  button: {
+    padding: '10px',
+    background: 'blue',
+    color: 'white',
+    border: 'none',
+    borderRadius: '4px',
+    cursor: 'pointer'
+  },
 };
 
 export default Login;
