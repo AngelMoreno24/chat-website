@@ -1,12 +1,15 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Outlet, Link, useNavigate } from 'react-router-dom';
 import './CssComponent/Layout.css';
+import axios from 'axios';
+
 
 const Layout = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isPopupOpen, setIsPopupOpen] = useState(false);
   const [newChatName, setNewChatName] = useState('');
   const [manageChatId, setManageChatId] = useState(null);
+  const [token, setToken] = useState('');
 
   const [conversations, setConversations] = useState([
     { id: 1, name: "Alice", members: ["Alice"] },
@@ -15,7 +18,14 @@ const Layout = () => {
   ]);
 
   const [users] = useState(["Alice", "Bob", "Charlie", "David", "Emma"]);
+
+  const [chats, setChats] = useState([]);
+
+
+
   const navigate = useNavigate();
+
+
 
   const handleLogout = () => {
     localStorage.removeItem('isLoggedIn');
@@ -30,6 +40,53 @@ const Layout = () => {
     setNewChatName('');
     setIsPopupOpen(false);
   };
+
+
+
+  useEffect(() => {
+    
+    const storedToken = localStorage.getItem('token');
+    if (storedToken) {
+      setToken(storedToken);
+    } else {
+      console.warn('Token not found in localStorage');
+    }
+    
+  }, []);
+
+
+
+  // Fetch friends only after token is set
+  useEffect(() => {
+    if (token) {
+      addChat(token);
+    }
+  }, [token]);
+
+  const addChat = (token) => {
+
+    
+    axios.get(`http://localhost:7145/chat/getChats`, {
+      headers: {
+        'Authorization': `Bearer ${token}`,
+        'Content-Type': 'application/json'
+      }
+    })
+    .then(response => {
+      console.log('Conversation fetched:', response.data);
+      setChats(response.data.chats || []); // Assuming the response contains an array of requests
+    })
+    .catch(err => {
+      console.error(err);
+    });
+    
+  }
+
+
+
+
+
+
 
   const openManageChat = (chatId) => setManageChatId(chatId);
   const closeManageChat = () => setManageChatId(null);
@@ -64,13 +121,13 @@ const Layout = () => {
 
         <ul className="layout__nav-list">
 
-          {conversations.map(chat => (
-            <li key={chat.id} className="layout__nav-item">
+          {chats.map(chat => (
+            <li key={chat.Id} className="layout__nav-item">
               <div className="layout__chat-item">
-                <Link to={`/chat/${chat.id}`} className="layout__nav-link" onClick={() => setIsOpen(false)}>
-                  {chat.name}
+                <Link to={`/chat/${chat.Id}`} className="layout__nav-link" onClick={() => setIsOpen(false)}>
+                  {chat.Name}
                 </Link>
-                <button className="layout__manage-btn" onClick={() => openManageChat(chat.id)}>⚙️</button>
+                <button className="layout__manage-btn" onClick={() => openManageChat(chat.Id)}>⚙️</button>
               </div>
             </li>
           ))}
