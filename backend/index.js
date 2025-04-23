@@ -4,6 +4,7 @@ import dotenv from 'dotenv';
 import authRoutes from './routes/authRoutes.js'; // 👈 import your auth routes
 import chatRoutes from './routes/chatRoutes.js'; // 👈 import your chat routes
 import friendshipRoutes from './routes/friendshipRoutes.js'; // 👈 import your friendship routes
+import messageRoutes from './routes/messageRoutes.js'; // 👈 import your message routes
 import { verifyToken } from './middleware/verifyToken.js'; // 👈 import your middleware
 import { sql, poolPromise } from './db.js'; // 👈 import your db connection
 
@@ -19,6 +20,7 @@ app.use("/auth", authRoutes); // 👈 use your auth routes
 
 app.use("/chat", verifyToken, chatRoutes); // 👈 use your auth routes
 app.use("/friendship", verifyToken, friendshipRoutes); // 👈 use your auth routes
+app.use("/message", verifyToken, messageRoutes); // 👈 use your auth routes
 
 // Example: Use DB in a route
 app.get('/users', async (req, res) => {

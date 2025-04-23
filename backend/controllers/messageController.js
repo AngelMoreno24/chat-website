@@ -16,9 +16,11 @@ export const sendMessage = async (req, res) => {
             .input('Content', sql.NVarChar, message)
             .query(`
                 INSERT INTO Messages (ConversationId, SenderId, Content)
-                VALUES (@ConversationId, @SenderId, @Message)
+                VALUES (@ConversationId, @SenderId, @Content)
             `);
 
+
+        return res.status(200).json({ message: 'Message sent successfully' });
     }catch(err){
             
             console.error('send message error:', err);
