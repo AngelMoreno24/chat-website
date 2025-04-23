@@ -11,13 +11,8 @@ const Layout = () => {
   const [manageChatId, setManageChatId] = useState(null);
   const [token, setToken] = useState('');
 
-  const [conversations, setConversations] = useState([
-    { id: 1, name: "Alice", members: ["Alice"] },
-    { id: 2, name: "Bob", members: ["Bob"] },
-    { id: 3, name: "Group Chat 1", members: ["Alice", "Bob"] }
-  ]);
 
-  const [users] = useState(["Alice", "Bob", "Charlie", "David", "Emma"]);
+  const [] = useState(["Alice", "Bob", "Charlie", "David", "Emma"]);
 
   const [chats, setChats] = useState([]);
 
@@ -124,9 +119,14 @@ const Layout = () => {
           {chats.map(chat => (
             <li key={chat.Id} className="layout__nav-item">
               <div className="layout__chat-item">
-                <Link to={`/chat/${chat.Id}`} className="layout__nav-link" onClick={() => setIsOpen(false)}>
-                  {chat.Name}
-                </Link>
+              <Link
+                to={`/chat/${chat.Id}`}
+                state={{ chatName: chat.Name, members: chat.Members }}
+                className="layout__nav-link"
+                onClick={() => setIsOpen(false)}
+              >
+                {chat.Name}
+              </Link>
                 <button className="layout__manage-btn" onClick={() => openManageChat(chat.Id)}>⚙️</button>
               </div>
             </li>
