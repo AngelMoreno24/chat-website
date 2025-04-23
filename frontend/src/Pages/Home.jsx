@@ -34,6 +34,7 @@ const Home = () => {
     setLoading(true);
     setError(null);
 
+    console.log('Fetching friends with token:', token); // Debug log
 
     axios.get('http://localhost:7145/friendship/getFriends', {
       headers: {

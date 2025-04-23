@@ -36,7 +36,7 @@ export const sendMessage = async (req, res) => {
 
 export const getMessages = async (req, res) => {
 
-    const { conversationId } = req.body;
+    const { conversationId } = req.query;
 
     try{
 
