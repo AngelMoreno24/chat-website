@@ -25,3 +25,30 @@ export const sendMessage = async (req, res) => {
             return res.status(500).json({ message: 'Server error' });
     }
 }
+
+
+
+export const getMessages = async (req, res) => {
+
+    const { conversationId } = req.body;
+
+    try{
+
+        const pool = await poolPromise;
+
+        await pool.request()
+            .input('ConversationId', sql.Int, conversationId)
+            .input('SenderId', sql.Int, SenderId)
+            .input('Content', sql.NVarChar, message)
+            .query(`
+                SELECT * FROM Messages
+                WHERE (ConversationId = @ConversationId)
+            `);
+
+            return res.status(200).json({ message: 'this is getMessages', messages: result.recordset });
+    }catch(err){
+            
+            console.error('send message error:', err);
+            return res.status(500).json({ message: 'Server error' });
+    }
+}
