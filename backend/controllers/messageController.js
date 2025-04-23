@@ -5,6 +5,10 @@ export const sendMessage = async (req, res) => {
 
     const { conversationId, message } = req.body;
 
+    if (!conversationId || !message) {
+        return res.status(400).json({ message: 'Missing conversationId or message!' });
+    }
+
     const SenderId = req.user.id;
     try{
 
@@ -38,10 +42,8 @@ export const getMessages = async (req, res) => {
 
         const pool = await poolPromise;
 
-        await pool.request()
+        const result = await pool.request()
             .input('ConversationId', sql.Int, conversationId)
-            .input('SenderId', sql.Int, SenderId)
-            .input('Content', sql.NVarChar, message)
             .query(`
                 SELECT * FROM Messages
                 WHERE (ConversationId = @ConversationId)
