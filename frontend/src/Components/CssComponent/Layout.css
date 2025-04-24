@@ -18,74 +18,64 @@ body {
 /* Layout container */
 .layout {
   display: flex;
-  width: 90vw;
-  max-width: 1200px;
-  height: 90vh;
+  width: 100%;
+  height: 100vh;
   background: #1e1e1e;
-  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
-  border-radius: 10px;
-  overflow: hidden;
-  position: relative;
 }
 
-/* Sidebar Toggle Button */
-.layout__toggle-btn {
-  position: absolute;
-  top: 15px;
-  left: 15px;
-  background: #333;
-  color: #e0e0e0;
-  border: none;
-  padding: 10px 15px;
-  cursor: pointer;
-  font-size: 1.2rem;
-  border-radius: 5px;
-  transition: left 0.3s ease, background 0.3s ease;
-  z-index: 200;
-}
-
-.layout__toggle-btn:hover {
-  background: #444;
-}
-
-.layout__sidebar--left.open ~ .layout__toggle-btn {
-  left: 265px;
-}
-
-/* Sidebar */
+/* Sidebar Styling */
 .layout__sidebar {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  background-color: #212121;
+  color: white;
   width: 250px;
-  height: 100%;
+  padding-top: 3rem;
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.3);
   display: flex;
   flex-direction: column;
-  align-items: center;
-  transition: transform 0.3s ease;
 }
 
 .layout__sidebar--left {
-  position: absolute;
-  left: -250px;
-  top: 0;
-  background-color: #212121;
-  color: white;
-  padding: 1rem;
-  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.3);
+  left: 0;
 }
 
-.layout__sidebar--left.open {
-  transform: translateX(250px);
+.layout__sidebar--right {
+  right: 0;
+  background-color: #1f2937;
 }
 
+/* Sidebar title */
 .layout__sidebar-title {
   color: white;
   text-align: center;
   margin-bottom: 1rem;
 }
 
+/* Sidebar Buttons */
+.layout__new-chat-btn {
+  background: #4caf50;
+  color: white;
+  width: 100%;
+  padding: 10px;
+  text-align: center;
+  border: none;
+  cursor: pointer;
+  font-size: 1rem;
+  border-radius: 5px;
+  margin-bottom: 10px;
+}
+
+.layout__new-chat-btn:hover {
+  background: #45a049;
+}
+
 .layout__nav-list {
   list-style: none;
   padding: 0;
   width: 100%;
+  margin-top: 20px;
 }
 
 .layout__nav-item {
@@ -100,6 +90,9 @@ body {
   padding: 1rem;
   color: #e0e0e0;
   text-decoration: none;
+  background: none;
+  border: none;
+  cursor: pointer;
   transition: background 0.3s ease;
 }
 
@@ -107,41 +100,16 @@ body {
   background: rgba(255, 255, 255, 0.1);
 }
 
-.layout__logout-btn {
-  background: #d9534f;
-  color: white;
-  border: none;
-  padding: 10px 15px;
-  width: 100%;
-  cursor: pointer;
-  font-size: 1rem;
-  border-radius: 5px;
-  transition: background 0.3s ease;
-}
-
-.layout__logout-btn:hover {
-  background: #c9302c;
-}
-
-.layout__sidebar--right {
-  background-color: #292929;
-  padding: 1rem;
-  border-left: 1px solid #444;
-  text-align: center;
-  width: 250px;
-  color: #e0e0e0;
-}
-
-/* Chat Content */
+/* Content area */
 .layout__content {
   flex: 1;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
+  margin-left: 250px; /* To account for left sidebar */
+  margin-right: 250px; /* To account for right sidebar */
   padding: 2rem;
-  transition: margin-left 0.3s ease;
+  background-color: #111827;
 }
 
+/* Chat main section */
 .layout__main {
   flex: 1;
   display: flex;
@@ -151,42 +119,7 @@ body {
   text-align: center;
 }
 
-/* New Chat Button */
-.layout__new-chat-btn {
-  background: #383838;
-  color: white;
-  border: none;
-  padding: 10px 15px;
-  cursor: pointer;
-  font-size: 1rem;
-  border-radius: 5px;
-  transition: background 0.3s ease;
-  width: 100%;
-  margin-bottom: 1rem;
-}
-
-.layout__new-chat-btn:hover {
-  background: #0056b3;
-}
-
-/* Manage Members Button */
-.layout__manage-btn {
-  background: #444;
-  color: white;
-  border: none;
-  padding: 5px 10px;
-  cursor: pointer;
-  font-size: 0.9rem;
-  border-radius: 5px;
-  transition: background 0.3s ease;
-  margin-left: 10px;
-}
-
-.layout__manage-btn:hover {
-  background: #666;
-}
-
-/* Popup Styling */
+/* New Chat Popup */
 .popup {
   position: fixed;
   top: 0;
@@ -210,6 +143,7 @@ body {
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
 }
 
+/* Friend Search Input */
 .popup__input {
   width: 100%;
   padding: 10px;
@@ -220,6 +154,7 @@ body {
   border-radius: 5px;
 }
 
+/* Send Friend Request Button */
 .popup__send-btn {
   background: #28a745;
   color: white;
@@ -241,6 +176,7 @@ body {
   cursor: not-allowed;
 }
 
+/* Close Button */
 .popup__close-btn {
   background: #d9534f;
   color: white;

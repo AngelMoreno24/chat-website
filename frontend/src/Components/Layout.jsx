@@ -4,7 +4,6 @@ import './CssComponent/Layout.css';
 import axios from 'axios';
 
 const Layout = () => {
-  const [isOpen, setIsOpen] = useState(false);
   const [isPopupOpen, setIsPopupOpen] = useState(false);
   const [newChatName, setNewChatName] = useState('');
   const [chats, setChats] = useState([]);
@@ -46,7 +45,7 @@ const Layout = () => {
 
   return (
     <div className="layout">
-      <nav className={`layout__sidebar layout__sidebar--left ${isOpen ? 'open' : ''}`}>
+      <div className="layout__sidebar layout__sidebar--left">
         <h3 className="layout__sidebar-title">Chats</h3>
         <button className="layout__new-chat-btn" onClick={() => navigate('/home')}>Friends</button>
         <button className="layout__new-chat-btn" onClick={() => setIsPopupOpen(true)}>+ New Chat</button>
@@ -59,7 +58,6 @@ const Layout = () => {
                   to={`/chat/${chat.Id}`}
                   state={{ chatName: chat.Name, members: chat.Members }}
                   className="layout__nav-link"
-                  onClick={() => setIsOpen(false)}
                 >
                   {chat.Name}
                 </Link>
@@ -69,11 +67,7 @@ const Layout = () => {
         </ul>
 
         <button onClick={handleLogout} className="layout__logout-btn">Logout</button>
-      </nav>
-
-      <button className={`layout__toggle-btn ${isOpen ? 'open' : ''}`} onClick={() => setIsOpen(!isOpen)}>
-        ☰ Chats
-      </button>
+      </div>
 
       <div className="layout__content">
         <main className="layout__main">
@@ -81,10 +75,10 @@ const Layout = () => {
         </main>
       </div>
 
-      <aside className="layout__sidebar layout__sidebar--right">
+      <div className="layout__sidebar layout__sidebar--right">
         <h3>Online Users</h3>
         <p>Coming soon...</p>
-      </aside>
+      </div>
 
       {/* New Chat Popup */}
       {isPopupOpen && (
@@ -101,7 +95,6 @@ const Layout = () => {
             <button
               className="popup__send-btn"
               onClick={() => {
-                // Future: hook this up to backend
                 console.log('Create chat:', newChatName);
                 setIsPopupOpen(false);
                 setNewChatName('');
