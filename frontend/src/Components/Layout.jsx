@@ -149,14 +149,6 @@ const Layout = () => {
 
         {(isChatPage)?(
           <> 
-            <h3>Online Users</h3>
-            {members.length > 0 ? (
-              members.map((member, index) => (
-                <p key={index}>{member.Username || member}</p>
-              ))
-            ) : (
-              <p>No members found.</p>
-            )}
             <button
               className="layout__new-chat-btn"
 
@@ -166,6 +158,14 @@ const Layout = () => {
               }}            >
               + Add Member
             </button>
+            <h3>Online Users</h3>
+            {members.length > 0 ? (
+              members.map((member, index) => (
+                <p key={index}>{member.Username || member}</p>
+              ))
+            ) : (
+              <p>No members found.</p>
+            )}
           </>
         ):(
           
