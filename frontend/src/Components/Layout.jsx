@@ -45,7 +45,7 @@ const Layout = () => {
 
   return (
     <div className="layout">
-      <div className="layout__sidebar layout__sidebar--left">
+      <nav className="layout__sidebar layout__sidebar--left">
         <h3 className="layout__sidebar-title">Chats</h3>
         <button className="layout__new-chat-btn" onClick={() => navigate('/home')}>Friends</button>
         <button className="layout__new-chat-btn" onClick={() => setIsPopupOpen(true)}>+ New Chat</button>
@@ -67,7 +67,7 @@ const Layout = () => {
         </ul>
 
         <button onClick={handleLogout} className="layout__logout-btn">Logout</button>
-      </div>
+      </nav>
 
       <div className="layout__content">
         <main className="layout__main">
@@ -75,12 +75,11 @@ const Layout = () => {
         </main>
       </div>
 
-      <div className="layout__sidebar layout__sidebar--right">
+      <aside className="layout__sidebar layout__sidebar--right">
         <h3>Online Users</h3>
         <p>Coming soon...</p>
-      </div>
+      </aside>
 
-      {/* New Chat Popup */}
       {isPopupOpen && (
         <div className="popup">
           <div className="popup__content">

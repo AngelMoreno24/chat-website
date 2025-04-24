@@ -12,12 +12,13 @@ body {
   min-height: 100vh;
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: flex-start;
 }
 
 /* Layout container */
 .layout {
-  display: flex;
+  display: grid;
+  grid-template-columns: 250px 1fr 250px; /* Three sections: left sidebar, content, right sidebar */
   width: 100%;
   height: 100vh;
   background: #1e1e1e;
@@ -25,24 +26,22 @@ body {
 
 /* Sidebar Styling */
 .layout__sidebar {
-  position: fixed;
-  top: 0;
-  bottom: 0;
   background-color: #212121;
   color: white;
-  width: 250px;
   padding-top: 3rem;
   box-shadow: 2px 0 5px rgba(0, 0, 0, 0.3);
   display: flex;
   flex-direction: column;
+  padding-left: 1rem;
+  padding-right: 1rem;
 }
 
 .layout__sidebar--left {
-  left: 0;
+  grid-column: 1;
 }
 
 .layout__sidebar--right {
-  right: 0;
+  grid-column: 3;
   background-color: #1f2937;
 }
 
@@ -102,11 +101,12 @@ body {
 
 /* Content area */
 .layout__content {
-  flex: 1;
-  margin-left: 250px; /* To account for left sidebar */
-  margin-right: 250px; /* To account for right sidebar */
-  padding: 2rem;
+  grid-column: 2; /* Content section */ 
   background-color: #111827;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  height: 100%;
 }
 
 /* Chat main section */
