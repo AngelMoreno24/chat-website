@@ -58,6 +58,8 @@ const Layout = () => {
       getMembers();
     }
   }, [isChatPage, token, chatId]);
+
+
   const getMembers = () => {
 
     
@@ -80,7 +82,34 @@ const Layout = () => {
     });
   }
 
-
+  const [isAdding, setIsAdding] = useState(false);
+  const [errorMsg, setErrorMsg] = useState('');
+  
+  const addMember = () => {
+    setIsAdding(true);
+    axios.post(`http://localhost:7145/chat/addChatMember`, {
+      chatId: chatId,
+      friendUsername: newMemberUsername
+    }, {
+      headers: {
+        'Authorization': `Bearer ${token}`,
+        'Content-Type': 'application/json'
+      }
+    })
+    .then(response => {
+      setMembers(response.data.members || []);
+      setIsAddMemberPopupOpen(false);
+      setNewMemberUsername('');
+      setErrorMsg('');
+    })
+    .catch(err => {
+      console.error(err);
+      setErrorMsg('Failed to add member.');
+    })
+    .finally(() => {
+      setIsAdding(false);
+    });
+  };
 
 
 
@@ -130,8 +159,11 @@ const Layout = () => {
             )}
             <button
               className="layout__new-chat-btn"
-              onClick={() => setIsAddMemberPopupOpen(true)}
-            >
+
+              onClick={() => { 
+                setIsAddMemberPopupOpen(true);
+                setNewMemberUsername('');
+              }}            >
               + Add Member
             </button>
           </>
@@ -141,39 +173,38 @@ const Layout = () => {
         )}
       </aside>
 
-      
+
       {isAddMemberPopupOpen && (
-        <div className="popup">
-          <div className="popup__content">
-            <h3>Add Member to Chat</h3>
-            <input
-              type="text"
-              placeholder="Enter username..."
-              className="popup__input"
-              value={newMemberUsername}
-              onChange={(e) => setNewMemberUsername(e.target.value)}
-            />
-            <button
-              className="popup__send-btn"
-              onClick={() => {
-                console.log('Adding member:', newMemberUsername);
-                // TODO: Call API here
-                setIsAddMemberPopupOpen(false);
-                setNewMemberUsername('');
-              }}
-              disabled={newMemberUsername.trim() === ''}
-            >
-              Add Member
-            </button>
-            <button
-              className="popup__close-btn"
-              onClick={() => setIsAddMemberPopupOpen(false)}
-            >
-              Cancel
-            </button>
-          </div>
-        </div>
-      )}
+  <div className="popup">
+    <div className="popup__content">
+      <h3>Add Member to Chat</h3>
+      <input
+        type="text"
+        placeholder="Enter username..."
+        className="popup__input"
+        value={newMemberUsername}
+        onChange={(e) => setNewMemberUsername(e.target.value)}
+      />
+      <button
+        className="popup__send-btn"
+        onClick={() => {
+          addMember(); // 🔥 Call the function here
+          setIsAddMemberPopupOpen(false);
+          setNewMemberUsername('');
+        }}
+        disabled={newMemberUsername.trim() === ''}
+      >
+        Add Member
+      </button>
+      <button
+        className="popup__close-btn"
+        onClick={() => setIsAddMemberPopupOpen(false)}
+      >
+        Cancel
+      </button>
+    </div>
+  </div>
+)}
 
       
       {isPopupOpen && (

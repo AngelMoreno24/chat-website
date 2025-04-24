@@ -75,16 +75,16 @@ export const addChatMember = async (req, res) => {
         // Get friend ID from username
         const result = await pool
             .request()
-            .input('Username ', sql.NVarChar, friendUsername)
-            .query('SELECT Id FROM Users WHERE Username  = @Username ');
+            .input('Username', sql.NVarChar, friendUsername)
+            .query('SELECT Id FROM Users WHERE Username = @Username');
 
 
         const friendId = result.recordset[0].Id;
 
         await pool
         .request()
-        .input('ConversationId', sql.NVarChar, chatId)
-        .input('UserId', sql.NVarChar, friendId)
+        .input('ConversationId', sql.Int, chatId)
+        .input('UserId', sql.Int, friendId)
         .query('INSERT INTO ConversationParticipants (ConversationId, UserId) VALUES (@ConversationId, @UserId)');
 
         
