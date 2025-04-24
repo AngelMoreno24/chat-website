@@ -16,6 +16,10 @@ const Layout = () => {
 
   const isChatPage = location.pathname.includes('/chat/');
 
+  //add member popup
+  const [isAddMemberPopupOpen, setIsAddMemberPopupOpen] = useState(false);
+  const [newMemberUsername, setNewMemberUsername] = useState('');
+  
   const handleLogout = () => {
     localStorage.removeItem('isLoggedIn');
     localStorage.removeItem('token');
@@ -117,14 +121,19 @@ const Layout = () => {
         {(isChatPage)?(
           <> 
             <h3>Online Users</h3>
-            <p>Coming soon...</p>
             {members.length > 0 ? (
               members.map((member, index) => (
-                <li key={index}>{member.Username || member}</li>
+                <p key={index}>{member.Username || member}</p>
               ))
             ) : (
               <p>No members found.</p>
             )}
+            <button
+              className="layout__new-chat-btn"
+              onClick={() => setIsAddMemberPopupOpen(true)}
+            >
+              + Add Member
+            </button>
           </>
         ):(
           
@@ -132,6 +141,41 @@ const Layout = () => {
         )}
       </aside>
 
+      
+      {isAddMemberPopupOpen && (
+        <div className="popup">
+          <div className="popup__content">
+            <h3>Add Member to Chat</h3>
+            <input
+              type="text"
+              placeholder="Enter username..."
+              className="popup__input"
+              value={newMemberUsername}
+              onChange={(e) => setNewMemberUsername(e.target.value)}
+            />
+            <button
+              className="popup__send-btn"
+              onClick={() => {
+                console.log('Adding member:', newMemberUsername);
+                // TODO: Call API here
+                setIsAddMemberPopupOpen(false);
+                setNewMemberUsername('');
+              }}
+              disabled={newMemberUsername.trim() === ''}
+            >
+              Add Member
+            </button>
+            <button
+              className="popup__close-btn"
+              onClick={() => setIsAddMemberPopupOpen(false)}
+            >
+              Cancel
+            </button>
+          </div>
+        </div>
+      )}
+
+      
       {isPopupOpen && (
         <div className="popup">
           <div className="popup__content">
