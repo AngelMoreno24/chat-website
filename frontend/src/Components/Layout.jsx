@@ -111,6 +111,29 @@ const Layout = () => {
     });
   };
 
+  const createChat = () => {
+    setIsAdding(true);
+    axios.post(`http://localhost:7145/chat/create`, {
+      name: newChatName
+    }, {
+      headers: {
+        'Authorization': `Bearer ${token}`,
+        'Content-Type': 'application/json'
+      }
+    })
+    .then(response => { 
+      setIsPopupOpen(false);
+      setNewChatName('');
+      setErrorMsg('');
+    })
+    .catch(err => {
+      console.error(err);
+      setErrorMsg('Failed to add member.');
+    })
+    .finally(() => {
+      setIsAdding(false);
+    });
+  };
 
 
   return (
@@ -221,7 +244,7 @@ const Layout = () => {
             <button
               className="popup__send-btn"
               onClick={() => {
-                console.log('Create chat:', newChatName);
+                createChat();
                 setIsPopupOpen(false);
                 setNewChatName('');
               }}
