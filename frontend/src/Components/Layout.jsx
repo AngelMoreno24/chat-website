@@ -2,14 +2,19 @@ import React, { useState, useEffect } from 'react';
 import { Outlet, Link, useNavigate, useLocation } from 'react-router-dom';
 import './CssComponent/Layout.css';
 import axios from 'axios';
+import { useParams } from 'react-router-dom';
 
 const Layout = () => {
   const [isPopupOpen, setIsPopupOpen] = useState(false);
   const [newChatName, setNewChatName] = useState('');
   const [chats, setChats] = useState([]);
   const [token, setToken] = useState('');
+  const [members, setMembers] = useState([]);
   const navigate = useNavigate();
   const location = useLocation(); // Get current route info
+  const { chatId } = useParams(); // Automatically gives you the value after /chat/
+
+  const isChatPage = location.pathname.includes('/chat/');
 
   const handleLogout = () => {
     localStorage.removeItem('isLoggedIn');
@@ -44,19 +49,27 @@ const Layout = () => {
     }
   }, [token]);
 
-
-  const getMembers = (chat) => {
+  useEffect(() => {
+    if (isChatPage && token && chatId) {
+      getMembers();
+    }
+  }, [isChatPage, token, chatId]);
+  const getMembers = () => {
 
     
-    axios.get(`http://localhost:7145/chat/getChats`, {
+    axios.post(`http://localhost:7145/chat/getChatMembers`,
+      {
+        chatId: chatId
+      }, {
       headers: {
         'Authorization': `Bearer ${token}`,
         'Content-Type': 'application/json'
       }
     })
     .then(response => {
-      console.log('Chats fetched:', response.data);
-      setChats(response.data.chats || []);
+      console.log('Chat members fetched:', response.data);
+      
+      setMembers(response.data.members || []);
     })
     .catch(err => {
       console.error(err);
@@ -66,7 +79,6 @@ const Layout = () => {
 
 
 
-  const isChatPage = location.pathname.includes('/chat/');
 
   return (
     <div className="layout">
@@ -103,10 +115,16 @@ const Layout = () => {
       <aside className="layout__sidebar layout__sidebar--right">
 
         {(isChatPage)?(
-          <>
-              
+          <> 
             <h3>Online Users</h3>
             <p>Coming soon...</p>
+            {members.length > 0 ? (
+              members.map((member, index) => (
+                <li key={index}>{member.Username || member}</li>
+              ))
+            ) : (
+              <p>No members found.</p>
+            )}
           </>
         ):(
           
