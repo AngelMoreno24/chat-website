@@ -1,20 +1,28 @@
-import React, {useState, useEffect} from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useParams, useLocation } from 'react-router-dom';
-import './CssPages/ChatWindow.css';
 import axios from 'axios';
+import './CssPages/ChatWindow.css';
 
 const ChatWindow = () => {
   const { chatId } = useParams();
   const location = useLocation();
-
   const { chatName, members } = location.state || {};
+
   const [messages, setMessages] = useState([]);
-  const [token, setToken] = useState([]);
+  const [token, setToken] = useState('');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
+  const messagesEndRef = useRef(null);
 
-  // Load token on mount
+  // Scroll to bottom on new message
+  useEffect(() => {
+    if (messagesEndRef.current) {
+      messagesEndRef.current.scrollIntoView({ behavior: 'smooth' });
+    }
+  }, [messages]);
+
+  // Load token
   useEffect(() => {
     const storedToken = localStorage.getItem('token');
     if (storedToken) {
@@ -24,62 +32,49 @@ const ChatWindow = () => {
     }
   }, []);
 
-  // Fetch friends only after token is set
+  // Fetch messages after token is set
   useEffect(() => {
     if (token) {
-      console.log('Token found:', token); // Debug log
-      getFriends(token);
+      fetchMessages(token);
     }
   }, [token]);
 
-  const getFriends = (token) => {
+  const fetchMessages = async (token) => {
     setLoading(true);
     setError(null);
 
-    console.log('Fetching friends with token:', token); // Debug log
-
-    axios.get(`http://localhost:7145/message/getMessages`, {
-      params: {
-        conversationId: chatId
-      },
-      headers: {
-        'Authorization': `Bearer ${token}`
-      }
-      })
-      .then(response => {
-        setMessages(response.data.messages || []);
-
-        setLoading(false);
-      })
-      .catch(err => {
-        console.error('Failed to fetch messages:', err);
-        setError('Failed to load messages.');
-        setLoading(false);
+    try {
+      const res = await axios.get(`http://localhost:7145/message/getMessages`, {
+        params: { conversationId: chatId },
+        headers: { 'Authorization': `Bearer ${token}` }
       });
+      setMessages(res.data.messages || []);
+    } catch (err) {
+      console.error('Failed to fetch messages:', err);
+      setError('Failed to load messages.');
+    } finally {
+      setLoading(false);
+    }
   };
-
-
-
-
-
-
-
-
 
   return (
     <div className="chat-window">
-      <h2 className="chat-title">{chatName || 'Chat'}</h2>
+      <header className="chat-header">
+        <h2 className="chat-title">{chatName || 'Chat'}</h2>
+        {members && <p className="chat-subtitle">Members: {members.join(', ')}</p>}
+      </header>
+
       <div className="messages-container">
-        
-        {messages.length > 0 ? (
-          messages.map((message, index) => (
-            <div key={index} className="message">
-              <strong>{message.SenderUsername}</strong>: {message.Content}
-            </div>
-          ))
-        ) : (
-          <p>No messages yet.</p>
-        )}
+        {loading && <p className="chat-status">Loading messages...</p>}
+        {error && <p className="chat-error">{error}</p>}
+        {!loading && messages.length === 0 && <p className="chat-status">No messages yet.</p>}
+
+        {messages.map((message, index) => (
+          <div key={index} className="message">
+            <strong>{message.SenderUsername}</strong>: {message.Content}
+          </div>
+        ))}
+        <div ref={messagesEndRef} />
       </div>
     </div>
   );

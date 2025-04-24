@@ -57,7 +57,7 @@ const Layout = () => {
                 <Link
                   to={`/chat/${chat.Id}`}
                   state={{ chatName: chat.Name, members: chat.Members }}
-                  className="layout__nav-link"
+                  className={`layout__nav-link`}
                 >
                   {chat.Name}
                 </Link>

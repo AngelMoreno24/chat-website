@@ -25,7 +25,6 @@ const Home = () => {
   // Fetch friends only after token is set
   useEffect(() => {
     if (token) {
-      console.log('Token found:', token); // Debug log
       getFriends(token);
     }
   }, [token]);
@@ -33,8 +32,6 @@ const Home = () => {
   const getFriends = (token) => {
     setLoading(true);
     setError(null);
-
-    console.log('Fetching friends with token:', token); // Debug log
 
     axios.get('http://localhost:7145/friendship/getFriends', {
       headers: {
@@ -44,19 +41,17 @@ const Home = () => {
     })
       .then(response => {
         setFriends(response.data.friends || []);
-
         setLoading(false);
       })
       .catch(err => {
-        console.error('Failed to fetch friends:', err);
         setError('Failed to load friends.');
         setLoading(false);
       });
   };
 
   return (
-    <div className="home-container">
-      <h1>Friends Dashboard</h1>
+    <div className="home-window">
+      <div className="home-title">Friends Dashboard</div>
 
       <div className="button-group">
         <button onClick={() => setShowRequestsModal(true)}>👥 Friend Requests</button>
@@ -67,15 +62,17 @@ const Home = () => {
       {loading && <p>Loading friends...</p>}
       {error && <p className="error">{error}</p>}
 
-      <ul>
+      <div className="friends-container">
         {friends.length > 0 ? (
           friends.map((friend, index) => (
-            <li key={index}>{friend.Username}</li>
+            <div key={index} className="friend">
+              {friend.Username}
+            </div>
           ))
         ) : (
           !loading && <p>No friends found.</p>
         )}
-      </ul>
+      </div>
 
       {showRequestsModal && (
         <FriendRequestsModal onClose={() => setShowRequestsModal(false)} />

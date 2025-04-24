@@ -18,16 +18,16 @@ body {
 /* Layout container */
 .layout {
   display: grid;
-  grid-template-columns: 250px 1fr 250px; /* Three sections: left sidebar, content, right sidebar */
+  grid-template-columns: 250px 1fr 250px;
   width: 100%;
   height: 100vh;
-  background: #1e1e1e;
+  background: #181818;
 }
 
 /* Sidebar Styling */
 .layout__sidebar {
-  background-color: #212121;
-  color: white;
+  background-color: #1f1f1f;
+  color: #e0e0e0;
   padding-top: 3rem;
   box-shadow: 2px 0 5px rgba(0, 0, 0, 0.3);
   display: flex;
@@ -42,20 +42,20 @@ body {
 
 .layout__sidebar--right {
   grid-column: 3;
-  background-color: #1f2937;
+  background-color: #232323;
 }
 
 /* Sidebar title */
 .layout__sidebar-title {
-  color: white;
+  color: #ffffff;
   text-align: center;
   margin-bottom: 1rem;
 }
 
 /* Sidebar Buttons */
 .layout__new-chat-btn {
-  background: #4caf50;
-  color: white;
+  background: #00bcd4;
+  color: #121212;
   width: 100%;
   padding: 10px;
   text-align: center;
@@ -64,12 +64,14 @@ body {
   font-size: 1rem;
   border-radius: 5px;
   margin-bottom: 10px;
+  transition: background 0.3s ease;
 }
 
 .layout__new-chat-btn:hover {
-  background: #45a049;
+  background: #00acc1;
 }
 
+/* Chat Navigation Links */
 .layout__nav-list {
   list-style: none;
   padding: 0;
@@ -89,20 +91,34 @@ body {
   padding: 1rem;
   color: #e0e0e0;
   text-decoration: none;
-  background: none;
+  background-color: #333;  /* Add a background color */
   border: none;
   cursor: pointer;
-  transition: background 0.3s ease;
+  transition: background 0.3s ease, color 0.3s ease;
+  border-radius: 5px;  /* Optional: To add rounded corners */
 }
 
+/* Hover state for chat nav items */
 .layout__nav-link:hover {
-  background: rgba(255, 255, 255, 0.1);
+  background-color: #4caf50;  /* Green background on hover */
+  color: #fff;  /* White text on hover */
+}
+
+/* Active state for chat nav items */
+.layout__nav-link:active {
+  background-color: #388e3c;  /* Darker green when active */
+}
+
+/* Selected/Current chat link */
+.layout__nav-link.selected {
+  background-color: #2196f3;  /* Blue background for the selected item */
+  color: white;
 }
 
 /* Content area */
 .layout__content {
-  grid-column: 2; /* Content section */ 
-  background-color: #111827;
+  grid-column: 2;
+  background-color: #1a1a1a;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
@@ -126,7 +142,7 @@ body {
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(0, 0, 0, 0.5);
+  background: rgba(0, 0, 0, 0.6);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -134,13 +150,13 @@ body {
 }
 
 .popup__content {
-  background: #292929;
+  background: #1f1f1f;
   padding: 20px;
   border-radius: 10px;
   text-align: center;
-  color: white;
+  color: #e0e0e0;
   width: 300px;
-  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
 }
 
 /* Friend Search Input */
@@ -148,16 +164,16 @@ body {
   width: 100%;
   padding: 10px;
   margin: 10px 0;
-  border: 1px solid #444;
-  background: #1e1e1e;
-  color: white;
+  border: 1px solid #333;
+  background: #2a2a2a;
+  color: #e0e0e0;
   border-radius: 5px;
 }
 
 /* Send Friend Request Button */
 .popup__send-btn {
-  background: #28a745;
-  color: white;
+  background: #00bcd4;
+  color: #121212;
   border: none;
   padding: 10px 15px;
   cursor: pointer;
@@ -168,7 +184,7 @@ body {
 }
 
 .popup__send-btn:hover {
-  background: #218838;
+  background: #0097a7;
 }
 
 .popup__send-btn:disabled {
@@ -178,8 +194,8 @@ body {
 
 /* Close Button */
 .popup__close-btn {
-  background: #d9534f;
-  color: white;
+  background: #f44336;
+  color: #fff;
   border: none;
   padding: 10px 15px;
   cursor: pointer;
@@ -191,5 +207,22 @@ body {
 }
 
 .popup__close-btn:hover {
-  background: #c9302c;
+  background: #c62828;
+}
+
+/* Logout Button */
+.layout__logout-btn {
+  background: #f44336;  /* Red background */
+  color: #fff;
+  border: none;
+  padding: 10px 15px;
+  cursor: pointer;
+  font-size: 1rem;
+  border-radius: 5px;
+  margin-top: 20px;
+  transition: background 0.3s ease;
+}
+
+.layout__logout-btn:hover {
+  background: #c62828;  /* Darker red on hover */
 }
