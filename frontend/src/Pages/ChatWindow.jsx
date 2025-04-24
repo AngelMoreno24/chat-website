@@ -37,7 +37,7 @@ const ChatWindow = () => {
     if (token) {
       fetchMessages(token);
     }
-  }, [token]);
+  }, [token,location]);
 
   const fetchMessages = async (token) => {
     setLoading(true);
