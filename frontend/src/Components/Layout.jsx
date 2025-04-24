@@ -3,24 +3,13 @@ import { Outlet, Link, useNavigate } from 'react-router-dom';
 import './CssComponent/Layout.css';
 import axios from 'axios';
 
-
 const Layout = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isPopupOpen, setIsPopupOpen] = useState(false);
   const [newChatName, setNewChatName] = useState('');
-  const [manageChatId, setManageChatId] = useState(null);
-  const [token, setToken] = useState('');
-
-
-  const [] = useState(["Alice", "Bob", "Charlie", "David", "Emma"]);
-
   const [chats, setChats] = useState([]);
-
-
-
+  const [token, setToken] = useState('');
   const navigate = useNavigate();
-
-
 
   const handleLogout = () => {
     localStorage.removeItem('isLoggedIn');
@@ -28,110 +17,57 @@ const Layout = () => {
     navigate('/login');
   };
 
-  const createNewChat = () => {
-    if (newChatName.trim() === '') return;
-    const newChat = { id: conversations.length + 1, name: newChatName, members: [] };
-    setConversations([...conversations, newChat]);
-    setNewChatName('');
-    setIsPopupOpen(false);
-  };
-
-
-
   useEffect(() => {
-    
     const storedToken = localStorage.getItem('token');
     if (storedToken) {
       setToken(storedToken);
     } else {
       console.warn('Token not found in localStorage');
     }
-    
   }, []);
 
-
-
-  // Fetch friends only after token is set
   useEffect(() => {
     if (token) {
-      addChat(token);
+      axios.get(`http://localhost:7145/chat/getChats`, {
+        headers: {
+          'Authorization': `Bearer ${token}`,
+          'Content-Type': 'application/json'
+        }
+      })
+      .then(response => {
+        console.log('Chats fetched:', response.data);
+        setChats(response.data.chats || []);
+      })
+      .catch(err => {
+        console.error(err);
+      });
     }
   }, [token]);
-
-  const addChat = (token) => {
-
-    
-    axios.get(`http://localhost:7145/chat/getChats`, {
-      headers: {
-        'Authorization': `Bearer ${token}`,
-        'Content-Type': 'application/json'
-      }
-    })
-    .then(response => {
-      console.log('Conversation fetched:', response.data);
-      setChats(response.data.chats || []); // Assuming the response contains an array of requests
-    })
-    .catch(err => {
-      console.error(err);
-    });
-    
-  }
-
-
-
-
-
-
-
-  const openManageChat = (chatId) => setManageChatId(chatId);
-  const closeManageChat = () => setManageChatId(null);
-
-  const toggleMember = (chatId, user) => {
-    setConversations(conversations.map(chat => {
-      if (chat.id === chatId) {
-        const isMember = chat.members.includes(user);
-        return {
-          ...chat,
-          members: isMember ? chat.members.filter(m => m !== user) : [...chat.members, user]
-        };
-      }
-      return chat;
-    }));
-  };
 
   return (
     <div className="layout">
       <nav className={`layout__sidebar layout__sidebar--left ${isOpen ? 'open' : ''}`}>
         <h3 className="layout__sidebar-title">Chats</h3>
-        <button
-          className="layout__new-chat-btn"
-          onClick={() => navigate('/home')}
-        >
-          Friends
-        </button>
-
+        <button className="layout__new-chat-btn" onClick={() => navigate('/home')}>Friends</button>
         <button className="layout__new-chat-btn" onClick={() => setIsPopupOpen(true)}>+ New Chat</button>
 
-
-
         <ul className="layout__nav-list">
-
           {chats.map(chat => (
             <li key={chat.Id} className="layout__nav-item">
               <div className="layout__chat-item">
-              <Link
-                to={`/chat/${chat.Id}`}
-                state={{ chatName: chat.Name, members: chat.Members }}
-                className="layout__nav-link"
-                onClick={() => setIsOpen(false)}
-              >
-                {chat.Name}
-              </Link>
-                <button className="layout__manage-btn" onClick={() => openManageChat(chat.Id)}>⚙️</button>
+                <Link
+                  to={`/chat/${chat.Id}`}
+                  state={{ chatName: chat.Name, members: chat.Members }}
+                  className="layout__nav-link"
+                  onClick={() => setIsOpen(false)}
+                >
+                  {chat.Name}
+                </Link>
               </div>
             </li>
           ))}
         </ul>
+
         <button onClick={handleLogout} className="layout__logout-btn">Logout</button>
       </nav>
 
@@ -162,31 +98,19 @@ const Layout = () => {
               value={newChatName}
               onChange={(e) => setNewChatName(e.target.value)}
             />
-            <button className="popup__send-btn" onClick={createNewChat} disabled={newChatName.trim() === ''}>Create Chat</button>
+            <button
+              className="popup__send-btn"
+              onClick={() => {
+                // Future: hook this up to backend
+                console.log('Create chat:', newChatName);
+                setIsPopupOpen(false);
+                setNewChatName('');
+              }}
+              disabled={newChatName.trim() === ''}
+            >
+              Create Chat
+            </button>
             <button className="popup__close-btn" onClick={() => setIsPopupOpen(false)}>Close</button>
-          </div>
-        </div>
-      )}
-
-      {/* Manage Chat Members Popup */}
-      {manageChatId !== null && (
-        <div className="popup">
-          <div className="popup__content">
-            <h3>Manage Chat Members</h3>
-            <ul className="popup__user-list">
-              {users.map(user => (
-                <li key={user} className="popup__user-item">
-                  <span>{user}</span>
-                  <button
-                    className={`popup__toggle-btn ${conversations.find(chat => chat.id === manageChatId)?.members.includes(user) ? 'remove' : 'add'}`}
-                    onClick={() => toggleMember(manageChatId, user)}
-                  >
-                    {conversations.find(chat => chat.id === manageChatId)?.members.includes(user) ? 'Remove' : 'Add'}
-                  </button>
-                </li>
-              ))}
-            </ul>
-            <button className="popup__close-btn" onClick={closeManageChat}>Close</button>
           </div>
         </div>
       )}

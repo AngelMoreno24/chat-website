@@ -48,23 +48,20 @@ body {
   background: #444;
 }
 
-/* Move button when sidebar is open */
 .layout__sidebar--left.open ~ .layout__toggle-btn {
   left: 265px;
 }
 
-/* Sidebar container */
+/* Sidebar */
 .layout__sidebar {
   width: 250px;
   height: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding-top: 3rem;
   transition: transform 0.3s ease;
 }
 
-/* Left Sidebar */
 .layout__sidebar--left {
   position: absolute;
   left: -250px;
@@ -79,14 +76,12 @@ body {
   transform: translateX(250px);
 }
 
-/* Sidebar title */
 .layout__sidebar-title {
   color: white;
   text-align: center;
   margin-bottom: 1rem;
 }
 
-/* Sidebar Links */
 .layout__nav-list {
   list-style: none;
   padding: 0;
@@ -105,9 +100,6 @@ body {
   padding: 1rem;
   color: #e0e0e0;
   text-decoration: none;
-  background: none;
-  border: none;
-  cursor: pointer;
   transition: background 0.3s ease;
 }
 
@@ -115,7 +107,6 @@ body {
   background: rgba(255, 255, 255, 0.1);
 }
 
-/* Logout Button */
 .layout__logout-btn {
   background: #d9534f;
   color: white;
@@ -132,7 +123,6 @@ body {
   background: #c9302c;
 }
 
-/* Right Sidebar */
 .layout__sidebar--right {
   background-color: #292929;
   padding: 1rem;
@@ -148,17 +138,10 @@ body {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  width: calc(100% - 250px);
   padding: 2rem;
   transition: margin-left 0.3s ease;
 }
 
-/* Adjust content when left sidebar is open */
-.layout__sidebar--left.open + .layout__content {
-  margin-left: 250px;
-}
-
-/* Centered chat window */
 .layout__main {
   flex: 1;
   display: flex;
@@ -167,191 +150,6 @@ body {
   align-items: center;
   text-align: center;
 }
-
-/* Chat Messages Area */
-.chat-messages {
-  width: 100%;
-  max-width: 600px;
-  height: 400px;
-  background: #1e1e1e;
-  border: 1px solid #444;
-  padding: 1rem;
-  overflow-y: auto;
-  border-radius: 10px;
-}
-
-/* Message Input */
-.chat-input {
-  display: flex;
-  width: 100%;
-  max-width: 600px;
-  margin-top: 1rem;
-}
-
-.chat-input input {
-  flex: 1;
-  padding: 10px;
-  border: 1px solid #444;
-  border-radius: 5px 0 0 5px;
-  font-size: 1rem;
-  background: #292929;
-  color: #e0e0e0;
-}
-
-.chat-input button {
-  padding: 10px;
-  border: none;
-  background: #007bff;
-  color: white;
-  cursor: pointer;
-  font-size: 1rem;
-  border-radius: 0 5px 5px 0;
-  transition: background 0.3s ease;
-}
-
-.chat-input button:hover {
-  background: #0056b3;
-}
-
-/* Footer */
-.layout__footer {
-  background-color: #1e1e1e;
-  text-align: center;
-  padding: 1rem;
-  font-size: 0.9rem;
-  width: 100%;
-  border-top: 1px solid #444;
-  color: #bbb;
-}
-
-
-
-
-
-
-/* Find Friends Button */
-.layout__friend-btn {
-  background: #007bff;
-  color: white;
-  border: none;
-  padding: 10px 15px;
-  cursor: pointer;
-  font-size: 1rem;
-  border-radius: 5px;
-  transition: background 0.3s ease;
-  width: 100%;
-  margin-top: 1rem;
-}
-
-.layout__friend-btn:hover {
-  background: #0056b3;
-}
-
-
-
-
-
-
-
-
-
-
-
-
-/* Popup Styling */
-.popup {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.5);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 300;
-}
-
-.popup__content {
-  background: #292929;
-  padding: 20px;
-  border-radius: 10px;
-  text-align: center;
-  color: white;
-  width: 300px;
-  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
-}
-
-/* Friend Search Input */
-.popup__input {
-  width: 100%;
-  padding: 10px;
-  margin: 10px 0;
-  border: 1px solid #444;
-  background: #1e1e1e;
-  color: white;
-  border-radius: 5px;
-}
-
-/* Send Friend Request Button */
-.popup__send-btn {
-  background: #28a745;
-  color: white;
-  border: none;
-  padding: 10px 15px;
-  cursor: pointer;
-  font-size: 1rem;
-  border-radius: 5px;
-  width: 100%;
-  transition: background 0.3s ease;
-}
-
-.popup__send-btn:hover {
-  background: #218838;
-}
-
-.popup__send-btn:disabled {
-  background: #555;
-  cursor: not-allowed;
-}
-
-/* Close Button */
-.popup__close-btn {
-  background: #d9534f;
-  color: white;
-  border: none;
-  padding: 10px 15px;
-  cursor: pointer;
-  font-size: 1rem;
-  border-radius: 5px;
-  margin-top: 10px;
-  transition: background 0.3s ease;
-  width: 100%;
-}
-
-.popup__close-btn:hover {
-  background: #c9302c;
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 /* New Chat Button */
 .layout__new-chat-btn {
@@ -371,6 +169,23 @@ body {
   background: #0056b3;
 }
 
+/* Manage Members Button */
+.layout__manage-btn {
+  background: #444;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  border-radius: 5px;
+  transition: background 0.3s ease;
+  margin-left: 10px;
+}
+
+.layout__manage-btn:hover {
+  background: #666;
+}
+
 /* Popup Styling */
 .popup {
   position: fixed;
@@ -395,7 +210,6 @@ body {
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
 }
 
-/* Input Field */
 .popup__input {
   width: 100%;
   padding: 10px;
@@ -406,7 +220,6 @@ body {
   border-radius: 5px;
 }
 
-/* Create Chat Button */
 .popup__send-btn {
   background: #28a745;
   color: white;
@@ -428,7 +241,6 @@ body {
   cursor: not-allowed;
 }
 
-/* Close Button */
 .popup__close-btn {
   background: #d9534f;
   color: white;
@@ -444,167 +256,4 @@ body {
 
 .popup__close-btn:hover {
   background: #c9302c;
-}
-
-
-
-
-
-
-
-
-
-/* Manage Members Button */
-.layout__manage-btn {
-  background: #444;
-  color: white;
-  border: none;
-  padding: 5px 10px;
-  cursor: pointer;
-  font-size: 0.9rem;
-  border-radius: 5px;
-  transition: background 0.3s ease;
-  margin-left: 10px;
-}
-
-.layout__manage-btn:hover {
-  background: #666;
-}
-
-/* User List Popup */
-.popup__user-list {
-  list-style: none;
-  padding: 0;
-  margin: 10px 0;
-}
-
-.popup__user-item {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background: #1e1e1e;
-  padding: 8px;
-  border-radius: 5px;
-  margin-bottom: 5px;
-}
-
-/* Add/Remove Button */
-.popup__toggle-btn {
-  padding: 5px 10px;
-  border: none;
-  cursor: pointer;
-  border-radius: 5px;
-}
-
-.popup__toggle-btn.add {
-  background: #28a745;
-  color: white;
-}
-
-.popup__toggle-btn.add:hover {
-  background: #218838;
-}
-
-.popup__toggle-btn.remove {
-  background: #d9534f;
-  color: white;
-}
-
-.popup__toggle-btn.remove:hover {
-  background: #c9302c;
-}
-
-
-/* Chat List Item - Aligning Name & Manage Button */
-.layout__chat-item {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 5px;
-}
-
-/* Manage Members Button (Now Next to Chat Name) */
-.layout__manage-btn {
-  background: transparent;
-  color: white;
-  border: none;
-  padding: 5px;
-  cursor: pointer;
-  font-size: 1rem;
-  transition: color 0.3s ease;
-}
-
-.layout__manage-btn:hover {
-  color: #ff9800;
-}
-
-/* User List Popup */
-.popup__user-list {
-  list-style: none;
-  padding: 0;
-  margin: 10px 0;
-}
-
-.popup__user-item {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background: #1e1e1e;
-  padding: 8px;
-  border-radius: 5px;
-  margin-bottom: 5px;
-}
-
-/* Add/Remove Button */
-.popup__toggle-btn {
-  padding: 5px 10px;
-  border: none;
-  cursor: pointer;
-  border-radius: 5px;
-}
-
-.popup__toggle-btn.add {
-  background: #28a745;
-  color: white;
-}
-
-.popup__toggle-btn.add:hover {
-  background: #218838;
-}
-
-.popup__toggle-btn.remove {
-  background: #d9534f;
-  color: white;
-}
-
-.popup__toggle-btn.remove:hover {
-  background: #c9302c;
-}
-
-.layout__user-list {
-  list-style: none;
-  padding: 0;
-}
-
-.layout__user-item {
-  display: flex;
-  justify-content: space-between;
-  margin: 5px 0;
-}
-
-.layout__friend-btn {
-  padding: 4px 8px;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-}
-
-.layout__friend-btn.add {
-  background-color: #4CAF50;
-  color: white;
-}
-
-.layout__friend-btn.remove {
-  background-color: #f44336;
-  color: white;
 }
