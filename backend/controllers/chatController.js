@@ -97,3 +97,32 @@ export const addChatMember = async (req, res) => {
 
     }
 }
+
+
+export const getChatMembers = async (req, res) => {
+
+    const { chatId } = req.body;
+
+    if (!chatId) {
+        return res.status(400).json({ message: 'Missing chatId!' });
+    }
+
+    try {
+        const pool = await poolPromise;
+
+        const result = await pool
+            .request()
+            .input('ConversationId', sql.Int, chatId)
+            .query(`
+                SELECT u.Username 
+                FROM Users u
+                JOIN ConversationParticipants cp ON u.Id = cp.UserId
+                WHERE cp.ConversationId = @ConversationId
+            `);
+
+        return res.status(200).json({ message: 'this is getChatMembers', members: result.recordset });
+    } catch (err) {
+        console.error('Get chat members error:', err);
+        return res.status(500).json({ message: 'Server error' });
+    }
+}

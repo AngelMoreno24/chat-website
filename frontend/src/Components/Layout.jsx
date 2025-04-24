@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Outlet, Link, useNavigate } from 'react-router-dom';
+import { Outlet, Link, useNavigate, useLocation } from 'react-router-dom';
 import './CssComponent/Layout.css';
 import axios from 'axios';
 
@@ -9,6 +9,7 @@ const Layout = () => {
   const [chats, setChats] = useState([]);
   const [token, setToken] = useState('');
   const navigate = useNavigate();
+  const location = useLocation(); // Get current route info
 
   const handleLogout = () => {
     localStorage.removeItem('isLoggedIn');
@@ -43,6 +44,30 @@ const Layout = () => {
     }
   }, [token]);
 
+
+  const getMembers = (chat) => {
+
+    
+    axios.get(`http://localhost:7145/chat/getChats`, {
+      headers: {
+        'Authorization': `Bearer ${token}`,
+        'Content-Type': 'application/json'
+      }
+    })
+    .then(response => {
+      console.log('Chats fetched:', response.data);
+      setChats(response.data.chats || []);
+    })
+    .catch(err => {
+      console.error(err);
+    });
+  }
+
+
+
+
+  const isChatPage = location.pathname.includes('/chat/');
+
   return (
     <div className="layout">
       <nav className="layout__sidebar layout__sidebar--left">
@@ -76,8 +101,17 @@ const Layout = () => {
       </div>
 
       <aside className="layout__sidebar layout__sidebar--right">
-        <h3>Online Users</h3>
-        <p>Coming soon...</p>
+
+        {(isChatPage)?(
+          <>
+              
+            <h3>Online Users</h3>
+            <p>Coming soon...</p>
+          </>
+        ):(
+          
+          <p></p>
+        )}
       </aside>
 
       {isPopupOpen && (
