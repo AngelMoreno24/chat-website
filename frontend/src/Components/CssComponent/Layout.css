@@ -227,3 +227,20 @@ body {
 .layout__logout-btn:hover {
   background: #c62828;  /* Darker red on hover */
 }
+
+
+
+
+
+
+/*Users*/
+.layout__users {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  background-color: #333333; /* darker base background */
+  color: #e0e0e0; /* light gray text */
+  border-radius: 10px; 
+  
+}

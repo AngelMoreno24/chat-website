@@ -172,7 +172,7 @@ const Layout = () => {
       <aside className="layout__sidebar layout__sidebar--right">
 
         {(isChatPage)?(
-          <> 
+          <div className="layout__users"> 
             <button
               className="layout__new-chat-btn"
 
@@ -182,7 +182,7 @@ const Layout = () => {
               }}            >
               + Add Member
             </button>
-            <h3>Online Users</h3>
+            <h3>Users</h3>
             {members.length > 0 ? (
               members.map((member, index) => (
                 <p key={index}>{member.Username || member}</p>
@@ -190,7 +190,7 @@ const Layout = () => {
             ) : (
               <p>No members found.</p>
             )}
-          </>
+          </div>
         ):(
           
           <p></p>
