@@ -54,23 +54,24 @@ body {
 
 /* Sidebar Buttons */
 .layout__new-chat-btn {
-  background: #00bcd4;
-  color: #121212;
+  background-color: #1f1f1f;
+  color: #00bcd4; /* accent teal */
+  border: 1px solid #00bcd4;
   width: 100%;
   padding: 10px;
-  text-align: center;
-  border: none;
+  text-align: center; 
   cursor: pointer;
   font-size: 1rem;
   border-radius: 5px;
   margin-bottom: 10px;
-  transition: background 0.3s ease;
+  transition: background-color 0.2s ease, color 0.2s ease;
+  cursor: pointer;
 }
 
 .layout__new-chat-btn:hover {
-  background: #00acc1;
-}
 
+  background-color: #00bcd4;
+  color: #121212;}
 /* Chat Navigation Links */
 .layout__nav-list {
   list-style: none;
