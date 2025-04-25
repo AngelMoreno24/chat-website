@@ -1,41 +1,63 @@
 import express from 'express';
 import cors from 'cors';
 import dotenv from 'dotenv';
-import authRoutes from './routes/authRoutes.js'; // 👈 import your auth routes
-import chatRoutes from './routes/chatRoutes.js'; // 👈 import your chat routes
-import friendshipRoutes from './routes/friendshipRoutes.js'; // 👈 import your friendship routes
-import messageRoutes from './routes/messageRoutes.js'; // 👈 import your message routes
-import { verifyToken } from './middleware/verifyToken.js'; // 👈 import your middleware
-import { sql, poolPromise } from './db.js'; // 👈 import your db connection
+import { createServer } from 'http';
+import { Server } from 'socket.io';
 
+import authRoutes from './routes/authRoutes.js';
+import chatRoutes from './routes/chatRoutes.js';
+import friendshipRoutes from './routes/friendshipRoutes.js';
+import messageRoutes from './routes/messageRoutes.js';
+import { verifyToken } from './middleware/verifyToken.js';
+import { sql, poolPromise } from './db.js';
 
 dotenv.config();
 
 const app = express();
+const server = createServer(app); // 👈 HTTP server for Socket.IO
 
-app.use(cors());
-app.use(express.json());
-
-app.use("/auth", authRoutes); // 👈 use your auth routes
-
-app.use("/chat", verifyToken, chatRoutes); // 👈 use your auth routes
-app.use("/friendship", verifyToken, friendshipRoutes); // 👈 use your auth routes
-app.use("/message", verifyToken, messageRoutes); // 👈 use your auth routes
-
-// Example: Use DB in a route
-app.get('/users', async (req, res) => {
-  try {
-    const pool = await poolPromise;
-    const result = await pool.request().query('SELECT * FROM Users');
-    res.json(result.recordset);
-  } catch (err) {
-    console.error('DB error:', err);
-    res.status(500).send('Server Error');
+const io = new Server(server, {
+  cors: {
+    origin: 'http://localhost:5173', // 👈 adjust for frontend origin
+    methods: ['GET', 'POST']
   }
 });
 
+// 💬 Socket.IO logic
+io.on('connection', (socket) => {
+  console.log(`🔌 User connected: ${socket.id}`);
+
+  // Join a room based on chatId (conversationId)
+  socket.on('join_room', (chatId) => {
+    socket.join(chatId);
+    console.log(`📥 User ${socket.id} joined room ${chatId}`);
+  });
+
+  // When a message is sent
+  socket.on('send_message', (data) => {
+    const { conversationId } = data;
+    console.log(`📩 Broadcasting to room ${conversationId}:`, data);
+
+    // Send message to only users in the same room
+    socket.to(conversationId).emit('receive_message', data);
+  });
+
+  socket.on('disconnect', () => {
+    console.log(`❌ User disconnected: ${socket.id}`);
+  });
+});
+
+// Middlewares and Routes
+app.use(cors());
+app.use(express.json());
+
+app.use("/auth", authRoutes);
+app.use("/chat", verifyToken, chatRoutes);
+app.use("/friendship", verifyToken, friendshipRoutes);
+app.use("/message", verifyToken, messageRoutes);
+
 // Start server
-const PORT = process.env.PORT ;
-app.listen(PORT, () => {
+const PORT = process.env.PORT || 7145;
+server.listen(PORT, () => {
   console.log(`🚀 Server started on http://localhost:${PORT}`);
 });

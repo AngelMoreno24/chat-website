@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { useParams, useLocation } from 'react-router-dom';
 import axios from 'axios';
 import './CssPages/ChatWindow.css';
+import { io } from 'socket.io-client';
 
 const ChatWindow = () => {
   const { chatId } = useParams();
@@ -13,8 +14,27 @@ const ChatWindow = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [newMessage, setNewMessage] = useState('');
+  const [socket, setSocket] = useState(null);
+
 
   const messagesEndRef = useRef(null);
+
+  // Load socket on mount
+  useEffect(() => {
+    const newSocket = io('http://localhost:7145');
+    setSocket(newSocket);
+  
+    newSocket.on('connect', () => {
+      console.log('🔌 Connected to socket');
+      newSocket.emit('join_room', chatId); // 👈 Join room by chat ID
+    });
+  
+    newSocket.on('receive_message', (data) => {
+      setMessages((prev) => [...prev, data]);
+    });
+  
+    return () => newSocket.disconnect();
+  }, [chatId]);
 
   // Scroll to bottom on new message
   useEffect(() => {
@@ -57,10 +77,15 @@ const ChatWindow = () => {
       setLoading(false);
     }
   };
-
   const handleSendMessage = async () => {
     if (!newMessage.trim()) return;
-
+  
+    const messageData = {
+      conversationId: chatId,
+      Content: newMessage,
+      SenderUsername: 'You', // Ideally from auth/user context
+    };
+  
     try {
       await axios.post(
         'http://localhost:7145/message/sendMessage',
@@ -72,9 +97,14 @@ const ChatWindow = () => {
           headers: { Authorization: `Bearer ${token}` },
         }
       );
-
+  
+      // Emit to socket for real-time update
+      if (socket) {
+        socket.emit('send_message', messageData);
+      }
+  
+      setMessages((prev) => [...prev, messageData]);
       setNewMessage('');
-      fetchMessages(token); // Refresh messages
     } catch (err) {
       console.error('Error sending message:', err);
     }
