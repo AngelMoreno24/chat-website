@@ -124,7 +124,8 @@ const ChatWindow = () => {
 
         {messages.map((message, index) => (
           <div key={index} className="message">
-            <strong>{message.SenderUsername}</strong>: {message.Content}
+            <span className="message-left"><strong>{message.SenderUsername}</strong></span>
+            <span className="message-right">{message.Content}</span>
           </div>
         ))}
         <div ref={messagesEndRef} />

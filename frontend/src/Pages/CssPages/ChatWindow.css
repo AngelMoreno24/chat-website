@@ -34,13 +34,26 @@
   margin: 10px 0;
   padding: 10px;
   border-radius: 8px;
-  max-width: 70%;
+  max-width: 90%;
   background-color: #2e2e2e;
-  display: block;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: #e0e0e0;
   margin-left: auto;
   margin-right: auto;
+}
+
+.message-left {
+  flex: 1;
   text-align: left;
-  color: #e0e0e0;
+  font-weight: bold;
+  color: #00bcd4;
+}
+
+.message-right {
+  flex: 2;
+  text-align: right;
 }
 
 .chat-input-container {
