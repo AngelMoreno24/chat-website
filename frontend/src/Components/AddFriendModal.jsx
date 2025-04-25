@@ -4,6 +4,9 @@ import './CssComponent/AddFriendModal.css'; // Assuming you have some CSS for th
 const AddFriendModal = ({ onClose }) => {
   const [friendCode, setFriendCode] = useState('');
 
+  const apiUrl = import.meta.env.VITE_BASE_URL;
+
+
   const handleSendRequest = () => {
     if (!friendCode.trim()) return;
 
@@ -18,7 +21,7 @@ const AddFriendModal = ({ onClose }) => {
     const token = localStorage.getItem('token');
 
 
-    axios.post(`http://localhost:7145/friendship/addFriend`, 
+    axios.post(`${apiUrl}/friendship/addFriend`, 
       {
         friendCode: friendCode
       }, {

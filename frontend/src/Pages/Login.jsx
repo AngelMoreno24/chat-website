@@ -10,6 +10,9 @@ const Login = () => {
   const [registerEmail, setRegisterEmail] = useState('');
   const [registerPassword, setRegisterPassword] = useState('');
 
+  const apiUrl = import.meta.env.VITE_BASE_URL;
+
+
   const navigate = useNavigate();
 
   // Check if user is already logged in
@@ -24,7 +27,7 @@ const Login = () => {
   const login = (event) => {
     event.preventDefault();
 
-    axios.post('http://localhost:7145/auth/login', {
+    axios.post(`${apiUrl}/auth/login`, {
       email: email,
       password: password
     })
@@ -48,7 +51,7 @@ const Login = () => {
   const signup = (event) => {
     event.preventDefault();
 
-    axios.post('http://localhost:7145/auth/register', {
+    axios.post(`${apiUrl}/auth/register`, {
       username: registerUsername,
       email: registerEmail,
       password: registerPassword

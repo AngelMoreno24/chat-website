@@ -1,7 +1,0 @@
-
-
-const login = (email, password) => {
-
-
-    
-}

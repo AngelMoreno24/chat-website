@@ -7,6 +7,7 @@ const FriendRequestsModal = ({ onClose }) => {
   const [requests, setRequests] = useState([]); // State to hold friend requests
   const [token, setToken] = useState(''); // State to hold the token
 
+  const apiUrl = import.meta.env.VITE_BASE_URL;
 
   useEffect(() => {
     
@@ -31,7 +32,7 @@ const FriendRequestsModal = ({ onClose }) => {
   const fetchFriendRequests = () => {
  
     
-    axios.get(`http://localhost:7145/friendship/getRequests`, {
+    axios.get(`${apiUrl}/friendship/getRequests`, {
       headers: {
         'Authorization': `Bearer ${token}`,
         'Content-Type': 'application/json'
@@ -50,7 +51,7 @@ const FriendRequestsModal = ({ onClose }) => {
 
   const acceptRequest = (requestId) => {
     
-    axios.patch(`http://localhost:7145/friendship/acceptRequest`, 
+    axios.patch(`${apiUrl}/friendship/acceptRequest`, 
       {
         userId: requestId
       }, {

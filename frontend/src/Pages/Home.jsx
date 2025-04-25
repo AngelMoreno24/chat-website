@@ -11,7 +11,8 @@ const Home = () => {
   const [showRequestsModal, setShowRequestsModal] = useState(false);
   const [showAddFriendModal, setShowAddFriendModal] = useState(false);
   const [token, setToken] = useState('');
-
+  const apiUrl = import.meta.env.VITE_BASE_URL;
+  
   // Load token on mount
   useEffect(() => {
     const storedToken = localStorage.getItem('token');
@@ -33,7 +34,7 @@ const Home = () => {
     setLoading(true);
     setError(null);
 
-    axios.get('http://localhost:7145/friendship/getFriends', {
+    axios.get(`${apiUrl}/friendship/getFriends`, {
       headers: {
         'Authorization': `Bearer ${token}`,
         'Content-Type': 'application/json'

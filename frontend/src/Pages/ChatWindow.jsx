@@ -17,11 +17,12 @@ const ChatWindow = () => {
   const [socket, setSocket] = useState(null);
 
 
+  const apiUrl = import.meta.env.VITE_BASE_URL;
   const messagesEndRef = useRef(null);
 
   // Load socket on mount
   useEffect(() => {
-    const newSocket = io('http://localhost:7145');
+    const newSocket = io(`${apiUrl}`);
     setSocket(newSocket);
   
     newSocket.on('connect', () => {
@@ -65,7 +66,7 @@ const ChatWindow = () => {
     setError(null);
 
     try {
-      const res = await axios.get(`http://localhost:7145/message/getMessages`, {
+      const res = await axios.get(`${apiUrl}/message/getMessages`, {
         params: { conversationId: chatId },
         headers: { Authorization: `Bearer ${token}` },
       });
@@ -87,8 +88,7 @@ const ChatWindow = () => {
     };
   
     try {
-      await axios.post(
-        'http://localhost:7145/message/sendMessage',
+      await axios.post(`${apiUrl}/message/sendMessage`,
         {
           conversationId: chatId,
           message: newMessage,

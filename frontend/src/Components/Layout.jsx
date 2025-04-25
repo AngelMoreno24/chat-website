@@ -14,6 +14,7 @@ const Layout = () => {
   const location = useLocation(); // Get current route info
   const { chatId } = useParams(); // Automatically gives you the value after /chat/
 
+  const apiUrl = import.meta.env.VITE_BASE_URL;
   const isChatPage = location.pathname.includes('/chat/');
 
   //add member popup
@@ -37,7 +38,7 @@ const Layout = () => {
 
   useEffect(() => {
     if (token) {
-      axios.get(`http://localhost:7145/chat/getChats`, {
+      axios.get(`${apiUrl}/chat/getChats`, {
         headers: {
           'Authorization': `Bearer ${token}`,
           'Content-Type': 'application/json'
@@ -63,7 +64,7 @@ const Layout = () => {
   const getMembers = () => {
 
     
-    axios.post(`http://localhost:7145/chat/getChatMembers`,
+    axios.post(`${apiUrl}/chat/getChatMembers`,
       {
         chatId: chatId
       }, {
@@ -87,7 +88,7 @@ const Layout = () => {
   
   const addMember = () => {
     setIsAdding(true);
-    axios.post(`http://localhost:7145/chat/addChatMember`, {
+    axios.post(`${apiUrl}/chat/addChatMember`, {
       chatId: chatId,
       friendUsername: newMemberUsername
     }, {
@@ -113,7 +114,7 @@ const Layout = () => {
 
   const createChat = () => {
     setIsAdding(true);
-    axios.post(`http://localhost:7145/chat/create`, {
+    axios.post(`${apiUrl}/chat/create`, {
       name: newChatName
     }, {
       headers: {
