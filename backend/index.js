@@ -16,7 +16,7 @@ dotenv.config();
 const app = express();
 const server = createServer(app);
 
-// ✅ Use frontend URL from env or allow all origins for testing
+// Use frontend URL from env or allow all origins for testing
 const url = process.env.FRONTEND_URL || '*';
 
 const io = new Server(server, {
@@ -26,7 +26,7 @@ const io = new Server(server, {
   }
 });
 
-// 💬 Socket.IO logic
+// Socket.IO logic
 io.on('connection', (socket) => {
   console.log(`🔌 User connected: ${socket.id}`);
 
@@ -46,7 +46,7 @@ io.on('connection', (socket) => {
   });
 });
 
-// ✅ Middlewares and Routes
+// Middlewares and Routes
 app.use(cors({ origin: url }));
 app.use(express.json());
 
@@ -55,8 +55,8 @@ app.use("/chat", verifyToken, chatRoutes);
 app.use("/friendship", verifyToken, friendshipRoutes);
 app.use("/message", verifyToken, messageRoutes);
 
-// ✅ Start server on Render-provided PORT
+// Bind to 0.0.0.0 so Render's port scanner can detect the open port
 const PORT = process.env.PORT || 7145;
-server.listen(PORT, () => {
+server.listen(PORT, '0.0.0.0', () => {
   console.log(`🚀 Server started on port ${PORT}`);
 });
