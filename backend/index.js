@@ -56,7 +56,7 @@ app.use("/friendship", verifyToken, friendshipRoutes);
 app.use("/message", verifyToken, messageRoutes);
 
 // Bind to 0.0.0.0 so Render's port scanner can detect the open port
-const PORT = process.env.PORT || 7145;
+const PORT = Number(process.env.PORT) || 7145;
 server.listen(PORT, '0.0.0.0', () => {
   console.log(`🚀 Server started on port ${PORT}`);
 });
