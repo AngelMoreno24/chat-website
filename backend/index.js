@@ -16,9 +16,11 @@ dotenv.config();
 const app = express();
 const server = createServer(app); // 👈 HTTP server for Socket.IO
 
+const url = process.env.FRONTEND_URL;
+
 const io = new Server(server, {
   cors: {
-    origin: 'http://localhost:5173', // 👈 adjust for frontend origin
+    origin: url, // 👈 adjust for frontend origin
     methods: ['GET', 'POST']
   }
 });
