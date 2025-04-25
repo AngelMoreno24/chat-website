@@ -6,8 +6,13 @@ import axios from 'axios';
 const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [registerUsername, setRegisterUsername] = useState('');
+  const [registerEmail, setRegisterEmail] = useState('');
+  const [registerPassword, setRegisterPassword] = useState('');
+
   const navigate = useNavigate();
 
+  // Check if user is already logged in
   useEffect(() => {
     const token = localStorage.getItem('token');
     if (token) {
@@ -15,6 +20,7 @@ const Login = () => {
     }
   }, [navigate]);
 
+  //login function
   const login = (event) => {
     event.preventDefault();
 
@@ -37,33 +43,94 @@ const Login = () => {
     });
   };
 
+  
+  //signup functio
+  const signup = (event) => {
+    event.preventDefault();
+
+    axios.post('http://localhost:7145/auth/register', {
+      username: registerUsername,
+      email: registerEmail,
+      password: registerPassword
+    })
+    .then(data => {
+ 
+    })
+    .catch(error => {
+      console.error('Login error:', error);
+      alert('Login failed. Please check your credentials.');
+    });
+  };
+
   return (
-    <div style={styles.container}>
-      <h2>Login</h2>
-      <form onSubmit={login} style={styles.form}>
-        <div style={styles.inputGroup}>
-          <label>Email:</label>
-          <input
-            type="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            required
-          />
-        </div>
+    <>
+      
+      <div style={styles.container}>
+        <h2>Login</h2>
+        <form onSubmit={login} style={styles.form}>
+          <div style={styles.inputGroup}>
+            <label>Email:</label>
+            <input
+              type="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              required
+            />
+          </div>
 
-        <div style={styles.inputGroup}>
-          <label>Password:</label>
-          <input
-            type="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            required
-          />
-        </div>
+          <div style={styles.inputGroup}>
+            <label>Password:</label>
+            <input
+              type="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              required
+            />
+          </div>
 
-        <button type="submit" style={styles.button}>Login</button>
-      </form>
-    </div>
+          <button type="submit" style={styles.button}>Login</button>
+        </form>
+      </div>
+
+  
+      <div style={styles.container}>
+        <h2>Signup</h2>
+        <form onSubmit={signup} style={styles.form}>
+          <div style={styles.inputGroup}>
+            <label>Username:</label>
+            <input
+              type="text"
+              value={registerUsername}
+              onChange={(e) => setRegisterUsername(e.target.value)}
+              required
+            />
+          </div>
+          
+          <div style={styles.inputGroup}>
+            <label>Email:</label>
+            <input
+              type="email"
+              value={registerEmail}
+              onChange={(e) => setRegisterEmail(e.target.value)}
+              required
+            />
+          </div>
+
+
+          <div style={styles.inputGroup}>
+            <label>Password:</label>
+            <input
+              type="password"
+              value={registerPassword}
+              onChange={(e) => setRegisterPassword(e.target.value)}
+              required
+            />
+          </div>
+
+          <button type="submit" style={styles.button}>Login</button>
+        </form>
+      </div>
+    </>
   );
 };
 
