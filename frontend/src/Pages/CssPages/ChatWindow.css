@@ -53,7 +53,7 @@
 
 .message-right {
   flex: 2;
-  text-align: right;
+  text-align: left;
 }
 
 .chat-input-container {
