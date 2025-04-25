@@ -1,29 +1,22 @@
 import React, { useState } from 'react';
 import './CssComponent/AddFriendModal.css'; // Assuming you have some CSS for the modal"
+import axios from 'axios';
 
 const AddFriendModal = ({ onClose }) => {
-  const [friendCode, setFriendCode] = useState('');
+  const [username, setUsername] = useState('');
 
   const apiUrl = import.meta.env.VITE_BASE_URL;
 
 
   const handleSendRequest = () => {
-    if (!friendCode.trim()) return;
-
-    console.log('Sending request to:', friendCode);
-
-    // You can replace this with an actual API call
-
-
-    setLoading(true);
-    setError(null);
+    if (!username.trim()) return;
 
     const token = localStorage.getItem('token');
 
 
     axios.post(`${apiUrl}/friendship/addFriend`, 
       {
-        friendCode: friendCode
+        username: username
       }, {
       headers: {
         'Authorization': `Bearer ${token}`,
@@ -40,7 +33,7 @@ const AddFriendModal = ({ onClose }) => {
 
 
     // After sending:
-    setFriendCode('');
+    setUsername('');
     onClose(); // CLOSE MODAL after sending
   };
 
@@ -50,9 +43,9 @@ const AddFriendModal = ({ onClose }) => {
         <h3>Add Friend</h3>
         <input
           type="text"
-          placeholder="Enter Friend Code"
-          value={friendCode}
-          onChange={(e) => setFriendCode(e.target.value)}
+          placeholder="Enter Username"
+          value={username}
+          onChange={(e) => setUsername(e.target.value)}
         />
         <button onClick={handleSendRequest}>Send Request</button>
         <button onClick={onClose} style={{ backgroundColor: '#444', marginTop: '8px' }}>

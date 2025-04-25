@@ -2,12 +2,12 @@ import { sql, poolPromise } from '../db.js'; // adjust the path as needed
 
 export const addFriend = async (req, res) => {
 
-    const { friendCode  } = req.body;
+    const { username  } = req.body;
 
     const userId = req.user.id;
 
-    if(!friendCode){
-        return res(400).json({ message: 'missing friend code!' });  
+    if(!username){
+        return res(400).json({ message: 'missing username!' });  
     }
     
     try{
@@ -15,9 +15,9 @@ export const addFriend = async (req, res) => {
         const pool = await poolPromise;
         const response = await pool
             .request()
-            .input('FriendCode', sql.NVarChar, friendCode)
+            .input('Username', sql.NVarChar, username)
             .query(`
-                Select Id FROM Users Where FriendCode = @FriendCode
+                Select Id FROM Users Where Username = @Username
             `);
 
 
