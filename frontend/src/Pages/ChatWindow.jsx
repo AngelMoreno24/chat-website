@@ -12,6 +12,7 @@ const ChatWindow = () => {
   const [token, setToken] = useState('');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
+  const [newMessage, setNewMessage] = useState('');
 
   const messagesEndRef = useRef(null);
 
@@ -37,7 +38,7 @@ const ChatWindow = () => {
     if (token) {
       fetchMessages(token);
     }
-  }, [token,location]);
+  }, [token, location]);
 
   const fetchMessages = async (token) => {
     setLoading(true);
@@ -46,7 +47,7 @@ const ChatWindow = () => {
     try {
       const res = await axios.get(`http://localhost:7145/message/getMessages`, {
         params: { conversationId: chatId },
-        headers: { 'Authorization': `Bearer ${token}` }
+        headers: { Authorization: `Bearer ${token}` },
       });
       setMessages(res.data.messages || []);
     } catch (err) {
@@ -57,10 +58,32 @@ const ChatWindow = () => {
     }
   };
 
+  const handleSendMessage = async () => {
+    if (!newMessage.trim()) return;
+
+    try {
+      await axios.post(
+        'http://localhost:7145/message/sendMessage',
+        {
+          conversationId: chatId,
+          message: newMessage,
+        },
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
+      );
+
+      setNewMessage('');
+      fetchMessages(token); // Refresh messages
+    } catch (err) {
+      console.error('Error sending message:', err);
+    }
+  };
+
   return (
     <div className="chat-window">
-      <header className="chat-header">
-        <h2 className="chat-title">{chatName || 'Chat'}</h2>
+      <header className="chat-title">
+        <h2>{chatName || 'Chat'}</h2>
         {members && <p className="chat-subtitle">Members: {members.join(', ')}</p>}
       </header>
 
@@ -75,6 +98,20 @@ const ChatWindow = () => {
           </div>
         ))}
         <div ref={messagesEndRef} />
+      </div>
+
+      <div className="chat-input-container">
+        <input
+          type="text"
+          className="chat-input"
+          placeholder="Type your message..."
+          value={newMessage}
+          onChange={(e) => setNewMessage(e.target.value)}
+          onKeyDown={(e) => e.key === 'Enter' && handleSendMessage()}
+        />
+        <button className="send-button" onClick={handleSendMessage}>
+          Send
+        </button>
       </div>
     </div>
   );
