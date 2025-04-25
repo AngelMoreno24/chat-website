@@ -24,11 +24,11 @@ const FriendRequestsModal = ({ onClose }) => {
   // Fetch friends only after token is set
   useEffect(() => {
     if (token) {
-      fetchFriendRequests(token);
+      fetchFriendRequests();
     }
   }, [token]);
 
-  const fetchFriendRequests = (token) => {
+  const fetchFriendRequests = () => {
  
     
     axios.get(`http://localhost:7145/friendship/getRequests`, {
@@ -47,6 +47,28 @@ const FriendRequestsModal = ({ onClose }) => {
 
   }
 
+
+  const acceptRequest = (requestId) => {
+    
+    axios.patch(`http://localhost:7145/friendship/acceptRequest`, 
+      {
+        userId: requestId
+      }, {
+      headers: {
+        'Authorization': `Bearer ${token}`,
+        'Content-Type': 'application/json'
+      }
+    })
+    .then(response => {
+      console.log('Friend request accepted:', response.data); 
+      fetchFriendRequests();
+    })
+    .catch(err => {
+      console.error(err);
+    });
+
+  }
+
   return (
     <div className="modal">
       <div className="modal-content">
@@ -55,7 +77,10 @@ const FriendRequestsModal = ({ onClose }) => {
 
         {requests.length > 0 ? (
           requests.map((request, index) => (
-            <li key={index}>{request.SenderUsername || request}</li>
+            <div key={index} className='friend-request'> 
+              <p>{request.SenderUsername}</p>
+              <button onClick={() => {acceptRequest(request.SenderId)}}>Accept</button>
+            </div>
           ))
         ) : (
           <p>No friends found.</p>

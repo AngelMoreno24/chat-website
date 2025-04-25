@@ -83,7 +83,7 @@ export const acceptRequest = async (req, res) => {
     const { userId } = req.body;
 
     if(!userId){
-        return res(400).json({ message: 'missing request id!' });  
+        return res.status(400).json({ message: 'missing request id!' });  
     }
 
     const friendId = req.user.id;
