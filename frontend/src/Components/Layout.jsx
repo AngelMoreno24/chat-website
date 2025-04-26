@@ -38,19 +38,7 @@ const Layout = () => {
 
   useEffect(() => {
     if (token) {
-      axios.get(`${apiUrl}/chat/getChats`, {
-        headers: {
-          'Authorization': `Bearer ${token}`,
-          'Content-Type': 'application/json'
-        }
-      })
-      .then(response => {
-        console.log('Chats fetched:', response.data);
-        setChats(response.data.chats || []);
-      })
-      .catch(err => {
-        console.error(err);
-      });
+      getChats();
     }
   }, [token]);
 
@@ -59,6 +47,23 @@ const Layout = () => {
       getMembers();
     }
   }, [isChatPage, token, chatId]);
+
+  const getChats = () => {
+
+    axios.get(`${apiUrl}/chat/getChats`, {
+      headers: {
+        'Authorization': `Bearer ${token}`,
+        'Content-Type': 'application/json'
+      }
+    })
+    .then(response => {
+      console.log('Chats fetched:', response.data);
+      setChats(response.data.chats || []);
+    })
+    .catch(err => {
+      console.error(err);
+    });
+  }
 
 
   const getMembers = () => {
@@ -126,6 +131,7 @@ const Layout = () => {
       setIsPopupOpen(false);
       setNewChatName('');
       setErrorMsg('');
+      getChat();
     })
     .catch(err => {
       console.error(err);
