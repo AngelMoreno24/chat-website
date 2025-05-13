@@ -1,7 +1,7 @@
-// Login.js
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import './CssPages/Login.css'; // Import the CSS
 
 const Login = () => {
   const [email, setEmail] = useState('');
@@ -11,67 +11,47 @@ const Login = () => {
   const [registerPassword, setRegisterPassword] = useState('');
 
   const apiUrl = import.meta.env.VITE_BASE_URL;
-
-
   const navigate = useNavigate();
 
-  // Check if user is already logged in
   useEffect(() => {
     const token = localStorage.getItem('token');
-    if (token) {
-      navigate('/home'); // Redirect if already logged in
-    }
+    if (token) navigate('/home');
   }, [navigate]);
 
-  //login function
-  const login = (event) => {
-    event.preventDefault();
-
-    axios.post(`${apiUrl}/auth/login`, {
-      email: email,
-      password: password
-    })
-    .then(data => {
-      localStorage.setItem('token', data.data.token);
-      localStorage.setItem('isLoggedIn', 'true');
-
-      // Tiny delay to allow token to be saved before navigation
-      setTimeout(() => {
-        navigate('/home', { state: { justLoggedIn: true } });
-      }, 50);
-    })
-    .catch(error => {
-      console.error('Login error:', error);
-      alert('Login failed. Please check your credentials.');
-    });
+  const login = (e) => {
+    e.preventDefault();
+    axios.post(`${apiUrl}/auth/login`, { email, password })
+      .then(res => {
+        localStorage.setItem('token', res.data.token);
+        localStorage.setItem('isLoggedIn', 'true');
+        setTimeout(() => navigate('/home', { state: { justLoggedIn: true } }), 50);
+      })
+      .catch(err => {
+        console.error('Login error:', err);
+        alert('Login failed. Please check your credentials.');
+      });
   };
 
-  
-  //signup functio
-  const signup = (event) => {
-    event.preventDefault();
-
+  const signup = (e) => {
+    e.preventDefault();
     axios.post(`${apiUrl}/auth/register`, {
       username: registerUsername,
       email: registerEmail,
       password: registerPassword
     })
-    .then(data => {
- 
-    })
-    .catch(error => {
-      console.error('Login error:', error);
-      alert('Login failed. Please check your credentials.');
+    .then(() => alert('Signup successful. You can now log in.'))
+    .catch(err => {
+      console.error('Signup error:', err);
+      alert('Signup failed. Please check your input.');
     });
   };
 
   return (
-    <>
-      
-      <div style={styles.container}>
+    <div className="wrapper">
+      <div className="form-container">
         <h2>Login</h2>
-        <form onSubmit={login} style={styles.form}>
-          <div style={styles.inputGroup}>
+        <form onSubmit={login} className="form">
+          <div className="input-group">
             <label>Email:</label>
             <input
               type="email"
@@ -80,8 +60,7 @@ const Login = () => {
               required
             />
           </div>
-
-          <div style={styles.inputGroup}>
+          <div className="input-group">
             <label>Password:</label>
             <input
               type="password"
@@ -90,16 +69,14 @@ const Login = () => {
               required
             />
           </div>
-
-          <button type="submit" style={styles.button}>Login</button>
+          <button type="submit" className="button">Login</button>
         </form>
       </div>
 
-  
-      <div style={styles.container}>
+      <div className="form-container">
         <h2>Signup</h2>
-        <form onSubmit={signup} style={styles.form}>
-          <div style={styles.inputGroup}>
+        <form onSubmit={signup} className="form">
+          <div className="input-group">
             <label>Username:</label>
             <input
               type="text"
@@ -108,8 +85,7 @@ const Login = () => {
               required
             />
           </div>
-          
-          <div style={styles.inputGroup}>
+          <div className="input-group">
             <label>Email:</label>
             <input
               type="email"
@@ -118,9 +94,7 @@ const Login = () => {
               required
             />
           </div>
-
-
-          <div style={styles.inputGroup}>
+          <div className="input-group">
             <label>Password:</label>
             <input
               type="password"
@@ -129,33 +103,11 @@ const Login = () => {
               required
             />
           </div>
-
-          <button type="submit" style={styles.button}>Login</button>
+          <button type="submit" className="button">Signup</button>
         </form>
       </div>
-    </>
+    </div>
   );
-};
-
-const styles = {
-  container: {
-    maxWidth: '300px',
-    margin: '50px auto',
-    padding: '20px',
-    border: '1px solid #ccc',
-    borderRadius: '8px',
-    textAlign: 'center'
-  },
-  form: { display: 'flex', flexDirection: 'column' },
-  inputGroup: { marginBottom: '10px' },
-  button: {
-    padding: '10px',
-    background: 'blue',
-    color: 'white',
-    border: 'none',
-    borderRadius: '4px',
-    cursor: 'pointer'
-  },
 };
 
 export default Login;
