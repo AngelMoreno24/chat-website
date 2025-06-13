@@ -15,6 +15,7 @@ const ChatWindow = () => {
   const [error, setError] = useState(null);
   const [newMessage, setNewMessage] = useState('');
   const [socket, setSocket] = useState(null);
+  const [name, setName] = useState('');
 
 
   const apiUrl = import.meta.env.VITE_BASE_URL;
@@ -47,8 +48,11 @@ const ChatWindow = () => {
   // Load token
   useEffect(() => {
     const storedToken = localStorage.getItem('token');
+    const name = localStorage.getItem('name');
+    
     if (storedToken) {
       setToken(storedToken);
+      setName(name)
     } else {
       console.warn('Token not found in localStorage');
     }
@@ -124,7 +128,13 @@ const ChatWindow = () => {
 
         {messages.map((message, index) => (
           <div key={index} className="message">
-            <span className="message-left"><strong>{message.SenderUsername}</strong></span>
+            {message.SenderUsername == name?(
+                          <span className="message-left-user"><strong>{message.SenderUsername}</strong></span>
+
+            ):(
+                          <span className="message-left"><strong>{message.SenderUsername}</strong></span>
+
+            )}
             <span className="message-right">{message.Content}</span>
           </div>
         ))}

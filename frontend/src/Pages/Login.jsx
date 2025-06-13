@@ -23,6 +23,7 @@ const Login = () => {
     axios.post(`${apiUrl}/auth/login`, { email, password })
       .then(res => {
         localStorage.setItem('token', res.data.token);
+        localStorage.setItem('name', res.data.name);
         localStorage.setItem('isLoggedIn', 'true');
         setTimeout(() => navigate('/home', { state: { justLoggedIn: true } }), 50);
       })

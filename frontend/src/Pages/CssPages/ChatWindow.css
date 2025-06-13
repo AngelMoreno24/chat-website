@@ -50,6 +50,12 @@
   font-weight: bold;
   color: #00bcd4;
 }
+.message-left-user {
+  flex: 1;
+  text-align: left;
+  font-weight: bold;
+  color: #00d440;
+}
 
 .message-right {
   flex: 2;
