@@ -22,6 +22,13 @@ Backend:
 * JWT Authentication
 * WebSockets (Socket.IO)
 
+
+login/Signup
+
+![image](https://github.com/user-attachments/assets/d277f462-0ddc-4287-987a-77db0323380e)
+
+
+Conversation Page
 ![chatApplication](https://github.com/user-attachments/assets/2135e071-66ca-4459-a02e-295ec5b7cbab)
 
 
