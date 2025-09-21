@@ -1,246 +1,173 @@
-/* Reset defaults */
-* {
+html, body, #root {
+  height: 100%;
   margin: 0;
   padding: 0;
-  box-sizing: border-box;
+  font-family: "Inter", "Roboto", sans-serif;
+  background: #f0f4f8;
+  color: #333;
 }
 
-body {
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-  background-color: #121212;
-  color: #e0e0e0;
-  min-height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: flex-start;
-}
-
-/* Layout container */
+/* ---------------- Layout ---------------- */
 .layout {
-  display: grid;
-  grid-template-columns: 250px 1fr 250px;
-  width: 100%;
-  height: 100vh;
-  background: #181818;
+  display: flex;
+  height: 100%;
+  min-height: 100vh;
 }
 
-/* Sidebar Styling */
+/* -------- Sidebars -------- */
 .layout__sidebar {
-  background-color: #1f1f1f;
-  color: #e0e0e0;
-  padding-top: 3rem;
-  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.3);
+  width: 240px;
+  background: #1f2937; /* dark gray */
+  border-right: 1px solid #374151;
   display: flex;
   flex-direction: column;
-  padding-left: 1rem;
-  padding-right: 1rem;
-}
-
-.layout__sidebar--left {
-  grid-column: 1;
+  padding: 1rem;
+  color: #f9fafb;
 }
 
 .layout__sidebar--right {
-  grid-column: 3;
-  background-color: #232323;
+  border-left: 1px solid #374151;
+  border-right: none;
 }
 
-/* Sidebar title */
 .layout__sidebar-title {
-  color: #ffffff;
-  text-align: center;
+  font-size: 1.2rem;
+  font-weight: 600;
   margin-bottom: 1rem;
+  color: #10b981; /* emerald green */
 }
 
-/* Sidebar Buttons */
-.layout__new-chat-btn {
-  background-color: #1f1f1f;
-  color: #00bcd4; /* accent teal */
-  border: 1px solid #00bcd4;
-  width: 100%;
-  padding: 10px;
-  text-align: center; 
-  cursor: pointer;
-  font-size: 1rem;
-  border-radius: 5px;
-  margin-bottom: 10px;
-  transition: background-color 0.2s ease, color 0.2s ease;
-  cursor: pointer;
-}
-
-.layout__new-chat-btn:hover {
-
-  background-color: #00bcd4;
-  color: #121212;}
-/* Chat Navigation Links */
 .layout__nav-list {
   list-style: none;
   padding: 0;
-  width: 100%;
-  margin-top: 20px;
+  margin: 0;
+  flex-grow: 1;
+  overflow-y: auto;
 }
 
 .layout__nav-item {
-  width: 100%;
-  text-align: center;
   margin-bottom: 0.5rem;
 }
 
 .layout__nav-link {
   display: block;
-  width: 100%;
-  padding: 1rem;
-  color: #e0e0e0;
+  padding: 0.5rem 0.75rem;
+  border-radius: 6px;
+  color: #e5e7eb;
   text-decoration: none;
-  background-color: #333;  /* Add a background color */
-  border: none;
-  cursor: pointer;
-  transition: background 0.3s ease, color 0.3s ease;
-  border-radius: 5px;  /* Optional: To add rounded corners */
+  transition: background 0.2s;
 }
 
-/* Hover state for chat nav items */
 .layout__nav-link:hover {
-  background-color: #4caf50;  /* Green background on hover */
-  color: #fff;  /* White text on hover */
+  background: #374151;
+  color: #ffffff;
 }
 
-/* Active state for chat nav items */
-.layout__nav-link:active {
-  background-color: #388e3c;  /* Darker green when active */
+/* -------- Buttons -------- */
+.layout__new-chat-btn,
+.send-button,
+.button-group button,
+.popup__send-btn {
+  padding: 0.5rem 0.75rem;
+  border: none;
+  border-radius: 6px;
+  margin-bottom: 0.75rem;
+  cursor: pointer;
+  font-size: 0.95rem;
+  background: #14b8a6; /* teal */
+  color: #f9fafb;
+  transition: background 0.2s, transform 0.1s;
 }
 
-/* Selected/Current chat link */
-.layout__nav-link.selected {
-  background-color: #2196f3;  /* Blue background for the selected item */
-  color: white;
+.layout__new-chat-btn:hover,
+.send-button:hover,
+.button-group button:hover,
+.popup__send-btn:hover {
+  background: #0d9488; /* darker teal */
+  transform: translateY(-1px);
 }
 
-/* Content area */
+.layout__logout-btn,
+.popup__close-btn {
+  padding: 0.5rem 0.75rem;
+  border: none;
+  border-radius: 6px;
+  margin-top: auto;
+  cursor: pointer;
+  font-size: 0.95rem;
+  background: #ef4444; /* red */
+  color: #f9fafb;
+  transition: background 0.2s, transform 0.1s;
+}
+
+.layout__logout-btn:hover,
+.popup__close-btn:hover {
+  background: #b91c1c; /* darker red */
+  transform: translateY(-1px);
+}
+
+/* ---------------- Content ---------------- */
 .layout__content {
-  grid-column: 2;
-  background-color: #1a1a1a;
+  flex: 1;
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
-  height: 100%;
+  min-height: 0; /* allows children to fill flex */
 }
 
-/* Chat main section */
 .layout__main {
   flex: 1;
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
+  background: #f9fbff;
+  padding: 1.5rem;
+  overflow-y: auto;
 }
 
-/* New Chat Popup */
-.popup {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.6);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 300;
-}
-
-.popup__content {
-  background: #1f1f1f;
-  padding: 20px;
-  border-radius: 10px;
-  text-align: center;
-  color: #e0e0e0;
-  width: 300px;
-  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
-}
-
-/* Friend Search Input */
-.popup__input {
-  width: 100%;
-  padding: 10px;
-  margin: 10px 0;
-  border: 1px solid #333;
-  background: #2a2a2a;
-  color: #e0e0e0;
-  border-radius: 5px;
-}
-
-/* Send Friend Request Button */
-.popup__send-btn {
-  background: #00bcd4;
-  color: #121212;
-  border: none;
-  padding: 10px 15px;
-  cursor: pointer;
-  font-size: 1rem;
-  border-radius: 5px;
-  width: 100%;
-  transition: background 0.3s ease;
-}
-
-.popup__send-btn:hover {
-  background: #0097a7;
-}
-
-.popup__send-btn:disabled {
-  background: #555;
-  cursor: not-allowed;
-}
-
-/* Close Button */
-.popup__close-btn {
-  background: #f44336;
-  color: #fff;
-  border: none;
-  padding: 10px 15px;
-  cursor: pointer;
-  font-size: 1rem;
-  border-radius: 5px;
-  margin-top: 10px;
-  transition: background 0.3s ease;
-  width: 100%;
-}
-
-.popup__close-btn:hover {
-  background: #c62828;
-}
-
-/* Logout Button */
-.layout__logout-btn {
-  background: #f44336;  /* Red background */
-  color: #fff;
-  border: none;
-  padding: 10px 15px;
-  cursor: pointer;
-  font-size: 1rem;
-  border-radius: 5px;
-  margin-top: 20px;
-  transition: background 0.3s ease;
-}
-
-.layout__logout-btn:hover {
-  background: #c62828;  /* Darker red on hover */
-}
-
-
-
-
-
-
-/*Users*/
+/* ---------------- Right Sidebar Users ---------------- */
 .layout__users {
   display: flex;
   flex-direction: column;
+  gap: 0.5rem;
+}
+
+.layout__users h3 {
+  margin-top: 0.5rem;
+  margin-bottom: 0.75rem;
+  font-size: 1.1rem;
+  color: #10b981;
+}
+
+.layout__user-item {
+  display: flex;
   align-items: center;
-  padding: 20px;
-  background-color: #333333; /* darker base background */
-  color: #e0e0e0; /* light gray text */
-  border-radius: 10px; 
-  
+  gap: 0.5rem;
+  padding: 0.4rem 0.6rem;
+  border-radius: 6px;
+  color: #e5e7eb;
+  background: transparent;
+  cursor: default;
+  transition: background 0.2s;
+}
+
+.layout__user-item:hover {
+  background: #374151;
+}
+
+.layout__user-avatar {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: #6b7280;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #f9fafb;
+}
+
+.layout__user-name {
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: #f3f4f6;
 }

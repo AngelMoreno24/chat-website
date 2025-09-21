@@ -1,75 +1,103 @@
-
 .modal {
-    position: fixed;
-    top: 0; left: 0;
-    width: 100%; height: 100%;
-    background: rgba(0, 0, 0, 0.7);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 1000;
-  }
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: rgba(31, 41, 55, 0.75); /* dark overlay matching layout */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
 
-  .modal-content {
-    background: #1e1e1e;
-    color: white;
-    padding: 20px;
-    border-radius: 8px;
-    max-width: 400px;
-    width: 90%;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
-  }
+.modal-content {
+  background: #f9fbff; /* match layout content */
+  color: #111827;
+  padding: 20px;
+  border-radius: 8px;
+  max-width: 400px;
+  width: 90%;
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.25);
+}
 
-  .modal-content input,
-  .modal-content button {
-    width: 100%;
-    margin-top: 10px;
-    padding: 10px;
-    border-radius: 4px;
-    border: none;
-  }
+.modal-content h3 {
+  margin: 0;
+  font-size: 1.3rem;
+  color: #10b981; /* emerald green header */
+}
 
-  .modal-content input {
-    background: #2e2e2e;
-    color: white;
-  }
+/* Inputs */
+.modal-content input {
+  width: 100%;
+  padding: 0.6rem 0.75rem;
+  border-radius: 6px;
+  border: 1px solid #d1d5db;
+  background: #f0f4f8;
+  color: #111827;
+  font-size: 0.95rem;
+}
 
-  .modal-content button {
-    background: #007bff;
-    color: white;
-    cursor: pointer;
-  }
+/* Buttons */
+.modal-content button {
+  width: 100%;
+  padding: 0.6rem 1rem;
+  border-radius: 6px;
+  border: none;
+  font-weight: 600;
+  cursor: pointer;
+  font-size: 0.95rem;
+  transition: background 0.2s, transform 0.1s;
+}
 
-  .modal-content button:hover {
-    background: #0056b3;
-  }
+/* Primary send button */
+.modal-content button:first-of-type {
+  background: #14b8a6; /* teal accent */
+  color: #f9fafb;
+}
+.modal-content button:first-of-type:hover {
+  background: #0d9488; /* darker teal */
+  transform: translateY(-1px);
+}
 
+/* Cancel button */
+.modal-content button:last-of-type {
+  background: #ef4444; /* red for cancel */
+  color: #f9fafb;
+  margin-top: 0.5rem;
+}
+.modal-content button:last-of-type:hover {
+  background: #b91c1c; /* darker red */
+  transform: translateY(-1px);
+}
 
-  .friend-request {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 8px; 
-    background-color: rgb(92, 92, 92);
-    border-radius: 10px;
-    height: 50px;
-  }
-  
-  .friend-request p {
-    margin: 0;
-    width: calc(100% - 100px); /* Adjust width to fit button */
-  }
-  
-  .friend-request button { 
-    background-color: #4CAF50;
-    color: white;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    width: 180px;
-    margin-top: 0px;
-  }
+/* Friend requests inside modal (optional reuse) */
+.friend-request {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px; 
+  background-color: rgb(220, 245, 230); /* light green bg */
+  border-radius: 10px;
+  height: 50px;
+}
 
-  .friend-request button:hover {
-    background: #3a893c;
-  }
+.friend-request p {
+  margin: 0;
+  width: calc(100% - 100px);
+  color: #111827;
+}
+
+.friend-request button { 
+  background-color: #10b981; /* emerald green button */
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  width: 140px;
+  margin-top: 0;
+}
+.friend-request button:hover {
+  background: #0d7a63;
+}

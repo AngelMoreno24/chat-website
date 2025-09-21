@@ -126,18 +126,20 @@ const ChatWindow = () => {
         {error && <p className="chat-error">{error}</p>}
         {!loading && messages.length === 0 && <p className="chat-status">No messages yet.</p>}
 
-        {messages.map((message, index) => (
-          <div key={index} className="message">
-            {message.SenderUsername == name?(
-                          <span className="message-left-user"><strong>{message.SenderUsername}</strong></span>
-
-            ):(
-                          <span className="message-left"><strong>{message.SenderUsername}</strong></span>
-
-            )}
-            <span className="message-right">{message.Content}</span>
-          </div>
-        ))}
+        {messages.map((message, index) => {
+          const isMine = message.SenderUsername === name;
+          return (
+            <div
+              key={index}
+              className={`message ${isMine ? "message-right" : "message-left"}`}
+            >
+              <span className={isMine ? "message-right-user" : "message-left-user"}>
+                <strong>{message.SenderUsername}</strong>
+              </span>
+              <span className="message-bubble">{message.Content}</span>
+            </div>
+          );
+        })}
         <div ref={messagesEndRef} />
       </div>
 
