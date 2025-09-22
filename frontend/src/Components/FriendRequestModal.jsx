@@ -1,94 +1,56 @@
-// components/FriendRequestsModal.js
-import React, {useEffect, useState} from 'react';
+import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import './CssComponent/AddFriendModal.css'; // reuse modal styling
 
 const FriendRequestsModal = ({ onClose }) => {
-
-  const [requests, setRequests] = useState([]); // State to hold friend requests
-  const [token, setToken] = useState(''); // State to hold the token
-
+  const [requests, setRequests] = useState([]);
+  const [token, setToken] = useState('');
   const apiUrl = import.meta.env.VITE_BASE_URL;
 
   useEffect(() => {
-    
     const storedToken = localStorage.getItem('token');
-    if (storedToken) {
-      setToken(storedToken);
-    } else {
-      console.warn('Token not found in localStorage');
-    }
-    
+    if (storedToken) setToken(storedToken);
   }, []);
 
-
-
-  // Fetch friends only after token is set
   useEffect(() => {
-    if (token) {
-      fetchFriendRequests();
-    }
+    if (token) fetchFriendRequests();
   }, [token]);
 
   const fetchFriendRequests = () => {
- 
-    
     axios.get(`${apiUrl}/friendship/getRequests`, {
-      headers: {
-        'Authorization': `Bearer ${token}`,
-        'Content-Type': 'application/json'
-      }
+      headers: { Authorization: `Bearer ${token}` },
     })
-    .then(response => {
-      console.log('Friend request sent:', response.data);
-      setRequests(response.data.requests || []); // Assuming the response contains an array of requests
-    })
-    .catch(err => {
-      console.error(err);
-    });
-
-  }
-
+      .then(res => setRequests(res.data.requests || []))
+      .catch(console.error);
+  };
 
   const acceptRequest = (requestId) => {
-    
-    axios.patch(`${apiUrl}/friendship/acceptRequest`, 
-      {
-        userId: requestId
-      }, {
-      headers: {
-        'Authorization': `Bearer ${token}`,
-        'Content-Type': 'application/json'
-      }
-    })
-    .then(response => {
-      console.log('Friend request accepted:', response.data); 
-      fetchFriendRequests();
-    })
-    .catch(err => {
-      console.error(err);
-    });
-
-  }
+    axios.patch(`${apiUrl}/friendship/acceptRequest`,
+      { userId: requestId },
+      { headers: { Authorization: `Bearer ${token}` } }
+    ).then(() => fetchFriendRequests())
+     .catch(console.error);
+  };
 
   return (
     <div className="modal">
       <div className="modal-content">
         <h3>Friend Requests</h3>
-        <p>Show incoming friend requests here...</p>
 
         {requests.length > 0 ? (
-          requests.map((request, index) => (
-            <div key={index} className='friend-request'> 
-              <p>{request.SenderUsername}</p>
-              <button onClick={() => {acceptRequest(request.SenderId)}}>Accept</button>
+          requests.map((r, i) => (
+            <div key={i} className="friend-request">
+              <p>{r.SenderUsername}</p>
+              <button onClick={() => acceptRequest(r.SenderId)}>Accept</button>
             </div>
           ))
         ) : (
-          <p>No friends found.</p>
+          <p>No friend requests.</p>
         )}
 
-
-        <button onClick={onClose}>Close</button>
+        <button onClick={onClose} style={{ marginTop: '12px', backgroundColor: '#444' }}>
+          Close
+        </button>
       </div>
     </div>
   );

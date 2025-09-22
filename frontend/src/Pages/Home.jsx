@@ -1,58 +1,47 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import FriendRequestsModal from '../Components/FriendRequestModal.jsx';
 import AddFriendModal from '../Components/AddFriendModal.jsx';
+import FriendRequestsModal from '../Components/FriendRequestModal.jsx';
 import './CssPages/Home.css';
 
 const Home = () => {
   const [friends, setFriends] = useState([]);
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(null);
-  const [showRequestsModal, setShowRequestsModal] = useState(false);
-  const [showAddFriendModal, setShowAddFriendModal] = useState(false);
   const [token, setToken] = useState('');
+
+  const [showAddFriendModal, setShowAddFriendModal] = useState(false);
+  const [showRequestsModal, setShowRequestsModal] = useState(false);
+
   const apiUrl = import.meta.env.VITE_BASE_URL;
-  
-  // Load token on mount
+
+  // Load token
   useEffect(() => {
     const storedToken = localStorage.getItem('token');
-    if (storedToken) {
-      setToken(storedToken);
-    } else {
-      console.warn('Token not found in localStorage');
-    }
+    if (storedToken) setToken(storedToken);
   }, []);
 
-  // Fetch friends only after token is set
+  // Fetch friends when token is available
   useEffect(() => {
-    if (token) {
-      getFriends(token);
-    }
+    if (token) fetchFriends();
   }, [token]);
 
-  const getFriends = (token) => {
+  const fetchFriends = async () => {
     setLoading(true);
-    setError(null);
-
-    axios.get(`${apiUrl}/friendship/getFriends`, {
-      headers: {
-        'Authorization': `Bearer ${token}`,
-        'Content-Type': 'application/json'
-      }
-    })
-      .then(response => {
-        setFriends(response.data.friends || []);
-        setLoading(false);
-      })
-      .catch(err => {
-        setError('Failed to load friends.');
-        setLoading(false);
+    try {
+      const res = await axios.get(`${apiUrl}/friendship/getFriends`, {
+        headers: { Authorization: `Bearer ${token}` },
       });
+      setFriends(res.data.friends || []);
+    } catch (err) {
+      console.error(err);
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
     <div className="home-window">
-      <div className="home-title">Friends Dashboard</div>
+      <h1 className="home-title">Friends Dashboard</h1>
 
       <div className="button-group">
         <button onClick={() => setShowRequestsModal(true)}>👥 Friend Requests</button>
@@ -60,27 +49,20 @@ const Home = () => {
       </div>
 
       <h2>Friends List</h2>
-      {loading && <p>Loading friends...</p>}
-      {error && <p className="error">{error}</p>}
-
-      <div className="friends-container">
-        {friends.length > 0 ? (
-          friends.map((friend, index) => (
-            <div key={index} className="friend">
-              {friend.Username}
-            </div>
-          ))
-        ) : (
-          !loading && <p>No friends found.</p>
-        )}
-      </div>
-
-      {showRequestsModal && (
-        <FriendRequestsModal onClose={() => setShowRequestsModal(false)} />
+      {loading ? (
+        <p>Loading friends...</p>
+      ) : friends.length === 0 ? (
+        <p>No friends found.</p>
+      ) : (
+        <div className="friends-container">
+          {friends.map((f, i) => (
+            <div key={i} className="friend">{f.Username}</div>
+          ))}
+        </div>
       )}
-      {showAddFriendModal && (
-        <AddFriendModal onClose={() => setShowAddFriendModal(false)} />
-      )}
+
+      {showAddFriendModal && <AddFriendModal onClose={() => setShowAddFriendModal(false)} />}
+      {showRequestsModal && <FriendRequestsModal onClose={() => setShowRequestsModal(false)} />}
     </div>
   );
 };

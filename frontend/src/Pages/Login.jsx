@@ -1,15 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import './CssPages/Login.css'; // Import the CSS
+import './CssPages/Login.css';
 
 const Login = () => {
+  const [isLogin, setIsLogin] = useState(true); // Toggle between login/signup
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [registerUsername, setRegisterUsername] = useState('');
-  const [registerEmail, setRegisterEmail] = useState('');
-  const [registerPassword, setRegisterPassword] = useState('');
-
+  const [username, setUsername] = useState('');
   const apiUrl = import.meta.env.VITE_BASE_URL;
   const navigate = useNavigate();
 
@@ -18,94 +16,71 @@ const Login = () => {
     if (token) navigate('/home');
   }, [navigate]);
 
-  const login = (e) => {
+  const handleLogin = (e) => {
     e.preventDefault();
     axios.post(`${apiUrl}/auth/login`, { email, password })
       .then(res => {
         localStorage.setItem('token', res.data.token);
         localStorage.setItem('name', res.data.name);
         localStorage.setItem('isLoggedIn', 'true');
-        setTimeout(() => navigate('/home', { state: { justLoggedIn: true } }), 50);
+        navigate('/home', { state: { justLoggedIn: true } });
       })
-      .catch(err => {
-        console.error('Login error:', err);
-        alert('Login failed. Please check your credentials.');
-      });
+      .catch(err => alert('Login failed. Check your credentials.'));
   };
 
-  const signup = (e) => {
+  const handleSignup = (e) => {
     e.preventDefault();
-    axios.post(`${apiUrl}/auth/register`, {
-      username: registerUsername,
-      email: registerEmail,
-      password: registerPassword
-    })
-    .then(() => alert('Signup successful. You can now log in.'))
-    .catch(err => {
-      console.error('Signup error:', err);
-      alert('Signup failed. Please check your input.');
-    });
+    axios.post(`${apiUrl}/auth/register`, { username, email, password })
+      .then(() => alert('Signup successful. You can now log in.'))
+      .catch(err => alert('Signup failed. Check your input.'));
   };
 
   return (
     <div className="wrapper">
       <div className="form-container">
-        <h2>Login</h2>
-        <form onSubmit={login} className="form">
+        <h2>{isLogin ? 'Login' : 'Signup'}</h2>
+
+        <form onSubmit={isLogin ? handleLogin : handleSignup} className="form">
+          {!isLogin && (
+            <div className="input-group">
+              <label>Username</label>
+              <input
+                type="text"
+                value={username}
+                onChange={e => setUsername(e.target.value)}
+                required
+              />
+            </div>
+          )}
           <div className="input-group">
-            <label>Email:</label>
+            <label>Email</label>
             <input
               type="email"
               value={email}
-              onChange={(e) => setEmail(e.target.value)}
+              onChange={e => setEmail(e.target.value)}
               required
             />
           </div>
           <div className="input-group">
-            <label>Password:</label>
+            <label>Password</label>
             <input
               type="password"
               value={password}
-              onChange={(e) => setPassword(e.target.value)}
+              onChange={e => setPassword(e.target.value)}
               required
             />
           </div>
-          <button type="submit" className="button">Login</button>
+          <button type="submit" className="button">
+            {isLogin ? 'Login' : 'Signup'}
+          </button>
         </form>
-      </div>
 
-      <div className="form-container">
-        <h2>Signup</h2>
-        <form onSubmit={signup} className="form">
-          <div className="input-group">
-            <label>Username:</label>
-            <input
-              type="text"
-              value={registerUsername}
-              onChange={(e) => setRegisterUsername(e.target.value)}
-              required
-            />
-          </div>
-          <div className="input-group">
-            <label>Email:</label>
-            <input
-              type="email"
-              value={registerEmail}
-              onChange={(e) => setRegisterEmail(e.target.value)}
-              required
-            />
-          </div>
-          <div className="input-group">
-            <label>Password:</label>
-            <input
-              type="password"
-              value={registerPassword}
-              onChange={(e) => setRegisterPassword(e.target.value)}
-              required
-            />
-          </div>
-          <button type="submit" className="button">Signup</button>
-        </form>
+        <p className="toggle-text">
+          {isLogin ? "Don't have an account?" : "Already have an account?"}
+          <span className="toggle-link" onClick={() => setIsLogin(!isLogin)}>
+            {isLogin ? ' Sign up' : ' Login'}
+          </span>
+        </p>
       </div>
     </div>
   );

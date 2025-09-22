@@ -1,117 +1,58 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useParams, useLocation } from 'react-router-dom';
 import axios from 'axios';
-import './CssPages/ChatWindow.css';
 import { io } from 'socket.io-client';
+import './CssPages/ChatWindow.css';
 
 const ChatWindow = () => {
   const { chatId } = useParams();
   const location = useLocation();
   const { chatName, members } = location.state || {};
-
   const [messages, setMessages] = useState([]);
-  const [token, setToken] = useState('');
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(null);
   const [newMessage, setNewMessage] = useState('');
+  const [token, setToken] = useState('');
   const [socket, setSocket] = useState(null);
   const [name, setName] = useState('');
-
-
-  const apiUrl = import.meta.env.VITE_BASE_URL;
   const messagesEndRef = useRef(null);
+  const apiUrl = import.meta.env.VITE_BASE_URL;
 
-  // Load socket on mount
   useEffect(() => {
-    const newSocket = io(`${apiUrl}`);
-    setSocket(newSocket);
-  
-    newSocket.on('connect', () => {
-      console.log('🔌 Connected to socket');
-      newSocket.emit('join_room', chatId); // 👈 Join room by chat ID
-    });
-  
-    newSocket.on('receive_message', (data) => {
-      setMessages((prev) => [...prev, data]);
-    });
-  
-    return () => newSocket.disconnect();
+    const s = io(apiUrl);
+    setSocket(s);
+    s.on('connect', () => s.emit('join_room', chatId));
+    s.on('receive_message', data => setMessages(prev => [...prev, data]));
+    return () => s.disconnect();
   }, [chatId]);
 
-  // Scroll to bottom on new message
-  useEffect(() => {
-    if (messagesEndRef.current) {
-      messagesEndRef.current.scrollIntoView({ behavior: 'smooth' });
-    }
-  }, [messages]);
+  useEffect(() => { messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' }); }, [messages]);
 
-  // Load token
   useEffect(() => {
     const storedToken = localStorage.getItem('token');
-    const name = localStorage.getItem('name');
-    
-    if (storedToken) {
-      setToken(storedToken);
-      setName(name)
-    } else {
-      console.warn('Token not found in localStorage');
-    }
+    const storedName = localStorage.getItem('name');
+    if (storedToken) { setToken(storedToken); setName(storedName || 'You'); }
   }, []);
 
-  // Fetch messages after token is set
-  useEffect(() => {
-    if (token) {
-      fetchMessages(token);
-    }
-  }, [token, location]);
+  useEffect(() => { if (token) fetchMessages(); }, [token, location]);
 
-  const fetchMessages = async (token) => {
-    setLoading(true);
-    setError(null);
-
+  const fetchMessages = async () => {
     try {
       const res = await axios.get(`${apiUrl}/message/getMessages`, {
         params: { conversationId: chatId },
-        headers: { Authorization: `Bearer ${token}` },
+        headers: { Authorization: `Bearer ${token}` }
       });
       setMessages(res.data.messages || []);
-    } catch (err) {
-      console.error('Failed to fetch messages:', err);
-      setError('Failed to load messages.');
-    } finally {
-      setLoading(false);
-    }
+    } catch (err) { console.error(err); }
   };
+
   const handleSendMessage = async () => {
     if (!newMessage.trim()) return;
-  
-    const messageData = {
-      conversationId: chatId,
-      Content: newMessage,
-      SenderUsername: 'You', // Ideally from auth/user context
-    };
-  
+    const msgData = { conversationId: chatId, Content: newMessage, SenderUsername: name };
     try {
-      await axios.post(`${apiUrl}/message/sendMessage`,
-        {
-          conversationId: chatId,
-          message: newMessage,
-        },
-        {
-          headers: { Authorization: `Bearer ${token}` },
-        }
-      );
-  
-      // Emit to socket for real-time update
-      if (socket) {
-        socket.emit('send_message', messageData);
-      }
-  
-      setMessages((prev) => [...prev, messageData]);
+      await axios.post(`${apiUrl}/message/sendMessage`, { conversationId: chatId, message: newMessage }, { headers: { Authorization: `Bearer ${token}` } });
+      socket?.emit('send_message', msgData);
+      setMessages(prev => [...prev, msgData]);
       setNewMessage('');
-    } catch (err) {
-      console.error('Error sending message:', err);
-    }
+    } catch (err) { console.error(err); }
   };
 
   return (
@@ -122,21 +63,15 @@ const ChatWindow = () => {
       </header>
 
       <div className="messages-container">
-        {loading && <p className="chat-status">Loading messages...</p>}
-        {error && <p className="chat-error">{error}</p>}
-        {!loading && messages.length === 0 && <p className="chat-status">No messages yet.</p>}
-
-        {messages.map((message, index) => {
-          const isMine = message.SenderUsername === name;
+        {messages.length === 0 && <p className="chat-status">No messages yet.</p>}
+        {messages.map((msg, i) => {
+          const isMine = msg.SenderUsername === name;
           return (
-            <div
-              key={index}
-              className={`message ${isMine ? "message-right" : "message-left"}`}
-            >
-              <span className={isMine ? "message-right-user" : "message-left-user"}>
-                <strong>{message.SenderUsername}</strong>
+            <div key={i} className={`message ${isMine ? 'message-right' : 'message-left'}`}>
+              <span className={isMine ? 'message-right-user' : 'message-left-user'}>
+                <strong>{msg.SenderUsername}</strong>
               </span>
-              <span className="message-bubble">{message.Content}</span>
+              <span className="message-bubble">{msg.Content}</span>
             </div>
           );
         })}
@@ -144,17 +79,10 @@ const ChatWindow = () => {
       </div>
 
       <div className="chat-input-container">
-        <input
-          type="text"
-          className="chat-input"
-          placeholder="Type your message..."
-          value={newMessage}
-          onChange={(e) => setNewMessage(e.target.value)}
-          onKeyDown={(e) => e.key === 'Enter' && handleSendMessage()}
-        />
-        <button className="send-button" onClick={handleSendMessage}>
-          Send
-        </button>
+        <input type="text" className="chat-input" placeholder="Type a message..."
+          value={newMessage} onChange={e => setNewMessage(e.target.value)}
+          onKeyDown={e => e.key === 'Enter' && handleSendMessage()} />
+        <button className="send-button" onClick={handleSendMessage}>Send</button>
       </div>
     </div>
   );
