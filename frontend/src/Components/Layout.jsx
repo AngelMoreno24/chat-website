@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { Outlet, Link, useNavigate, useLocation } from 'react-router-dom';
-import './CssComponent/Layout.css';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
+import './CssComponent/Layout.css';
 
 const Layout = () => {
   const [isPopupOpen, setIsPopupOpen] = useState(false);
@@ -18,7 +18,7 @@ const Layout = () => {
 
   const [isAddMemberPopupOpen, setIsAddMemberPopupOpen] = useState(false);
   const [newMemberUsername, setNewMemberUsername] = useState('');
-  
+
   const handleLogout = () => {
     localStorage.removeItem('token');
     navigate('/login');
@@ -37,14 +37,14 @@ const Layout = () => {
       headers: { 'Authorization': `Bearer ${token}` }
     }).then(res => setChats(res.data.chats || []))
       .catch(console.error);
-  }
+  };
 
   const getMembers = () => {
     axios.post(`${apiUrl}/chat/getChatMembers`, { chatId }, {
       headers: { 'Authorization': `Bearer ${token}` }
     }).then(res => setMembers(res.data.members || []))
       .catch(console.error);
-  }
+  };
 
   const addMember = () => {
     if (!newMemberUsername.trim()) return;

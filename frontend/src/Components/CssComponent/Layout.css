@@ -3,21 +3,20 @@ html, body, #root {
   margin: 0;
   padding: 0;
   font-family: "Inter", "Roboto", sans-serif;
-  background: #f0f4f8;
+  background: #edf2f7; /* softer off-white */
   color: #333;
 }
 
-/* ---------------- Layout ---------------- */
 .layout {
   display: flex;
   height: 100%;
   min-height: 100vh;
 }
 
-/* -------- Sidebars -------- */
+/* Sidebars */
 .layout__sidebar {
   width: 240px;
-  background: #1f2937; /* dark gray */
+  background: #1f2937;
   border-right: 1px solid #374151;
   display: flex;
   flex-direction: column;
@@ -25,29 +24,17 @@ html, body, #root {
   color: #f9fafb;
 }
 
-.layout__sidebar--right {
-  border-left: 1px solid #374151;
-  border-right: none;
-}
+.layout__sidebar--right { border-left: 1px solid #374151; border-right: none; }
 
 .layout__sidebar-title {
   font-size: 1.2rem;
   font-weight: 600;
   margin-bottom: 1rem;
-  color: #10b981; /* emerald green */
+  color: #10b981;
 }
 
-.layout__nav-list {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-  flex-grow: 1;
-  overflow-y: auto;
-}
-
-.layout__nav-item {
-  margin-bottom: 0.5rem;
-}
+.layout__nav-list { list-style: none; padding: 0; margin: 0; flex-grow: 1; overflow-y: auto; }
+.layout__nav-item { margin-bottom: 0.5rem; }
 
 .layout__nav-link {
   display: block;
@@ -57,13 +44,9 @@ html, body, #root {
   text-decoration: none;
   transition: background 0.2s;
 }
+.layout__nav-link:hover { background: #374151; color: #ffffff; }
 
-.layout__nav-link:hover {
-  background: #374151;
-  color: #ffffff;
-}
-
-/* -------- Buttons -------- */
+/* Buttons */
 .layout__new-chat-btn,
 .send-button,
 .button-group button,
@@ -74,18 +57,14 @@ html, body, #root {
   margin-bottom: 0.75rem;
   cursor: pointer;
   font-size: 0.95rem;
-  background: #14b8a6; /* teal */
+  background: #14b8a6;
   color: #f9fafb;
   transition: background 0.2s, transform 0.1s;
 }
-
 .layout__new-chat-btn:hover,
 .send-button:hover,
 .button-group button:hover,
-.popup__send-btn:hover {
-  background: #0d9488; /* darker teal */
-  transform: translateY(-1px);
-}
+.popup__send-btn:hover { background: #0d9488; transform: translateY(-1px); }
 
 .layout__logout-btn,
 .popup__close-btn {
@@ -95,48 +74,26 @@ html, body, #root {
   margin-top: auto;
   cursor: pointer;
   font-size: 0.95rem;
-  background: #ef4444; /* red */
+  background: #ef4444;
   color: #f9fafb;
   transition: background 0.2s, transform 0.1s;
 }
-
 .layout__logout-btn:hover,
-.popup__close-btn:hover {
-  background: #b91c1c; /* darker red */
-  transform: translateY(-1px);
-}
+.popup__close-btn:hover { background: #b91c1c; transform: translateY(-1px); }
 
-/* ---------------- Content ---------------- */
-.layout__content {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  min-height: 0; /* allows children to fill flex */
-}
-
+/* Main content */
+.layout__content { flex: 1; display: flex; flex-direction: column; min-height: 0; }
 .layout__main {
   flex: 1;
   display: flex;
   flex-direction: column;
-  background: #f9fbff;
-  padding: 1.5rem;
+  background: #f3f4f6; /* softer background */
   overflow-y: auto;
 }
 
-/* ---------------- Right Sidebar Users ---------------- */
-.layout__users {
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-}
-
-.layout__users h3 {
-  margin-top: 0.5rem;
-  margin-bottom: 0.75rem;
-  font-size: 1.1rem;
-  color: #10b981;
-}
-
+/* Right sidebar users */
+.layout__users { display: flex; flex-direction: column; gap: 0.5rem; }
+.layout__users h3 { margin-top: 0.5rem; margin-bottom: 0.75rem; font-size: 1.1rem; color: #10b981; }
 .layout__user-item {
   display: flex;
   align-items: center;
@@ -146,28 +103,5 @@ html, body, #root {
   color: #e5e7eb;
   background: transparent;
   cursor: default;
-  transition: background 0.2s;
-}
-
-.layout__user-item:hover {
-  background: #374151;
-}
-
-.layout__user-avatar {
-  width: 28px;
-  height: 28px;
-  border-radius: 50%;
-  background: #6b7280;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 0.85rem;
-  font-weight: 600;
-  color: #f9fafb;
-}
-
-.layout__user-name {
-  font-size: 0.95rem;
-  font-weight: 500;
-  color: #f3f4f6;
+  transition: background 0.2s
 }
