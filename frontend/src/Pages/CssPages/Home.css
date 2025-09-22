@@ -1,49 +1,70 @@
 .home-window {
   padding: 2rem;
-  background: #f9fbff;
+  background: #f3f4f6; /* same as .layout__main */
   height: 100%;
   display: flex;
   flex-direction: column;
+  flex: 1;
+  overflow-y: auto;
 }
 
 .home-title {
   font-size: 1.8rem;
   font-weight: 700;
-  color: #357ab8;
-  margin-bottom: 1rem;
+  color: #000000; /* emerald green */
+  margin-bottom: 1.5rem;
+  text-align: center;
 }
 
 .button-group {
   display: flex;
   gap: 1rem;
   margin-bottom: 1.5rem;
+  justify-content: center;
 }
+
 .button-group button {
   border: none;
-  padding: 0.6rem 1rem;
-  border-radius: 8px;
-  background: #4a90e2;
+  padding: 0.6rem 1.2rem;
+  border-radius: 6px;
+  background: #14b8a6; /* teal (matches global buttons) */
   color: #fff;
   font-weight: 600;
   cursor: pointer;
-}
-.button-group button:hover {
-  background: #357ab8;
+  transition: background 0.2s ease, transform 0.1s ease;
 }
 
+.button-group button:hover {
+  background: #0d9488; /* darker teal */
+  transform: translateY(-1px);
+}
+
+/* Friends section */
 .friends-container {
   display: flex;
   flex-wrap: wrap;
   gap: 0.8rem;
+  margin-top: 1rem;
 }
+
 .friend {
   padding: 0.6rem 1rem;
   background: #fff;
-  border: 1px solid #eee;
-  border-radius: 8px;
+  border: 1px solid #e5e7eb;
+  border-radius: 6px;
   box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+  font-weight: 500;
+  color: #333;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
 }
+
+.friend:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
 .error {
-  color: red;
+  color: #ef4444; /* red (same as logout/close buttons) */
   margin-top: 0.5rem;
+  font-weight: 500;
 }
