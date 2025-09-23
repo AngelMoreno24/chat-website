@@ -83,8 +83,11 @@ const ChatWindow = () => {
           type="text"
           className="chat-input"
           placeholder="Type a message..."
+          value={newMessage}
+          onChange={e => setNewMessage(e.target.value)}
+          onKeyDown={e => { if(e.key === 'Enter') handleSendMessage(); }}
         />
-        <button className="send-button">✈️</button>
+        <button className="send-button" onClick={handleSendMessage}>✈️</button>
       </div>
     </div>
   );

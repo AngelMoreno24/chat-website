@@ -9,15 +9,14 @@ const Layout = () => {
   const [chats, setChats] = useState([]);
   const [token, setToken] = useState('');
   const [members, setMembers] = useState([]);
-  const [friends, setFriends] = useState([]); // <-- store friends
-  const [selectedFriend, setSelectedFriend] = useState(''); // <-- selected friend to add
+  const [friends, setFriends] = useState([]);
+  const [selectedFriend, setSelectedFriend] = useState('');
 
   const navigate = useNavigate();
   const location = useLocation();
   const { chatId } = useParams();
   const apiUrl = import.meta.env.VITE_BASE_URL;
   const isChatPage = location.pathname.includes('/chat/');
-
   const [isAddMemberPopupOpen, setIsAddMemberPopupOpen] = useState(false);
 
   const handleLogout = () => {
@@ -32,53 +31,47 @@ const Layout = () => {
 
   useEffect(() => { if (token) getChats(); }, [token]);
   useEffect(() => { if (isChatPage && token && chatId) getMembers(); }, [isChatPage, token, chatId]);
-  useEffect(() => { if (token) fetchFriends(); }, [token]); // load friends
+  useEffect(() => { if (token) fetchFriends(); }, [token]);
 
   const getChats = () => {
-    axios.get(`${apiUrl}/chat/getChats`, {
-      headers: { 'Authorization': `Bearer ${token}` }
-    }).then(res => setChats(res.data.chats || []))
+    axios.get(`${apiUrl}/chat/getChats`, { headers: { Authorization: `Bearer ${token}` } })
+      .then(res => setChats(res.data.chats || []))
       .catch(console.error);
   };
 
   const getMembers = () => {
-    axios.post(`${apiUrl}/chat/getChatMembers`, { chatId }, {
-      headers: { 'Authorization': `Bearer ${token}` }
-    }).then(res => setMembers(res.data.members || []))
+    axios.post(`${apiUrl}/chat/getChatMembers`, { chatId }, { headers: { Authorization: `Bearer ${token}` } })
+      .then(res => setMembers(res.data.members || []))
       .catch(console.error);
   };
 
   const fetchFriends = async () => {
     try {
-      const res = await axios.get(`${apiUrl}/friendship/getFriends`, {
-        headers: { Authorization: `Bearer ${token}` }
-      });
+      const res = await axios.get(`${apiUrl}/friendship/getFriends`, { headers: { Authorization: `Bearer ${token}` } });
       setFriends(res.data.friends || []);
-    } catch (err) {
-      console.error(err);
-    }
+    } catch (err) { console.error(err); }
   };
 
   const addMember = () => {
     if (!selectedFriend) return;
-    axios.post(`${apiUrl}/chat/addChatMember`, { chatId, friendUsername: selectedFriend }, {
-      headers: { 'Authorization': `Bearer ${token}` }
-    }).then(res => {
-      setMembers(res.data.members || []);
-      setIsAddMemberPopupOpen(false);
-      setSelectedFriend('');
-    }).catch(console.error);
+    axios.post(`${apiUrl}/chat/addChatMember`, { chatId, friendUsername: selectedFriend }, { headers: { Authorization: `Bearer ${token}` } })
+      .then(res => {
+        setMembers(res.data.members || []);
+        setIsAddMemberPopupOpen(false);
+        setSelectedFriend('');
+      })
+      .catch(console.error);
   };
 
   const createChat = () => {
     if (!newChatName.trim()) return;
-    axios.post(`${apiUrl}/chat/create`, { name: newChatName }, {
-      headers: { 'Authorization': `Bearer ${token}` }
-    }).then(() => {
-      setIsPopupOpen(false);
-      setNewChatName('');
-      getChats();
-    }).catch(console.error);
+    axios.post(`${apiUrl}/chat/create`, { name: newChatName }, { headers: { Authorization: `Bearer ${token}` } })
+      .then(() => {
+        setIsPopupOpen(false);
+        setNewChatName('');
+        getChats();
+      })
+      .catch(console.error);
   };
 
   return (
@@ -130,26 +123,34 @@ const Layout = () => {
         )}
       </aside>
 
-      {/* Popups */}
+      {/* Add Member Modal */}
       {isAddMemberPopupOpen && (
         <div className="modal">
           <div className="modal-content">
             <h3>Add Member</h3>
-            <select
-              value={selectedFriend}
-              onChange={e => setSelectedFriend(e.target.value)}
-            >
-              <option value="">Select a friend</option>
-              {friends.map((f, i) => (
-                <option key={i} value={f.Username}>{f.Username}</option>
-              ))}
-            </select>
+
+            <div className="select-container">
+              <select
+                value={selectedFriend}
+                onChange={e => setSelectedFriend(e.target.value)}
+                className="styled-select"
+              >
+                <option value="">Select a friend</option>
+                {friends
+                  .filter(f => !members.some(m => m.Username === f.Username)) // filter out current members
+                  .map((f, i) => (
+                    <option key={i} value={f.Username}>{f.Username}</option>
+                ))}
+              </select>
+            </div>
+
             <button onClick={addMember}>Add Member</button>
             <button onClick={() => setIsAddMemberPopupOpen(false)}>Cancel</button>
           </div>
         </div>
       )}
 
+      {/* Create Chat Modal */}
       {isPopupOpen && (
         <div className="modal">
           <div className="modal-content">
