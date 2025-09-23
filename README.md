@@ -23,6 +23,10 @@ Backend:
 * WebSockets (Socket.IO)
 
 
+Live Demo:
+https://am-chat-application.netlify.app/login
+
+
 login/Signup
 
 <img width="1360" height="690" alt="image" src="https://github.com/user-attachments/assets/78cd76a2-73f8-4d6b-80b1-d1d06950656d" />
