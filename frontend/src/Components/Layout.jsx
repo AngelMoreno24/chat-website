@@ -79,7 +79,10 @@ const Layout = () => {
         <ul className="layout__nav-list">
           {chats.map(chat => (
             <li key={chat.Id} className="layout__nav-item">
-              <Link to={`/chat/${chat.Id}`} className="layout__nav-link">
+              <Link
+                to={`/chat/${chat.Id}`}
+                className={`layout__nav-link ${chat.IsGroup ? "group" : ""} ${chatId == chat.Id ? "active" : ""}`}
+              >
                 {chat.Name}
               </Link>
             </li>

@@ -33,18 +33,52 @@ html, body, #root {
   color: #10b981;
 }
 
-.layout__nav-list { list-style: none; padding: 0; margin: 0; flex-grow: 1; overflow-y: auto; }
+.layout__nav-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  flex-grow: 1;
+  overflow-y: auto;
+}
+
 .layout__nav-item { margin-bottom: 0.5rem; }
 
+/* Chat links in sidebar */
 .layout__nav-link {
-  display: block;
+  display: flex;
+  justify-content: center; /* center text horizontally */
+  align-items: center;     /* center text vertically */
   padding: 0.5rem 0.75rem;
   border-radius: 6px;
   color: #e5e7eb;
   text-decoration: none;
-  transition: background 0.2s;
+  transition: background 0.2s, color 0.2s;
+  font-weight: 500;
 }
-.layout__nav-link:hover { background: #374151; color: #ffffff; }
+
+/* Private / default chats */
+.layout__nav-link {
+  background: #374151;
+}
+.layout__nav-link:hover {
+  background: #4b5563;
+  color: #ffffff;
+}
+
+/* Group chats */
+.layout__nav-link.group {
+  background: #3b82f6; /* blue */
+  color: #ffffff;
+}
+.layout__nav-link.group:hover {
+  background: #2563eb;
+}
+
+/* Active / selected chat */
+.layout__nav-link.active {
+  background: #10b981;   /* green highlight */
+  color: #ffffff;
+}
 
 /* Buttons */
 .layout__new-chat-btn,
@@ -64,7 +98,10 @@ html, body, #root {
 .layout__new-chat-btn:hover,
 .send-button:hover,
 .button-group button:hover,
-.popup__send-btn:hover { background: #0d9488; transform: translateY(-1px); }
+.popup__send-btn:hover {
+  background: #0d9488;
+  transform: translateY(-1px);
+}
 
 .layout__logout-btn,
 .popup__close-btn {
@@ -79,10 +116,18 @@ html, body, #root {
   transition: background 0.2s, transform 0.1s;
 }
 .layout__logout-btn:hover,
-.popup__close-btn:hover { background: #b91c1c; transform: translateY(-1px); }
+.popup__close-btn:hover {
+  background: #b91c1c;
+  transform: translateY(-1px);
+}
 
 /* Main content */
-.layout__content { flex: 1; display: flex; flex-direction: column; min-height: 0; }
+.layout__content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+}
 .layout__main {
   flex: 1;
   display: flex;
@@ -92,8 +137,17 @@ html, body, #root {
 }
 
 /* Right sidebar users */
-.layout__users { display: flex; flex-direction: column; gap: 0.5rem; }
-.layout__users h3 { margin-top: 0.5rem; margin-bottom: 0.75rem; font-size: 1.1rem; color: #10b981; }
+.layout__users {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+.layout__users h3 {
+  margin-top: 0.5rem;
+  margin-bottom: 0.75rem;
+  font-size: 1.1rem;
+  color: #10b981;
+}
 .layout__user-item {
   display: flex;
   align-items: center;
@@ -103,5 +157,63 @@ html, body, #root {
   color: #e5e7eb;
   background: transparent;
   cursor: default;
-  transition: background 0.2s
+  transition: background 0.2s;
+}
+
+/* Modal base */
+.modal {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 2000;
+}
+
+.modal-content {
+  background: #fff;
+  padding: 1.5rem;
+  border-radius: 10px;
+  width: 320px; /* consistent modal width */
+  max-width: 90%;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+/* Input fields inside modal */
+.modal-content input {
+  padding: 0.6rem 0.8rem;
+  font-size: 0.95rem;
+  border: 1px solid #cbd5e1;
+  border-radius: 6px;
+  width: 100%;      /* fills modal content, not the whole screen */
+  box-sizing: border-box;
+}
+
+/* Modal buttons */
+.modal-content button {
+  padding: 0.5rem 0.75rem;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.9rem;
+}
+
+.modal-content button:first-of-type {
+  background: #14b8a6;
+  color: #fff;
+}
+.modal-content button:first-of-type:hover {
+  background: #0d9488;
+}
+
+.modal-content button:last-of-type {
+  background: #e5e7eb;
+  color: #333;
+}
+.modal-content button:last-of-type:hover {
+  background: #d1d5db;
 }

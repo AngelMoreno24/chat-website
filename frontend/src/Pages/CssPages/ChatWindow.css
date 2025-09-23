@@ -2,16 +2,29 @@
   display: flex;
   flex-direction: column;
   height: 100%;
+  background: #f3f4f6; /* consistent with layout main */
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
 }
 
+/* Chat Header */
 .chat-title {
-  background: #10b981;
+  background: #10b981; /* emerald green */
   color: #fff;
   padding: 1rem;
   border-bottom: 1px solid #0d7a63;
 }
-.chat-title h2 { margin: 0; }
-.chat-subtitle { font-size: 0.9rem; opacity: 0.85; }
+
+.chat-title h2 {
+  margin: 0;
+  font-size: 1.25rem;
+}
+
+.chat-subtitle {
+  font-size: 0.9rem;
+  opacity: 0.9;
+  margin-top: 0.25rem;
+}
 
 /* Messages */
 .messages-container {
@@ -30,44 +43,45 @@
   max-width: 70%;
 }
 
-
 .message-left {
   align-self: flex-start;
 }
 
 .message-right {
-  align-self: flex-end;  /* sticks to right */
+  align-self: flex-end; /* aligns to right side */
   text-align: right;
 }
-
-
 
 /* Message bubbles */
 .message-bubble {
   padding: 0.6rem 0.9rem;
-  border-radius: 10px;
+  border-radius: 12px;
   box-shadow: 0 2px 6px rgba(0,0,0,0.08);
   display: inline-block;
   word-break: break-word;
+  font-size: 0.95rem;
+  line-height: 1.4;
 }
 
-
 .message-left .message-bubble {
-  background: #f3f4f6; /* soft gray */
+  background: #ffffff;
   border: 1px solid #e2e8f0;
+  color: #333;
 }
 
 .message-right .message-bubble {
-  background: #14b8a6;
+  background: #14b8a6; /* teal */
   color: #fff;
 }
 
 /* Input */
 .chat-input-container {
   display: flex;
+  align-items: center;   /* makes them line up vertically */
   padding: 0.8rem;
-  background: #f3f4f6; /* softer background */
+  background: #f3f4f6;
   border-top: 1px solid #e2e8f0;
+  gap: 0.5rem;           /* little spacing between input & button */
 }
 
 .chat-input {
@@ -75,17 +89,26 @@
   border: 1px solid #cbd5e1;
   border-radius: 20px;
   padding: 0.6rem 1rem;
-  margin-right: 0.6rem;
-  background: #ffffff; /* slightly off-white */
+  background: #ffffff;
+  height: 40px;          /* match button height */
+  font-size: 1rem;
 }
 
 .send-button {
   border: none;
   background: #14b8a6;
   color: #fff;
-  padding: 0.6rem 1rem;
+  padding: 0 1rem;
   border-radius: 20px;
   cursor: pointer;
+  height: 40px;          /* exact same as input */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.1rem;
+  margin: 0;
 }
 
-.send-button:hover { background: #0d9488; }
+.send-button:hover {
+  background: #0d9488;
+}
