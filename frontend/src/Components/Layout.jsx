@@ -87,6 +87,7 @@ const Layout = () => {
             <li key={chat.Id} className="layout__nav-item">
               <Link
                 to={`/chat/${chat.Id}`}
+                state={{ chatName: chat.Name }}
                 className={`layout__nav-link ${chat.IsGroup ? "group" : ""} ${chatId == chat.Id ? "active" : ""}`}
               >
                 {chat.Name}
