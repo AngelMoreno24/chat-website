@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { Outlet, Link, useNavigate, useLocation } from 'react-router-dom';
+import { Outlet, Link, useNavigate, useLocation, useParams } from 'react-router-dom';
 import axios from 'axios';
-import { useParams } from 'react-router-dom';
 import './CssComponent/Layout.css';
 
 const Layout = () => {
@@ -10,6 +9,9 @@ const Layout = () => {
   const [chats, setChats] = useState([]);
   const [token, setToken] = useState('');
   const [members, setMembers] = useState([]);
+  const [friends, setFriends] = useState([]); // <-- store friends
+  const [selectedFriend, setSelectedFriend] = useState(''); // <-- selected friend to add
+
   const navigate = useNavigate();
   const location = useLocation();
   const { chatId } = useParams();
@@ -17,7 +19,6 @@ const Layout = () => {
   const isChatPage = location.pathname.includes('/chat/');
 
   const [isAddMemberPopupOpen, setIsAddMemberPopupOpen] = useState(false);
-  const [newMemberUsername, setNewMemberUsername] = useState('');
 
   const handleLogout = () => {
     localStorage.removeItem('token');
@@ -31,6 +32,7 @@ const Layout = () => {
 
   useEffect(() => { if (token) getChats(); }, [token]);
   useEffect(() => { if (isChatPage && token && chatId) getMembers(); }, [isChatPage, token, chatId]);
+  useEffect(() => { if (token) fetchFriends(); }, [token]); // load friends
 
   const getChats = () => {
     axios.get(`${apiUrl}/chat/getChats`, {
@@ -46,14 +48,25 @@ const Layout = () => {
       .catch(console.error);
   };
 
+  const fetchFriends = async () => {
+    try {
+      const res = await axios.get(`${apiUrl}/friendship/getFriends`, {
+        headers: { Authorization: `Bearer ${token}` }
+      });
+      setFriends(res.data.friends || []);
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
   const addMember = () => {
-    if (!newMemberUsername.trim()) return;
-    axios.post(`${apiUrl}/chat/addChatMember`, { chatId, friendUsername: newMemberUsername }, {
+    if (!selectedFriend) return;
+    axios.post(`${apiUrl}/chat/addChatMember`, { chatId, friendUsername: selectedFriend }, {
       headers: { 'Authorization': `Bearer ${token}` }
     }).then(res => {
       setMembers(res.data.members || []);
       setIsAddMemberPopupOpen(false);
-      setNewMemberUsername('');
+      setSelectedFriend('');
     }).catch(console.error);
   };
 
@@ -122,7 +135,15 @@ const Layout = () => {
         <div className="modal">
           <div className="modal-content">
             <h3>Add Member</h3>
-            <input value={newMemberUsername} onChange={e => setNewMemberUsername(e.target.value)} placeholder="Username" />
+            <select
+              value={selectedFriend}
+              onChange={e => setSelectedFriend(e.target.value)}
+            >
+              <option value="">Select a friend</option>
+              {friends.map((f, i) => (
+                <option key={i} value={f.Username}>{f.Username}</option>
+              ))}
+            </select>
             <button onClick={addMember}>Add Member</button>
             <button onClick={() => setIsAddMemberPopupOpen(false)}>Cancel</button>
           </div>
