@@ -25,11 +25,18 @@ Backend:
 
 login/Signup
 
-![image](https://github.com/user-attachments/assets/d277f462-0ddc-4287-987a-77db0323380e)
+<img width="1360" height="690" alt="image" src="https://github.com/user-attachments/assets/78cd76a2-73f8-4d6b-80b1-d1d06950656d" />
+
+
+
+Friend Dashboard
+<img width="1353" height="691" alt="image" src="https://github.com/user-attachments/assets/52c351e7-c98f-4162-8c97-c818eeebb010" />
+
 
 
 Conversation Page
-![chatApplication](https://github.com/user-attachments/assets/2135e071-66ca-4459-a02e-295ec5b7cbab)
+<img width="1349" height="695" alt="image" src="https://github.com/user-attachments/assets/c014fef0-f4f9-48f5-bb3a-549b572c874c" />
+
 
 
 
