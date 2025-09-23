@@ -25,14 +25,32 @@ const Login = () => {
         localStorage.setItem('isLoggedIn', 'true');
         navigate('/home', { state: { justLoggedIn: true } });
       })
-      .catch(err => alert('Login failed. Check your credentials.'));
+      .catch(() => alert('Login failed. Check your credentials.'));
   };
 
   const handleSignup = (e) => {
     e.preventDefault();
     axios.post(`${apiUrl}/auth/register`, { username, email, password })
       .then(() => alert('Signup successful. You can now log in.'))
-      .catch(err => alert('Signup failed. Check your input.'));
+      .catch(() => alert('Signup failed. Check your input.'));
+  };
+
+  // DEMO LOGIN
+  const handleDemoLogin = () => {
+    const demoEmail = "demo@example.com";
+    const demoPassword = "password123";
+
+    setEmail(demoEmail);
+    setPassword(demoPassword);
+
+    axios.post(`${apiUrl}/auth/login`, { email: demoEmail, password: demoPassword })
+      .then(res => {
+        localStorage.setItem('token', res.data.token);
+        localStorage.setItem('name', res.data.name || "Demo User");
+        localStorage.setItem('isLoggedIn', 'true');
+        navigate('/home', { state: { justLoggedIn: true, demo: true } });
+      })
+      .catch(() => alert('Demo login failed. Please ensure demo user exists.'));
   };
 
   return (
@@ -74,6 +92,13 @@ const Login = () => {
             {isLogin ? 'Login' : 'Signup'}
           </button>
         </form>
+
+        {/* Demo Login Button */}
+        {isLogin && (
+          <button className="button demo-button" onClick={handleDemoLogin}>
+            Demo Login
+          </button>
+        )}
 
         <p className="toggle-text">
           {isLogin ? "Don't have an account?" : "Already have an account?"}

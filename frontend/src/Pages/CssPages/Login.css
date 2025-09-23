@@ -79,7 +79,9 @@ body {
   background-color: #272727;
 }
 
+/* Buttons (Login, Signup, Demo) */
 .button {
+  width: 100%;              /* ✅ all buttons full width */
   padding: 12px;
   background-color: #10b981;
   color: #fff;
@@ -95,6 +97,12 @@ body {
   transform: translateY(-2px);
 }
 
+/* Demo button styling (same as login, just spacing) */
+.demo-button {
+  margin-top: 12px;          /* ✅ spacing below login button */
+}
+
+/* Toggle text for switching forms */
 .toggle-text {
   margin-top: 20px;
   font-size: 0.9rem;
