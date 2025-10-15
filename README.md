@@ -24,7 +24,7 @@ Backend:
 
 
 Live Demo:
-https://am-chat-application.netlify.app/login
+https://am-chat-application.netlify.app
 
 
 login/Signup
